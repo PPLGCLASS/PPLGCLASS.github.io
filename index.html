@@ -1,0 +1,585 @@
+<html>
+<head>
+    <title>Home</title>
+    <link rel="icon" type="image/png" href="">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- Include Particles.js -->
+    <style>
+        .slide {
+            display: none; /* Hide slides by default */
+        }
+        .active {
+            display: block; /* Show the slide that has the 'active' class */
+        }
+        /* Existing styles... */
+        .hover\:text-blue-500:hover {
+            color: #e5e7eb; /* Light gray color */
+        }
+        .navbar {
+            position: fixed; /* Fix position to the top of the page */
+            width: 100%; /* Full width */
+            top: 0; /* Align to the top */
+            z-index: 1000; /* Ensure it stays on top of other content */
+            background-color: #ffffff; /* Background color */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Shadow for depth */
+        }
+        body {
+            padding-top: 70px; /* Add padding to the top of the body to prevent content from being hidden behind the navbar */
+            scroll-behavior: smooth; /* Enable smooth scrolling */
+            position: relative; /* Position relative for the particles container */
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Send particles behind other content */
+        }
+        .since-section {
+            background-color: #f9fafb; /* Light background color */
+            padding: 20px;
+            text-align: center;
+        }
+        .since-column {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px; /* Space between columns */
+        }
+        .since-column div {
+            flex: 1; /* Equal width */
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Consistent with other design elements */
+        }
+        .article-section {
+            padding: 20px;
+            text-align: center;
+        }
+        .article-section h2 {
+            font-size: 2rem;
+            color: #1f2937; /* Dark gray */
+            margin-bottom: 16px;
+        }
+        .article-section p {
+            color: #4b5563; /* Gray */
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .services-section {
+            padding: 20px;
+            text-align: center;
+        }
+        .services-section h2 {
+            font-size: 2rem;
+            color: #1f2937; /* Dark gray */
+            margin-bottom: 16px;
+        }
+        .service-card {
+            max-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 10px;
+        }
+        .systems-section {
+            padding: 20px;
+            text-align: center;
+        }
+        .systems-section h2 {
+            font-size: 2rem;
+            color: #1f2937; /* Dark gray */
+            margin-bottom: 16px;
+        }
+        .system-card {
+            max-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 10px;
+        }
+        .technology-section {
+            padding: 20px;
+            text-align: center;
+            background-color: #f9fafb; /* Light background color */
+        }
+        .technology-section h2 {
+            font-size: 2rem;
+            color: #1f2937; /* Dark gray */
+            margin-bottom: 16px;
+        }
+        .technology-section p {
+            color: #4b5563; /* Gray */
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .cooperation-section {
+            padding: 20px;
+            text-align: center;
+        }
+        .cooperation-images {
+            position: relative;
+            max-width: 800px; /* Set a max width for the slider */
+            margin: auto;
+            overflow: hidden; /* Hide overflow to create a sliding effect */
+        }
+        .slides-container {
+            display: flex; /* Use flexbox to arrange slides in a row */
+            transition: transform 0.5s ease; /* Smooth transition for sliding */
+        }
+        .slide {
+            min-width: 100%; /* Each slide takes full width of the container */
+            box-sizing: border-box; /* Include padding and border in the element's total width */
+        }
+        .slide img {
+            width: 100%; /* Make images responsive */
+            border-radius: 8px; /* Optional: add rounded corners */
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8); /* Dark background on hover */
+        }
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0; /* Start fully transparent */
+                transform: translateY(20px); /* Start slightly lower */
+            }
+            to {
+                opacity: 1; /* End fully opaque */
+                transform: translateY(0); /* End at original position */
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease forwards; /* Apply the fade-in animation */
+        }
+
+        /* Scale animation */
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8); /* Start slightly smaller */
+                opacity: 0; /* Start fully transparent */
+            }
+            to {
+                transform: scale(1); /* End at original size */
+                opacity: 1; /* End fully opaque */
+            }
+        }
+
+        .scale-in {
+            animation: scaleIn 1s ease forwards; /* Apply the scale-in animation */
+        }
+
+        /* Optional: Delay for each element */
+        .fade-in:nth-child(1) {
+            animation-delay: 0.2s; /* Delay for the first element */
+        }
+        .fade-in:nth-child(2) {
+            animation-delay: 0.4s; /* Delay for the second element */
+        }
+        .fade-in:nth-child(3) {
+            animation-delay: 0.6s; /* Delay for the third element */
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <div id="particles-js"></div> <!-- Particles container -->
+
+    <!-- Fixed Navigation Bar -->
+    <div class="navbar">
+        <div class="container mx-auto flex justify-between items-center py-4 px-5">
+            <div class="flex items-center space-x-4">
+                <span class="text-xl font-bold text-gray-800">X PPLG</span>
+                <a href="#Home" class="text-gray-800 hover:text-blue-500 font-medium">Home</a>
+                <a href="#piket" class="text-gray-800 hover:text-blue-500 font-medium">Piket Kelas</a>
+                <a href="#siswa" class="text-gray-800 hover:text-blue-500 font-medium">Absensi Kelas</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-gray-800 hover:text-blue-500 font-medium">Pengaturan</a>
+                <div class="relative">
+                    <input type="text" class="border border-gray-300 rounded-md pl-10 pr-3 py-1 focus:border-blue-500 focus:ring-blue-500" placeholder="Search...">
+                    <i class="fas fa-search absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub Navigation -->
+    <div class="bg-gray-100 py-2">
+        <div class="container mx-auto text-center">
+            <!-- Additional sub-navigation if needed -->
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto text-center py-16" id="Home">
+        <h2 class="text-3xl font-semibold text-gray-800 mb-4 fade-in">X PPLG Samsung</h2>
+        <h1 class="text-6xl font-bold text-gray-900 mb-6 scale-in">Pengembangan Perangkat Lunak & Gim</h1>
+        <p class="text-lg text-gray-600 fade-in">Tahun Ajaran 2024-2025</p>
+    </div>
+    
+    <!-- Vision and Mission Section -->
+    <div class="container mx-auto px-4 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 scroll-animation"></h2>
+            <p class="text-md text-gray-600 scroll-animation">Discover our vision and mission.</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-10">
+            <div class="max-w-md bg-white shadow-lg rounded-lg overflow-hidden scroll-animation">
+                <div class="px-6 py-4">
+                    <h3 class="font-bold text-xl mb-2 text-gray-800">Our Vision</h3>
+                    <p class="text-gray-600 text-base">
+                        Menjadi penyedia solusi teknologi inovatif terkemuka yang memberdayakan bisnis secara global untuk mencapai lebih banyak.
+                    </p>
+                </div>
+            </div>
+
+            <div class="max-w-md bg-white shadow-lg rounded-lg overflow-hidden scroll-animation">
+                <div class="px-6 py-4">
+                    <h3 class="font-bold text-xl mb-2 text-gray-800">Our Mission</h3>
+                    <p class="text-gray-600 text-base">
+                        Menyediakan perangkat lunak dan layanan yang luar biasa yang menciptakan nilai dan membuat perbedaan dalam komunitas yang kami layani.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Class Structure Section -->
+    <div class="class-structure-section bg-gray-100 py-16" id="class-structure">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">Struktur Kelas</h2>
+            <div class="flex flex-wrap justify-center gap-6">
+                <div class="class-role-card bg-white shadow-lg rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-gray-800">Wali Kelas</h3>
+                    <p class="text-gray-600">Erlina Baharuddin,S.kom</p>
+                </div>
+                <div class="class-role-card bg-white shadow-lg rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-gray-800">Ketua Kelas</h3>
+                    <p class="text-gray-600">Zidan Muhammad Sauki</p>
+                </div>
+                <div class="class-role-card bg-white shadow-lg rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-gray-800">Wakil Ketua Kelas</h3>
+                    <p class="text-gray-600">Zaim Radji Habibi</p>
+                </div>
+                <!-- Sekretaris -->
+                <div class="class-role-card bg-white shadow-lg rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-gray-800">Sekretaris</h3>
+                    <p class="text-gray-600">Dzikra Humairo.S</p>
+                    <p class="text-gray-600">Rania Larasati Quinn</p>
+                </div>
+                <!-- Bendahara -->
+                <div class="class-role-card bg-white shadow-lg rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-gray-800">Bendahara</h3>
+                    <p class="text-gray-600">Khayla Mazaya</p>
+                    <p class="text-gray-600">Naila NUrul Dzihni</p>
+                </div>
+                <!-- Seksi Agama -->
+                <div class="class-role-card bg-white shadow-lg rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-gray-800">Seksi Agama</h3>
+                    <p class="text-gray-600">Rafiq Al Habib</p>
+                    <p class="text-gray-600">M Fathul Al-Fath</p>
+                </div>
+                <!-- Seksi Keamanan -->
+                <div class="class-role-card bg-white shadow-lg rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-gray-800">Seksi Keamanan</h3>
+                    <p class="text-gray-600">Abiyyu Athalian</p>
+                    <p class="text-gray-600">Rafi Hibatullah</p>
+                </div>
+                <!-- Seksi Kebersihan -->
+                <div class="class-role-card bg-white shadow-lg rounded-lg p-6">
+                    <h3 class="font-bold text-lg text-gray-800">Seksi Kebersihan</h3>
+                    <p class="text-gray-600">Fairuz Dzikri Harofi</p>
+                    <p class="text-gray-600">Abdul Muhaimin</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Article Section -->
+        <div class="article-section" id="about"> <!-- Added ID for linking -->
+            <div class="container mx-auto">
+                <h2>About Our Class</h2>
+                <p>
+                    Selamat datang di dunia pendidikan yang penuh tantangan dan kesempatan! Sebagai siswa di jurusan PPLG (Pengembangan Perangkat Lunak dan Gim), kalian sedang mempersiapkan diri untuk menjadi generasi yang siap menghadapi kemajuan teknologi, khususnya dalam bidang pengembangan perangkat lunak dan gim.
+
+                    Penting untuk kalian menyadari bahwa kemampuan di bidang ini sangat dibutuhkan di dunia kerja yang semakin digital. Jadi, manfaatkan setiap kesempatan untuk belajar dengan serius, terus gali pengetahuan dan keterampilan teknis, serta jangan takut untuk berinovasi. Dengan sikap yang baik, kerja keras, dan kemauan untuk belajar, kalian bisa meraih banyak hal yang luar biasa di masa depan.
+                </p>
+            </div>
+        </div>
+
+    <!-- Systems Section -->
+    <div class="systems-section bg-gray-100 py-16" id="piket">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">Piket Kelas</h2>
+            <div class="flex flex-wrap justify-center gap-6">
+                <div class="system-card bg-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105 hover:shadow-xl">
+                    <h3 class="font-bold text-lg text-gray-800">Senin</h3>
+                    <p class="text-gray-600">
+                        <ol>
+                        <li>1. Rania Larasati Queen</li>
+                        <li>2. Zidan Muhammad Sauki</li>
+                        <li>3. Khayla Mazaya</li>
+                        <li>4. Ikmal Murial Devano</li>
+                        <li>5. Amru Naufal</li>
+                        <li>6. Abdul Muhaimin</li>
+                        <li>7. Husein</li> 
+                        <li>8. Alif Putra Perkasa</li>
+                        </ol>
+                        </p>
+                </div>
+                <div class="system-card bg-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105 hover:shadow-xl">
+                    <h3 class="font-bold text-lg text-gray-800">Selasa</h3>
+                    <p class="text-gray-600">
+                        <ol>
+                        <li>1. Zaim Radji Habibi</li>
+                        <li>2. Dzikra Humairo.S</li>
+                        <li>3. Daniella Zaina</li>
+                        <li>4. Rafiq Al Habib</li>
+                        <li>5. Yahya Fibert C</li>
+                        <li>6. Raja Fathur</li>
+                        <li>7. M Irfan Azzaky</li>
+                        <li>8. Atha Ramadhan</li>
+                    </ol>
+                    </p>
+                </div>
+                <div class="system-card bg-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105 hover:shadow-xl">
+                    <h3 class="font-bold text-lg text-gray-800">Rabu</h3>
+                    <p class="text-gray-600"><ol>
+                        <li>1. Fairuz Dzikri</li> 
+                        <li>2. Naila Nurul</li>
+                        <li>3. Mima</li>
+                        <li>4. M Rifki Fahrezi</li>
+                        <li>5. Tantra Hunafa</li>
+                        <li>6. Abiyyu Athalian</li>
+                        <li>7. Arya Rafka</li>
+                        <li>8. Beny Adrian Tobing</li>
+                    </ol>
+                    </p>
+                </div>
+                <div class="system-card bg-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105 hover:shadow-xl">
+                    <h3 class="font-bold text-lg text-gray-800">Kamis</h3>
+                    <p class="text-gray-600"><ol> <li>1. Izra Rakhi Muhammad</li> 
+                        <li>2. Nasyafa Ivana</li>
+                        <li>3. Athifa Mahirah Putri</li>
+                        <li>4. Agung Dwi</li>
+                        <li>5. Dzaki Afkar</li>
+                        <li>6. Rafi Hibatullah</li>
+                        <li>7. Tafayat Raziq</li>
+                    </ol></p>
+                </div>
+                <div class="system-card bg-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105 hover:shadow-xl">
+                    <h3 class="font-bold text-lg text-gray-800">Jumat</h3>
+                    <p class="text-gray-600"><ol> <li>1. M Fathul Al-fath</li> 
+                        <li>2. Fairuz Naufal</li>
+                        <li>3. Awen Akean</li>
+                        <li>4. M Syahru Ramadhan</li>
+                        <li>5. Aisyah Calsih</li>
+                        <li>6. M Rizky Ardiansyah</li>
+                        <li>7. Aisyah Azmi</li>
+                    </ol></p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technology Section -->
+    <div class="technology-section bg-gray-100 py-16" id="technology">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-6">Our Memorys</h2>
+        <div class="image-section">
+            <img src="pplg.jpg" alt="Our Memories" class="w-300 h-100">
+        </div>
+        <div class="image-section">
+            <img src="pplgk.jpg" alt="Image 1" class="w-300 h-100">
+            <img src="image2.jpg" alt="Image 2" class="w-300 h-100">
+            <img src="image3.jpg" alt="Image 3" class="w-300 h-100">
+        </div>
+        </div>
+    </div>
+
+
+    <!-- Since Section -->
+    <div class="since-section">
+        <div class="container mx-auto since-column">
+            <div>
+                <h3 class="font-bold text-xl text-gray-800">Since</h3>
+                <p class="text-gray-600">2024</p>
+            </div>
+            <div>
+                <h3 class="font-bold text-xl text-gray-800">Founded In</h3>
+                <p class="text-gray-600">Pekanbaru, Indonesia</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-100 py-4">
+        <div class="container mx-auto px-4 text-center text-sm text-gray-600">
+            <p>Hak cipta © 2024 X PPLG SMKN 2 Pekanbaru. Seluruh hak cipta dilindungi undang-undang.</p>
+            <p class="mt-2">
+                <a href="https://policies.google.com/privacy?hl=id" class="text-gray-600">Kebijakan Privasi</a> | 
+                <a href="https://paskerid.kemnaker.go.id/ketentuan-pengguna" class="text-gray-600">Ketentuan Penggunaan</a> | 
+                <a href="" class="text-gray-600">Legal</a> | 
+                <a href="#" class="text-gray-600">Peta Situs</a> | 
+                <span>Indonesia</span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            let slidesContainer = document.querySelector('.slides-container');
+            slideIndex++;
+            if (slideIndex >= slides.length) { slideIndex = 0; }    
+            slidesContainer.style.transform = 'translateX(' + (-slideIndex * 100) + '%)'; // Move slides to the left
+            setTimeout(showSlides, 3000); // Change image every 3 seconds
+        }
+
+        function changeSlide(n) {
+            let slides = document.getElementsByClassName("slide");
+            slideIndex += n;
+            if (slideIndex >= slides.length) { slideIndex = 0; }
+            if (slideIndex < 0) { slideIndex = slides.length - 1; }
+            let slidesContainer = document.querySelector('.slides-container');
+            slidesContainer.style.transform = 'translateX(' + (-slideIndex * 100) + '%)'; // Move slides to the left
+        }
+
+        // Initialize particles.js
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>
