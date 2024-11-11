@@ -1,4 +1,4 @@
-# Ignore all files in images folder
+# Ignore all jpg and png images
+*.jpg
+*.png
 img/
-galery.html
-absensi.html
