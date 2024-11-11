@@ -1,0 +1,284 @@
+<html></html>
+<head>
+    <title>Memorys</title>
+    <link rel="icon" type="image/png" href="">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- Include Particles.js -->
+    <style>
+        .slide {
+            display: none; /* Hide slides by default */
+        }
+        .active {
+            display: block; /* Show the slide that has the 'active' class */
+        }
+        /* Existing styles... */
+        .hover\:text-blue-500:hover {
+            color: #e5e7eb; /* Light gray color */
+        }
+        .navbar {
+            position: fixed; /* Fix position to the top of the page */
+            width: 100%; /* Full width */
+            top: 0; /* Align to the top */
+            z-index: 1000; /* Ensure it stays on top of other content */
+            background-color: #ffffff; /* Background color */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Shadow for depth */
+        }
+        body {
+            padding-top: 70px; /* Add padding to the top of the body to prevent content from being hidden behind the navbar */
+            scroll-behavior: smooth; /* Enable smooth scrolling */
+            position: relative; /* Position relative for the particles container */
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Send particles behind other content */
+        }
+        .since-section {
+            background-color: #f9fafb; /* Light background color */
+            padding: 20px;
+            text-align: center;
+        }
+        .since-column {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px; /* Space between columns */
+        }
+        .since-column div {
+            flex: 1; /* Equal width */
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Consistent with other design elements */
+        }
+        .article-section {
+            padding: 20px;
+            text-align: center;
+        }
+        .article-section h2 {
+            font-size: 2rem;
+            color: #1f2937; /* Dark gray */
+            margin-bottom: 16px;
+        }
+        .article-section p {
+            color: #4b5563; /* Gray */
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .services-section {
+            padding: 20px;
+            text-align: center;
+        }
+        .services-section h2 {
+            font-size: 2rem;
+            color: #1f2937; /* Dark gray */
+            margin-bottom: 16px;
+        }
+        .service-card {
+            max-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 10px;
+        }
+        .systems-section {
+            padding: 20px;
+            text-align: center;
+        }
+        .systems-section h2 {
+            font-size: 2rem;
+            color: #1f2937; /* Dark gray */
+            margin-bottom: 16px;
+        }
+        .system-card {
+            max-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 10px;
+        }
+        .technology-section {
+            padding: 20px;
+            text-align: center;
+            background-color: #f9fafb; /* Light background color */
+        }
+        .technology-section h2 {
+            font-size: 2rem;
+            color: #1f2937; /* Dark gray */
+            margin-bottom: 16px;
+        }
+        .technology-section p {
+            color: #4b5563; /* Gray */
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .cooperation-section {
+            padding: 20px;
+            text-align: center;
+        }
+        .cooperation-images {
+            position: relative;
+            max-width: 800px; /* Set a max width for the slider */
+            margin: auto;
+            overflow: hidden; /* Hide overflow to create a sliding effect */
+        }
+        .slides-container {
+            display: flex; /* Use flexbox to arrange slides in a row */
+            transition: transform 0.5s ease; /* Smooth transition for sliding */
+        }
+        .slide {
+            min-width: 100%; /* Each slide takes full width of the container */
+            box-sizing: border-box; /* Include padding and border in the element's total width */
+        }
+        .slide img {
+            width: 100%; /* Make images responsive */
+            border-radius: 8px; /* Optional: add rounded corners */
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8); /* Dark background on hover */
+        }
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0; /* Start fully transparent */
+                transform: translateY(20px); /* Start slightly lower */
+            }
+            to {
+                opacity: 1; /* End fully opaque */
+                transform: translateY(0); /* End at original position */
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease forwards; /* Apply the fade-in animation */
+        }
+
+        /* Scale animation */
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8); /* Start slightly smaller */
+                opacity: 0; /* Start fully transparent */
+            }
+            to {
+                transform: scale(1); /* End at original size */
+                opacity: 1; /* End fully opaque */
+            }
+        }
+
+        .scale-in {
+            animation: scaleIn 1s ease forwards; /* Apply the scale-in animation */
+        }
+
+        /* Optional: Delay for each element */
+        .fade-in:nth-child(1) {
+            animation-delay: 0.2s; /* Delay for the first element */
+        }
+        .fade-in:nth-child(2) {
+            animation-delay: 0.4s; /* Delay for the second element */
+        }
+        .fade-in:nth-child(3) {
+            animation-delay: 0.6s; /* Delay for the third element */
+        }
+
+        /* Animation for images */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .image-section img {
+            animation: fadeIn 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        /* Delay animation for each image */
+        .image-section img:nth-child(1) { animation-delay: 0.3s; }
+        .image-section img:nth-child(2) { animation-delay: 0.6s; }
+        .image-section img:nth-child(3) { animation-delay: 0.9s; }
+
+        .image-section img:hover {
+            transform: scale(1.1); /* Scale up the image */
+            transition: transform 0.3s ease-in-out; /* Smooth transition */
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <div id="particles-js"></div> <!-- Particles container -->
+
+    <!-- Fixed Navigation Bar -->
+    <div class="navbar">
+        <div class="container mx-auto flex justify-between items-center py-4 px-5">
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="text-xl font-bold text-gray-800">X PPLG</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="gallery-section">
+        <h2 class="text-2xl text-center mb-4 font-bold">Gallery</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <!-- Gambar 1 -->
+            <img src="pplg.jpg" alt="Img 1" class="w-full h-auto rounded shadow">
+            <!-- Gambar 2 -->
+            <img src="pplgbatik.jpg" alt="Img 2" class="w-full h-auto rounded shadow">
+            <!-- Gambar 3 -->
+            <img src="pplgsiswi.jpg" alt="Img 3" class="w-full h-auto rounded shadow">
+            <!-- Gambar 4 -->
+            <img src="img/img4.jpg" alt="Img 4" class="w-full h-auto rounded shadow">
+            <!-- Gambar 5 -->
+            <img src="img/img5.jpg" alt="Img 5" class="w-full h-auto rounded shadow">
+            <!-- Gambar 6 -->
+            <img src="img/img6.jpg" alt="Img 6" class="w-full h-auto rounded shadow">
+            <!-- Gambar 7 -->
+            <img src="img/img7.jpg" alt="Img 7" class="w-full h-auto rounded shadow">
+            <!-- Gambar 8 -->
+            <img src="img/img8.jpg" alt="Img 8" class="w-full h-auto rounded shadow">
+            <!-- Gambar 9 -->
+            <img src="img/img9.jpg" alt="Img 9" class="w-full h-auto rounded shadow">
+            <!-- Gambar 10 -->
+            <img src="img/img10.jpg" alt="Img 10" class="w-full h-auto rounded shadow">
+            <!-- Gambar 11 -->
+            <img src="img/img11.jpg" alt="Img 11" class="w-full h-auto rounded shadow">
+            <!-- Gambar 12 -->
+            <img src="img/img12.jpg" alt="Img 12" class="w-full h-auto rounded shadow">
+            <!-- Gambar 13 -->
+            <img src="img/img13.jpg" alt="Img 13" class="w-full h-auto rounded shadow">
+            <!-- Gambar 14 -->
+            <img src="img/img14.jpg" alt="Img 14" class="w-full h-auto rounded shadow">
+            <!-- Gambar 15 -->
+            <img src="img/img15.jpg" alt="Img 15" class="w-full h-auto rounded shadow">
+            <!-- Gambar 16 -->
+            <img src="img/img16.jpg" alt="Img 16" class="w-full h-auto rounded shadow">
+            <!-- Gambar 17 -->
+            <img src="img/img17.jpg" alt="Img 17" class="w-full h-auto rounded shadow">
+            <!-- Gambar 18 -->
+            <img src="img/img18.jpg" alt="Img 18" class="w-full h-auto rounded shadow">
+            <!-- Gambar 19 -->
+            <img src="img/img2.jpg" alt="Img 19" class="w-full h-auto rounded shadow">
+            <!-- Gambar 20 -->
+            <img src="img/img3.jpg" alt="Img 20" class="w-full h-auto rounded shadow">
+        </div>
+    </div>
+</body>
