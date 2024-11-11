@@ -1,3 +1,2 @@
-# Ignore all jpg and png images
-*.jpg
-*.png
+# Ignore all files in images folder
+img/
