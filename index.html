@@ -13,27 +13,26 @@
 </script>
     <style>
         .slide {
-            display: none; /* Hide slides by default */
+            display: none; 
         }
         .active {
-            display: block; /* Show the slide that has the 'active' class */
+            display: block; 
         }
-        /* Existing styles... */
         .hover\:text-blue-500:hover {
-            color: #e5e7eb; /* Light gray color */
+            color: #e5e7eb; 
         }
         .navbar {
-            position: fixed; /* Fix position to the top of the page */
-            width: 100%; /* Full width */
-            top: 0; /* Align to the top */
-            z-index: 1000; /* Ensure it stays on top of other content */
-            background-color: #ffffff; /* Background color */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Shadow for depth */
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 1000; 
+            background-color: #ffffff; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
         }
         body {
-            padding-top: 70px; /* Add padding to the top of the body to prevent content from being hidden behind the navbar */
-            scroll-behavior: smooth; /* Enable smooth scrolling */
-            position: relative; /* Position relative for the particles container */
+            padding-top: 70px; 
+            scroll-behavior: smooth; 
+            position: relative; 
         }
         #particles-js {
             position: absolute;
@@ -41,10 +40,10 @@
             height: 100%;
             top: 0;
             left: 0;
-            z-index: -1; /* Send particles behind other content */
+            z-index: -1; 
         }
         .since-section {
-            background-color: #f9fafb; /* Light background color */
+            background-color: #f9fafb; 
             padding: 20px;
             text-align: center;
         }
@@ -52,12 +51,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 50px; /* Space between columns */
+            gap: 50px; 
         }
         .since-column div {
-            flex: 1; /* Equal width */
+            flex: 1; 
             padding: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Consistent with other design elements */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
         }
         .article-section {
             padding: 20px;
@@ -65,11 +64,11 @@
         }
         .article-section h2 {
             font-size: 2rem;
-            color: #1f2937; /* Dark gray */
+            color: #1f2937; 
             margin-bottom: 16px;
         }
         .article-section p {
-            color: #4b5563; /* Gray */
+            color: #4b5563; 
             font-size: 1rem;
             line-height: 1.5;
         }
@@ -79,7 +78,7 @@
         }
         .services-section h2 {
             font-size: 2rem;
-            color: #1f2937; /* Dark gray */
+            color: #1f2937; 
             margin-bottom: 16px;
         }
         .service-card {
@@ -96,7 +95,7 @@
         }
         .systems-section h2 {
             font-size: 2rem;
-            color: #1f2937; /* Dark gray */
+            color: #1f2937; 
             margin-bottom: 16px;
         }
         .system-card {
@@ -110,15 +109,15 @@
         .technology-section {
             padding: 20px;
             text-align: center;
-            background-color: #f9fafb; /* Light background color */
+            background-color: #f9fafb; 
         }
         .technology-section h2 {
             font-size: 2rem;
-            color: #1f2937; /* Dark gray */
+            color: #1f2937; 
             margin-bottom: 16px;
         }
         .technology-section p {
-            color: #4b5563; /* Gray */
+            color: #4b5563; 
             font-size: 1rem;
             line-height: 1.5;
         }
@@ -128,21 +127,21 @@
         }
         .cooperation-images {
             position: relative;
-            max-width: 800px; /* Set a max width for the slider */
+            max-width: 800px; 
             margin: auto;
-            overflow: hidden; /* Hide overflow to create a sliding effect */
+            overflow: hidden; 
         }
         .slides-container {
-            display: flex; /* Use flexbox to arrange slides in a row */
-            transition: transform 0.5s ease; /* Smooth transition for sliding */
+            display: flex; 
+            transition: transform 0.5s ease; 
         }
         .slide {
-            min-width: 100%; /* Each slide takes full width of the container */
-            box-sizing: border-box; /* Include padding and border in the element's total width */
+            min-width: 100%; 
+            box-sizing: border-box; 
         }
         .slide img {
-            width: 100%; /* Make images responsive */
-            border-radius: 8px; /* Optional: add rounded corners */
+            width: 100%; 
+            border-radius: 8px; 
         }
         .prev, .next {
             cursor: pointer;
@@ -162,52 +161,48 @@
             border-radius: 3px 0 0 3px;
         }
         .prev:hover, .next:hover {
-            background-color: rgba(0, 0, 0, 0.8); /* Dark background on hover */
+            background-color: rgba(0, 0, 0, 0.8); 
         }
-        /* Fade-in animation */
         @keyframes fadeIn {
             from {
-                opacity: 0; /* Start fully transparent */
-                transform: translateY(20px); /* Start slightly lower */
+                opacity: 0; 
+                transform: translateY(20px); 
             }
             to {
-                opacity: 1; /* End fully opaque */
-                transform: translateY(0); /* End at original position */
+                opacity: 1; 
+                transform: translateY(0); 
             }
         }
 
         .fade-in {
-            animation: fadeIn 1s ease forwards; /* Apply the fade-in animation */
+            animation: fadeIn 1s ease forwards; 
         }
 
-        /* Scale animation */
         @keyframes scaleIn {
             from {
-                transform: scale(0.8); /* Start slightly smaller */
-                opacity: 0; /* Start fully transparent */
+                transform: scale(0.8); 
+                opacity: 0; 
             }
             to {
-                transform: scale(1); /* End at original size */
-                opacity: 1; /* End fully opaque */
+                transform: scale(1); 
+                opacity: 1; 
             }
         }
 
         .scale-in {
-            animation: scaleIn 1s ease forwards; /* Apply the scale-in animation */
+            animation: scaleIn 1s ease forwards; 
         }
 
-        /* Optional: Delay for each element */
         .fade-in:nth-child(1) {
-            animation-delay: 0.2s; /* Delay for the first element */
+            animation-delay: 0.2s; 
         }
         .fade-in:nth-child(2) {
-            animation-delay: 0.4s; /* Delay for the second element */
+            animation-delay: 0.4s; 
         }
         .fade-in:nth-child(3) {
-            animation-delay: 0.6s; /* Delay for the third element */
+            animation-delay: 0.6s; 
         }
 
-        /* Animation for images */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -218,83 +213,78 @@
             animation-fill-mode: both;
         }
 
-        /* Delay animation for each image */
         .image-section img:nth-child(1) { animation-delay: 0.3s; }
         .image-section img:nth-child(2) { animation-delay: 0.6s; }
         .image-section img:nth-child(3) { animation-delay: 0.9s; }
 
         .image-section img:hover {
-            transform: scale(1.1); /* Scale up the image */
-            transition: transform 0.3s ease-in-out; /* Smooth transition */
+            transform: scale(1.1); 
+            transition: transform 0.3s ease-in-out; 
         }
 
-        /* Add animation classes */
         .fade-in {
-            opacity: 0; /* Start fully transparent */
-            transition: opacity 0.5s ease-in-out; /* Smooth transition */
+            opacity: 0; 
+            transition: opacity 0.5s ease-in-out; 
         }
         .fade-in.visible {
-            opacity: 1; /* Fully opaque when visible */
+            opacity: 1; 
         }
 
-        /* Responsive adjustments */
         @media (max-width: 768px) {
             .navbar {
-                flex-direction: column; /* Stack navbar items vertically on smaller screens */
+                flex-direction: column; 
             }
             .class-role-card, .system-card {
-                max-width: 90%; /* Allow cards to take more width on smaller screens */
-                margin: 10px auto; /* Center cards */
+                max-width: 90%; 
+                margin: 10px auto; 
             }
             .image-section {
-                grid-template-columns: repeat(2, 1fr); /* Show 2 images per row on smaller screens */
+                grid-template-columns: repeat(2, 1fr); 
             }
             .text-6xl {
-                font-size: 3.5rem; /* Increased font size for better visibility */
+                font-size: 3.5rem; 
             }
             .text-4xl {
-                font-size: 2.5rem; /* Increased font size for better visibility */
+                font-size: 2.5rem; 
             }
         }
 
         @media (max-width: 480px) {
             .image-section {
-                grid-template-columns: 1fr; /* Show 1 image per row on very small screens */
+                grid-template-columns: 1fr; 
             }
             .navbar {
-                padding: 15px; /* Slightly increased padding for smaller screens */
+                padding: 15px; 
             }
             .text-6xl {
-                font-size: 4rem; /* Further increased font size for better visibility */
+                font-size: 4rem; 
             }
             .text-4xl {
-                font-size: 3rem; /* Further increased font size for better visibility */
+                font-size: 3rem; 
             }
         }
 
-        /* Tambahkan animasi untuk tombol */
         .animate-click {
-            animation: scaleUp 0.3s ease forwards; /* Animasi skala saat diklik */
+            animation: scaleUp 0.3s ease forwards; 
         }
 
         @keyframes scaleUp {
             0% {
-                transform: scale(1); /* Ukuran normal */
+                transform: scale(1); 
             }
             50% {
-                transform: scale(1.1); /* Sedikit membesar */
+                transform: scale(1.1); 
             }
             100% {
-                transform: scale(1); /* Kembali ke ukuran normal */
+                transform: scale(1); 
             }
         }
 
-        /* Additional styles for mobile menu */
         #mobile-menu a {
-            border-bottom: 1px solid #e5e7eb; /* Add a border for separation */
+            border-bottom: 1px solid #e5e7eb; 
         }
         #mobile-menu a:last-child {
-            border-bottom: none; /* Remove border from the last item */
+            border-bottom: none; 
         }
     </style>
 </head>

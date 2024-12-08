@@ -1,4 +1,4 @@
-<html></html>
+<html>
 <head>
     <title>Memorys</title>
     <link rel="icon" type="image/png" href="">
@@ -8,27 +8,27 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- Include Particles.js -->
     <style>
         .slide {
-            display: none; /* Hide slides by default */
+            display: none; 
         }
         .active {
-            display: block; /* Show the slide that has the 'active' class */
+            display: block; 
         }
         /* Existing styles... */
         .hover\:text-blue-500:hover {
-            color: #e5e7eb; /* Light gray color */
+            color: #e5e7eb; 
         }
         .navbar {
-            position: fixed; /* Fix position to the top of the page */
-            width: 100%; /* Full width */
-            top: 0; /* Align to the top */
-            z-index: 1000; /* Ensure it stays on top of other content */
-            background-color: #ffffff; /* Background color */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Shadow for depth */
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 1000; 
+            background-color: #ffffff; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
         }
         body {
-            padding-top: 70px; /* Add padding to the top of the body to prevent content from being hidden behind the navbar */
-            scroll-behavior: smooth; /* Enable smooth scrolling */
-            position: relative; /* Position relative for the particles container */
+            padding-top: 70px; 
+            scroll-behavior: smooth; 
+            position: relative; 
         }
         #particles-js {
             position: absolute;
@@ -36,10 +36,10 @@
             height: 100%;
             top: 0;
             left: 0;
-            z-index: -1; /* Send particles behind other content */
+            z-index: -1; 
         }
         .since-section {
-            background-color: #f9fafb; /* Light background color */
+            background-color: #f9fafb; 
             padding: 20px;
             text-align: center;
         }
@@ -47,12 +47,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 50px; /* Space between columns */
+            gap: 50px; 
         }
         .since-column div {
-            flex: 1; /* Equal width */
+            flex: 1; 
             padding: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Consistent with other design elements */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
         }
         .article-section {
             padding: 20px;
@@ -60,11 +60,11 @@
         }
         .article-section h2 {
             font-size: 2rem;
-            color: #1f2937; /* Dark gray */
+            color: #1f2937; 
             margin-bottom: 16px;
         }
         .article-section p {
-            color: #4b5563; /* Gray */
+            color: #4b5563; 
             font-size: 1rem;
             line-height: 1.5;
         }
@@ -74,7 +74,7 @@
         }
         .services-section h2 {
             font-size: 2rem;
-            color: #1f2937; /* Dark gray */
+            color: #1f2937; 
             margin-bottom: 16px;
         }
         .service-card {
@@ -91,7 +91,7 @@
         }
         .systems-section h2 {
             font-size: 2rem;
-            color: #1f2937; /* Dark gray */
+            color: #1f2937; 
             margin-bottom: 16px;
         }
         .system-card {
@@ -105,15 +105,15 @@
         .technology-section {
             padding: 20px;
             text-align: center;
-            background-color: #f9fafb; /* Light background color */
+            background-color: #f9fafb; 
         }
         .technology-section h2 {
             font-size: 2rem;
-            color: #1f2937; /* Dark gray */
+            color: #1f2937; 
             margin-bottom: 16px;
         }
         .technology-section p {
-            color: #4b5563; /* Gray */
+            color: #4b5563; 
             font-size: 1rem;
             line-height: 1.5;
         }
@@ -123,21 +123,21 @@
         }
         .cooperation-images {
             position: relative;
-            max-width: 800px; /* Set a max width for the slider */
+            max-width: 800px; 
             margin: auto;
-            overflow: hidden; /* Hide overflow to create a sliding effect */
+            overflow: hidden; 
         }
         .slides-container {
-            display: flex; /* Use flexbox to arrange slides in a row */
-            transition: transform 0.5s ease; /* Smooth transition for sliding */
+            display: flex; 
+            transition: transform 0.5s ease; 
         }
         .slide {
-            min-width: 100%; /* Each slide takes full width of the container */
-            box-sizing: border-box; /* Include padding and border in the element's total width */
+            min-width: 100%; 
+            box-sizing: border-box; 
         }
         .slide img {
-            width: 100%; /* Make images responsive */
-            border-radius: 8px; /* Optional: add rounded corners */
+            width: 100%; 
+            border-radius: 8px; 
         }
         .prev, .next {
             cursor: pointer;
@@ -157,52 +157,48 @@
             border-radius: 3px 0 0 3px;
         }
         .prev:hover, .next:hover {
-            background-color: rgba(0, 0, 0, 0.8); /* Dark background on hover */
+            background-color: rgba(0, 0, 0, 0.8); 
         }
-        /* Fade-in animation */
         @keyframes fadeIn {
             from {
-                opacity: 0; /* Start fully transparent */
-                transform: translateY(20px); /* Start slightly lower */
+                opacity: 0; 
+                transform: translateY(20px); 
             }
             to {
-                opacity: 1; /* End fully opaque */
-                transform: translateY(0); /* End at original position */
+                opacity: 1; 
+                transform: translateY(0); 
             }
         }
 
         .fade-in {
-            animation: fadeIn 1s ease forwards; /* Apply the fade-in animation */
+            animation: fadeIn 0.5s ease forwards; 
         }
 
-        /* Scale animation */
         @keyframes scaleIn {
             from {
-                transform: scale(0.8); /* Start slightly smaller */
-                opacity: 0; /* Start fully transparent */
+                transform: scale(0.8); 
+                opacity: 0; 
             }
             to {
-                transform: scale(1); /* End at original size */
-                opacity: 1; /* End fully opaque */
+                transform: scale(1); 
+                opacity: 1; 
             }
         }
 
         .scale-in {
-            animation: scaleIn 1s ease forwards; /* Apply the scale-in animation */
+            animation: scaleIn 1s ease forwards; 
         }
 
-        /* Optional: Delay for each element */
         .fade-in:nth-child(1) {
-            animation-delay: 0.2s; /* Delay for the first element */
+            animation-delay: 0.2s; 
         }
         .fade-in:nth-child(2) {
-            animation-delay: 0.4s; /* Delay for the second element */
+            animation-delay: 0.4s; 
         }
         .fade-in:nth-child(3) {
-            animation-delay: 0.6s; /* Delay for the third element */
+            animation-delay: 0.6s; 
         }
 
-        /* Animation for images */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -213,29 +209,28 @@
             animation-fill-mode: both;
         }
 
-        /* Delay animation for each image */
         .image-section img:nth-child(1) { animation-delay: 0.3s; }
         .image-section img:nth-child(2) { animation-delay: 0.6s; }
         .image-section img:nth-child(3) { animation-delay: 0.9s; }
 
         .image-section img:hover {
-            transform: scale(1.1); /* Scale up the image */
-            transition: transform 0.3s ease-in-out; /* Smooth transition */
+            transform: scale(1.1); 
+            transition: transform 0.3s ease-in-out; 
         }
 
         .grid img {
-            border: 2px solid #e5e7eb; /* Add a light gray border around images */
-            border-radius: 8px; /* Keep rounded corners */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+            border: 2px solid #e5e7eb; 
+            border-radius: 8px; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
         }
         .grid img:hover {
-            transform: scale(1.05); /* Slightly scale up on hover */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow effect on hover */
+            transform: scale(1.05); 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
         }
         .screenshot-prevent {
-            pointer-events: none; /* Disable mouse events */
-            user-select: none; /* Disable text selection */
-            opacity: 0.9; /* Slightly transparent to deter screenshots */
+            pointer-events: none; 
+            user-select: none; 
+            opacity: 0.9; 
         }
     </style>
     <script>
@@ -254,12 +249,20 @@
                 e.preventDefault();
             }
         });
+
+        // Function to add fade-in class to images one by one
+        window.onload = function() {
+            const images = document.querySelectorAll('.gallery-section img');
+            images.forEach((img, index) => {
+                img.style.animationDelay = `${index * 0.2}s`; // Delay for each image
+                img.classList.add('fade-in');
+            });
+        };
     </script>
 </head>
 <body class="font-sans bg-gray-50 text-gray-800 screenshot-prevent">
-    <div id="particles-js"></div> <!-- Particles container -->
+    <div id="particles-js"></div> 
 
-    <!-- Fixed Navigation Bar -->
     <div class="navbar">
         <div class="container mx-auto flex justify-between items-center py-4 px-5">
             <div class="flex items-center space-x-4">
@@ -391,6 +394,107 @@
             <img src="img/img59.jpg" alt="Img 59" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
             <!-- Gambar 60 -->
             <img src="img/img60.jpg" alt="Img 60" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 61 -->
+            <img src="img/img61.jpg" alt="Img 61" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 62 -->
+            <img src="img/img62.jpg" alt="Img 62" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 63 -->
+            <img src="img/img63.jpg" alt="Img 63" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 64 -->
+            <img src="img/img64.jpg" alt="Img 64" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 65 -->
+            <img src="img/img65.jpg" alt="Img 65" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 66 -->
+            <img src="img/img66.jpg" alt="Img 66" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 67 -->
+            <img src="img/img67.jpg" alt="Img 67" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 68 -->
+            <img src="img/img68.jpg" alt="Img 68" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 69 -->
+            <img src="img/img69.jpg" alt="Img 69" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 70 -->
+            <img src="img/img70.jpg" alt="Img 70" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 71 -->
+            <img src="img/img71.jpg" alt="Img 71" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 72 -->
+            <img src="img/img72.jpg" alt="Img 72" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 73 -->
+            <img src="img/img73.jpg" alt="Img 73" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 74 -->
+            <img src="img/img74.jpg" alt="Img 74" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 75 -->
+            <img src="img/img75.jpg" alt="Img 75" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 76 -->
+            <img src="img/img76.jpg" alt="Img 76" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 77 -->
+            <img src="img/img77.jpg" alt="Img 77" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 78 -->
+            <img src="img/img78.jpg" alt="Img 78" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 79 -->
+            <img src="img/img79.jpg" alt="Img 79" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 80 -->
+            <img src="img/img80.jpg" alt="Img 80" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 81 -->
+            <img src="img/img81.jpg" alt="Img 81" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 82 -->
+            <img src="img/img82.jpg" alt="Img 82" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 83 -->
+            <img src="img/img83.jpg" alt="Img 83" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 84 -->
+            <img src="img/img84.jpg" alt="Img 84" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 85 -->
+            <img src="img/img85.jpg" alt="Img 85" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 86 -->
+            <img src="img/img86.jpg" alt="Img 86" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 87 -->
+            <img src="img/img87.jpg" alt="Img 87" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 88 -->
+            <img src="img/img88.jpg" alt="Img 88" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 89 -->
+            <img src="img/img89.jpg" alt="Img 89" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 90 -->
+            <img src="img/img90.jpg" alt="Img 90" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 91 -->
+            <img src="img/img91.jpg" alt="Img 91" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 92 -->
+            <img src="img/img92.jpg" alt="Img 92" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 93 -->
+            <img src="img/img93.jpg" alt="Img 93" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 94 -->
+            <img src="img/img94.jpg" alt="Img 94" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 95 -->
+            <img src="img/img95.jpg" alt="Img 95" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 96 -->
+            <img src="img/img96.jpg" alt="Img 96" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 97 -->
+            <img src="img/img97.jpg" alt="Img 97" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 98 -->
+            <img src="img/img98.jpg" alt="Img 98" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 99 -->
+            <img src="img/img99.jpg" alt="Img 99" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 100 -->
+            <img src="img/img100.jpg" alt="Img 100" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 101 -->
+            <img src="img/img101.jpg" alt="Img 101" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 102 -->
+            <img src="img/img102.jpg" alt="Img 102" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 103 -->
+            <img src="img/img103.jpg" alt="Img 103" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 104 -->
+            <img src="img/img104.jpg" alt="Img 104" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 105 -->
+            <img src="img/img105.jpg" alt="Img 105" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 106 -->
+            <img src="img/img106.jpg" alt="Img 106" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 107 -->
+            <img src="img/img107.jpg" alt="Img 107" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 108 -->
+            <img src="img/img108.jpg" alt="Img 108" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 109 -->
+            <img src="img/img109.jpg" alt="Img 109" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
+            <!-- Gambar 110 -->
+            <img src="img/img110.jpg" alt="Img 110" class="w-full h-auto rounded shadow" oncontextmenu="return false;" draggable="false">
         </div>
     </div>
 </body>
+</html>

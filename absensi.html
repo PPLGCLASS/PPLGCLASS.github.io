@@ -1,1 +1,63 @@
-<a href="index.html">DALAM TAHAP UPDATE </a>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+    }
+    form {
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    input[type="text"],
+    input[type="date"],
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    input[type="submit"] {
+        background-color: #565756;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #2e2e2e;
+    }
+</style>
+<form action="index.html" method="post" onsubmit="return redirectToIndex();">
+    <label for="nama">Nama:</label>
+    <input type="text" id="nama" name="nama" required>
+    
+    <label for="tanggal">Tanggal:</label>
+    <input type="date" id="tanggal" name="tanggal" required>
+    
+    <label for="status">Status Kehadiran:</label>
+    <select id="status" name="status" required>
+        <option value="hadir">Hadir</option>
+        <option value="tidak_hadir">Tidak Hadir</option>
+    </select>
+    
+    <input type="submit" value="Kirim">
+</form>
+
+<script>
+    function redirectToIndex() {
+        // Mengirim data form ke server (jika diperlukan)
+        // Kemudian mengarahkan kembali ke index.html
+        window.location.href = 'index.html';
+        return false; // Mencegah pengiriman form secara default
+    }
+</script>
