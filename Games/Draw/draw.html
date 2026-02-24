@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GestDraw - Lingkaran Jari</title>
+    <!-- Library MediaPipe -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <!-- Font & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow: hidden;
+            color: white;
+        }
+        
+        .game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        #video-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        #draw-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            cursor: none;
+            pointer-events: none;
+        }
+        /* UI Overlay */
+        
+        .ui-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        /* Header dengan kontrol */
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 15px;
+            pointer-events: auto;
+        }
+        
+        .game-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .toolbar {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .tool-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .tool-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .color-picker {
+            display: flex;
+            gap: 10px;
+            margin: 0 15px;
+        }
+        
+        .color-option {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.2);
+        }
+        
+        .color-option.active {
+            border-color: white;
+            box-shadow: 0 0 15px currentColor;
+        }
+        /* Panel kanan */
+        
+        .game-panel {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            width: 280px;
+            pointer-events: auto;
+            margin-left: auto;
+        }
+        
+        .mode-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .mode-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .mode-btn.active {
+            background: white;
+            color: #764ba2;
+        }
+        
+        .challenge-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .challenge-text {
+            font-size: 2.5rem;
+            text-align: center;
+            letter-spacing: 10px;
+            margin: 10px 0;
+        }
+        
+        .timer {
+            font-size: 3rem;
+            text-align: center;
+            font-weight: 700;
+            color: #ffd700;
+        }
+        
+        .scores {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .score-item {
+            text-align: center;
+        }
+        
+        .score-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .score-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        /* Finger status */
+        
+        .finger-status {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            pointer-events: auto;
+            z-index: 3;
+        }
+        
+        .finger-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #4caf50;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .mirror-indicator {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            z-index: 3;
+            pointer-events: auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .mirror-indicator i {
+            color: #4caf50;
+            margin-right: 5px;
+        }
+        
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        /* Start menu */
+        
+        .start-menu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s;
+        }
+        
+        .start-menu.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .start-content {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+        }
+        
+        .start-content h1 {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        .start-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .start-btn {
+            padding: 20px 60px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            background: white;
+            color: #764ba2;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .start-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .camera-status {
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        #video-input {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <video id="video-input" playsinline></video>
+        <canvas id="video-canvas"></canvas>
+        <canvas id="draw-canvas"></canvas>
+
+        <!-- UI Overlay -->
+        <div class="ui-overlay">
+            <!-- Header -->
+            <div class="header">
+                <div class="game-title">
+                    <i class="fas fa-hand-peace"></i> GestDraw
+                </div>
+                <div class="toolbar">
+                    <div class="color-picker" id="color-picker">
+                        <div class="color-option active" style="background: #ff0000;" data-color="#ff0000"></div>
+                        <div class="color-option" style="background: #00ff00;" data-color="#00ff00"></div>
+                        <div class="color-option" style="background: #0000ff;" data-color="#0000ff"></div>
+                        <div class="color-option" style="background: #ffff00;" data-color="#ffff00"></div>
+                        <div class="color-option" style="background: #ff00ff;" data-color="#ff00ff"></div>
+                        <div class="color-option" style="background: #00ffff;" data-color="#00ffff"></div>
+                    </div>
+                    <button class="tool-btn" id="clear-btn" title="Clear Canvas">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                    <button class="tool-btn" id="undo-btn" title="Undo">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                    <button class="tool-btn" id="save-btn" title="Save Drawing">
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Panel kanan -->
+            <div style="display: flex; justify-content: flex-end;">
+                <div class="game-panel">
+                    <div class="mode-selector">
+                        <button class="mode-btn active" data-mode="free">Free Draw</button>
+                        <button class="mode-btn" data-mode="challenge">Challenge</button>
+                        <button class="mode-btn" data-mode="multi">Multiplayer</button>
+                    </div>
+
+                    <div id="free-mode" class="mode-content">
+                        <p><i class="fas fa-paint-brush"></i> Bebas menggambar dengan jari</p>
+                        <p class="small" style="opacity:0.7; font-size:0.9rem;">Lingkaran besar = posisi jari</p>
+                    </div>
+
+                    <div id="challenge-mode" class="mode-content" style="display: none;">
+                        <div class="challenge-box">
+                            <div>Gambar huruf:</div>
+                            <div class="challenge-text" id="target-letter">A</div>
+                            <div class="timer" id="timer">30</div>
+                        </div>
+                        <div class="scores">
+                            <div class="score-item">
+                                <div class="score-label">Skor</div>
+                                <div class="score-value" id="score">0</div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Streak</div>
+                                <div class="score-value" id="streak">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="multi-mode" class="mode-content" style="display: none;">
+                        <p><i class="fas fa-users"></i> Player 1 vs Player 2</p>
+                        <div class="scores">
+                            <div class="score-item">
+                                <div class="score-label">P1</div>
+                                <div class="score-value" id="p1-score">0</div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">P2</div>
+                                <div class="score-value" id="p2-score">0</div>
+                            </div>
+                        </div>
+                        <p class="small" style="margin-top: 10px; opacity:0.7;">Lingkaran biru = P1, Pink = P2</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Finger status -->
+            <div class="finger-status">
+                <div class="finger-dot"></div>
+                <span id="finger-text">Jari terdeteksi - Siap menggambar</span>
+            </div>
+
+            <div class="mirror-indicator">
+                <i class="fas fa-check-circle"></i> Lingkaran terang = posisi jari
+            </div>
+        </div>
+
+        <!-- Start Menu -->
+        <div class="start-menu" id="start-menu">
+            <div class="start-content">
+                <h1>✌️ GestDraw</h1>
+                <p>Gambar di udara dengan jari telunjukmu!<br>
+                    <span style="color: #ffd700;">✓ Lingkaran besar = posisi jari</span><br>
+                    <span style="color: #4caf50;">Hijau = Menggambar</span> |
+                    <span style="color: #ff4444;">Merah = Menghapus (cubit)</span></p>
+                <button class="start-btn" onclick="startApp()">
+                    <i class="fas fa-camera"></i> Mulai dengan Kamera
+                </button>
+                <div class="camera-status" id="camera-status"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const config = {
+            drawing: {
+                minDistance: 5,
+                lineWidth: 8,
+                smoothing: 0.3
+            },
+            hand: {
+                indexTip: 8,
+                thumbTip: 4,
+                confidence: 0.7
+            },
+            challenge: {
+                timeLimit: 30,
+                letters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+                    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+                ]
+            }
+        };
+
+        let appState = {
+            mode: 'free',
+            isDrawing: false,
+            currentColor: '#ff0000',
+            lines: [],
+            currentLine: [],
+            undoStack: [],
+            scores: {
+                free: 0,
+                challenge: 0,
+                p1: 0,
+                p2: 0
+            },
+            challenge: {
+                currentLetter: 'A',
+                timeLeft: 30,
+                streak: 0,
+                timer: null
+            },
+            hands: {
+                p1: {
+                    x: 0,
+                    y: 0,
+                    active: false
+                },
+                p2: {
+                    x: 0,
+                    y: 0,
+                    active: false
+                }
+            }
+        };
+
+        const videoElement = document.getElementById('video-input');
+        const videoCanvas = document.getElementById('video-canvas');
+        const drawCanvas = document.getElementById('draw-canvas');
+        const ctx = drawCanvas.getContext('2d');
+        const videoCtx = videoCanvas.getContext('2d');
+
+        // Inisialisasi MediaPipe
+        const hands = new Hands({
+            locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
+        });
+
+        hands.setOptions({
+            maxNumHands: 2,
+            modelComplexity: 1,
+            minDetectionConfidence: 0.5,
+            minTrackingConfidence: 0.5
+        });
+
+        hands.onResults(onHandResults);
+
+        const camera = new Camera(videoElement, {
+            onFrame: async() => {
+                await hands.send({
+                    image: videoElement
+                });
+            },
+            width: 1280,
+            height: 720
+        });
+
+        // ==================== HAND TRACKING DENGAN LINGKARAN BESAR ====================
+        function onHandResults(results) {
+            videoCtx.clearRect(0, 0, videoCanvas.width, videoCanvas.height);
+
+            // Gambar video dengan mirror manual
+            if (results.image) {
+                videoCtx.save();
+                videoCtx.translate(videoCanvas.width, 0);
+                videoCtx.scale(-1, 1);
+                videoCtx.drawImage(results.image, 0, 0, videoCanvas.width, videoCanvas.height);
+                videoCtx.restore();
+            }
+
+            appState.hands.p1.active = false;
+            appState.hands.p2.active = false;
+
+            if (results.multiHandLandmarks) {
+                for (let i = 0; i < results.multiHandLandmarks.length; i++) {
+                    const landmarks = results.multiHandLandmarks[i];
+
+                    // Dapatkan posisi ujung telunjuk
+                    const rawX = landmarks[config.hand.indexTip].x;
+                    const rawY = landmarks[config.hand.indexTip].y;
+
+                    // Mirror koordinat X untuk drawing
+                    const mirroredX = 1.0 - rawX;
+
+                    // Konversi ke pixel
+                    const canvasX = mirroredX * drawCanvas.width;
+                    const canvasY = rawY * drawCanvas.height;
+                    const markerX = rawX * videoCanvas.width;
+                    const markerY = rawY * videoCanvas.height;
+
+                    // Cek gestur cubit
+                    const thumb = landmarks[config.hand.thumbTip];
+                    const index = landmarks[config.hand.indexTip];
+                    const distance = Math.sqrt(
+                        Math.pow(thumb.x - index.x, 2) +
+                        Math.pow(thumb.y - index.y, 2)
+                    );
+                    const isPinching = distance < 0.05;
+
+                    // Tentukan player
+                    const isLeftSide = rawX < 0.5;
+
+                    if (appState.mode === 'multi') {
+                        if (isLeftSide) {
+                            appState.hands.p1 = {
+                                x: canvasX,
+                                y: canvasY,
+                                active: true
+                            };
+                            handleDrawing('p1', canvasX, canvasY, isPinching);
+                            // Gambar lingkaran untuk P1 (biru)
+                            drawFingerMarker(videoCtx, markerX, markerY, isPinching, '#3498db', 'P1');
+                        } else {
+                            appState.hands.p2 = {
+                                x: canvasX,
+                                y: canvasY,
+                                active: true
+                            };
+                            handleDrawing('p2', canvasX, canvasY, isPinching);
+                            // Gambar lingkaran untuk P2 (pink)
+                            drawFingerMarker(videoCtx, markerX, markerY, isPinching, '#ff5890', 'P2');
+                        }
+                    } else {
+                        appState.hands.p1 = {
+                            x: canvasX,
+                            y: canvasY,
+                            active: true
+                        };
+                        handleDrawing('p1', canvasX, canvasY, isPinching);
+                        // Gambar lingkaran dengan warna sesuai mode
+                        const markerColor = isPinching ? '#ff4444' : appState.currentColor;
+                        drawFingerMarker(videoCtx, markerX, markerY, isPinching, markerColor, '');
+                    }
+                }
+            }
+
+            updateFingerStatus();
+        }
+
+        // ==================== FUNGSI MENGGAMBAR LINGKARAN BESAR ====================
+        function drawFingerMarker(ctx, x, y, isPinching, color, label) {
+            // Lingkaran luar yang besar dan glow
+            ctx.shadowColor = isPinching ? '#ff4444' : color;
+            ctx.shadowBlur = 30;
+
+            // Lingkaran utama
+            ctx.beginPath();
+            ctx.arc(x, y, 35, 0, 2 * Math.PI);
+            ctx.strokeStyle = isPinching ? '#ff4444' : color;
+            ctx.lineWidth = 8;
+            ctx.stroke();
+
+            // Lingkaran dalam
+            ctx.beginPath();
+            ctx.arc(x, y, 25, 0, 2 * Math.PI);
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Titik pusat
+            ctx.beginPath();
+            ctx.arc(x, y, 8, 0, 2 * Math.PI);
+            ctx.fillStyle = isPinching ? '#ff4444' : color;
+            ctx.shadowBlur = 20;
+            ctx.fill();
+
+            // Reset shadow untuk teks
+            ctx.shadowBlur = 0;
+
+            // Tambah label jika ada (P1/P2)
+            if (label) {
+                ctx.font = 'bold 16px Poppins';
+                ctx.fillStyle = 'white';
+                ctx.shadowColor = 'black';
+                ctx.shadowBlur = 8;
+                ctx.fillText(label, x - 15, y - 45);
+            }
+
+        }
+
+        function handleDrawing(player, x, y, isPinching) {
+            if (isPinching) {
+                if (appState.isDrawing) {
+                    finishLine();
+                }
+                eraseNearby(x, y);
+            } else {
+                if (!appState.isDrawing) {
+                    startNewLine();
+                }
+                addPointToCurrentLine(x, y);
+            }
+        }
+
+        // Fungsi menggambar lainnya (sama seperti sebelumnya)
+        function startNewLine() {
+            if (appState.currentLine.length > 0) {
+                finishLine();
+            }
+            appState.isDrawing = true;
+            appState.currentLine = [];
+        }
+
+        function addPointToCurrentLine(x, y) {
+            if (!appState.isDrawing) return;
+
+            if (appState.currentLine.length > 0) {
+                const lastPoint = appState.currentLine[appState.currentLine.length - 1];
+                const distance = Math.hypot(x - lastPoint.x, y - lastPoint.y);
+
+                if (distance < config.drawing.minDistance) {
+                    return;
+                }
+
+                x = lastPoint.x + (x - lastPoint.x) * config.drawing.smoothing;
+                y = lastPoint.y + (y - lastPoint.y) * config.drawing.smoothing;
+            }
+
+            appState.currentLine.push({
+                x,
+                y,
+                color: appState.currentColor
+            });
+
+            drawCurrentSegment();
+        }
+
+        function finishLine() {
+            if (appState.currentLine.length > 0) {
+                appState.lines.push([...appState.currentLine]);
+                appState.undoStack.push([...appState.currentLine]);
+                appState.currentLine = [];
+
+                if (appState.undoStack.length > 50) {
+                    appState.undoStack.shift();
+                }
+            }
+            appState.isDrawing = false;
+            redrawCanvas();
+        }
+
+        function drawCurrentSegment() {
+            if (appState.currentLine.length < 2) return;
+
+            ctx.beginPath();
+            ctx.strokeStyle = appState.currentColor;
+            ctx.lineWidth = config.drawing.lineWidth;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            const points = appState.currentLine;
+            ctx.moveTo(points[0].x, points[0].y);
+
+            for (let i = 1; i < points.length; i++) {
+                ctx.lineTo(points[i].x, points[i].y);
+            }
+
+            ctx.stroke();
+        }
+
+        function redrawCanvas() {
+            ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+
+            appState.lines.forEach(line => {
+                if (line.length < 2) return;
+
+                ctx.beginPath();
+                ctx.strokeStyle = line[0].color;
+                ctx.lineWidth = config.drawing.lineWidth;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+
+                ctx.moveTo(line[0].x, line[0].y);
+                for (let i = 1; i < line.length; i++) {
+                    ctx.lineTo(line[i].x, line[i].y);
+                }
+                ctx.stroke();
+            });
+
+            if (appState.currentLine.length > 0) {
+                ctx.beginPath();
+                ctx.strokeStyle = appState.currentColor;
+                ctx.lineWidth = config.drawing.lineWidth;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+
+                ctx.moveTo(appState.currentLine[0].x, appState.currentLine[0].y);
+                for (let i = 1; i < appState.currentLine.length; i++) {
+                    ctx.lineTo(appState.currentLine[i].x, appState.currentLine[i].y);
+                }
+                ctx.stroke();
+            }
+        }
+
+        function eraseNearby(x, y) {
+            const eraseRadius = 40;
+            let erased = false;
+
+            appState.lines = appState.lines.filter(line => {
+                const keepLine = !line.some(point =>
+                    Math.hypot(point.x - x, point.y - y) < eraseRadius
+                );
+
+                if (!keepLine) erased = true;
+                return keepLine;
+            });
+
+            if (appState.currentLine.length > 0) {
+                appState.currentLine = appState.currentLine.filter(point =>
+                    Math.hypot(point.x - x, point.y - y) >= eraseRadius
+                );
+            }
+
+            if (erased) redrawCanvas();
+        }
+
+        function updateFingerStatus() {
+            const text = document.getElementById('finger-text');
+            const dot = document.querySelector('.finger-dot');
+
+            if (appState.hands.p1.active || appState.hands.p2.active) {
+                text.textContent = '✓ Jari terdeteksi - ' +
+                    (appState.isDrawing ? 'Menggambar...' : 'Siap menggambar');
+                dot.style.background = appState.isDrawing ? '#ffd700' : '#4caf50';
+            } else {
+                text.textContent = '✗ Tidak ada jari terdeteksi';
+                dot.style.background = '#ff4444';
+            }
+        }
+
+        // Challenge Mode
+        function startChallenge() {
+            if (appState.challenge.timer) clearInterval(appState.challenge.timer);
+            appState.mode = 'challenge';
+            nextChallenge();
+
+            appState.challenge.timer = setInterval(() => {
+                appState.challenge.timeLeft--;
+                document.getElementById('timer').textContent = appState.challenge.timeLeft;
+                if (appState.challenge.timeLeft <= 0) nextChallenge();
+            }, 1000);
+        }
+
+        function nextChallenge() {
+            const letters = config.challenge.letters;
+            const newLetter = letters[Math.floor(Math.random() * letters.length)];
+            appState.challenge.currentLetter = newLetter;
+            appState.challenge.timeLeft = config.challenge.timeLimit;
+
+            document.getElementById('target-letter').textContent = newLetter;
+            document.getElementById('timer').textContent = appState.challenge.timeLeft;
+            clearCanvas();
+        }
+
+        function checkDrawing() {
+            if (Math.random() > 0.7) {
+                appState.scores.challenge++;
+                appState.challenge.streak++;
+                document.getElementById('score').textContent = appState.scores.challenge;
+                document.getElementById('streak').textContent = appState.challenge.streak;
+
+                try {
+                    const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+                    const oscillator = audioCtx.createOscillator();
+                    const gainNode = audioCtx.createGain();
+
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+
+                    oscillator.frequency.value = 800;
+                    gainNode.gain.value = 0.3;
+
+                    oscillator.start();
+                    oscillator.stop(audioCtx.currentTime + 0.1);
+                } catch (e) {}
+
+                nextChallenge();
+            }
+        }
+
+        // UI Functions
+        function clearCanvas() {
+            appState.lines = [];
+            appState.currentLine = [];
+            appState.undoStack = [];
+            ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+        }
+
+        function undo() {
+            if (appState.undoStack.length > 0) {
+                appState.undoStack.pop();
+                appState.lines = [...appState.undoStack];
+                redrawCanvas();
+            }
+        }
+
+        function saveDrawing() {
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = drawCanvas.width;
+            tempCanvas.height = drawCanvas.height;
+            const tempCtx = tempCanvas.getContext('2d');
+
+            tempCtx.drawImage(videoCanvas, 0, 0);
+            tempCtx.drawImage(drawCanvas, 0, 0);
+
+            const link = document.createElement('a');
+            link.download = `gestdraw-${Date.now()}.png`;
+            link.href = tempCanvas.toDataURL();
+            link.click();
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            function resizeCanvas() {
+                drawCanvas.width = window.innerWidth;
+                drawCanvas.height = window.innerHeight;
+                videoCanvas.width = window.innerWidth;
+                videoCanvas.height = window.innerHeight;
+                redrawCanvas();
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            document.querySelectorAll('.color-option').forEach(opt => {
+                opt.addEventListener('click', (e) => {
+                    document.querySelector('.color-option.active').classList.remove('active');
+                    opt.classList.add('active');
+                    appState.currentColor = opt.dataset.color;
+                });
+            });
+
+            document.getElementById('clear-btn').addEventListener('click', clearCanvas);
+            document.getElementById('undo-btn').addEventListener('click', undo);
+            document.getElementById('save-btn').addEventListener('click', saveDrawing);
+
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelector('.mode-btn.active').classList.remove('active');
+                    btn.classList.add('active');
+
+                    const mode = btn.dataset.mode;
+                    appState.mode = mode;
+
+                    document.getElementById('free-mode').style.display = mode === 'free' ? 'block' : 'none';
+                    document.getElementById('challenge-mode').style.display = mode === 'challenge' ? 'block' : 'none';
+                    document.getElementById('multi-mode').style.display = mode === 'multi' ? 'block' : 'none';
+
+                    if (mode === 'challenge') {
+                        startChallenge();
+                    } else if (appState.challenge.timer) {
+                        clearInterval(appState.challenge.timer);
+                    }
+
+                    clearCanvas();
+                });
+            });
+
+            setInterval(() => {
+                if (appState.mode === 'challenge' && !appState.isDrawing) {
+                    checkDrawing();
+                }
+            }, 2000);
+        });
+
+        function startApp() {
+            const btn = document.querySelector('.start-btn');
+            const status = document.getElementById('camera-status');
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengaktifkan kamera...';
+            status.textContent = 'Meminta izin kamera...';
+
+            camera.start()
+                .then(() => {
+                    document.getElementById('start-menu').classList.add('hidden');
+                    status.textContent = '✓ Kamera aktif! Lingkaran besar = posisi jari';
+                })
+                .catch(err => {
+                    status.textContent = '✗ Gagal: ' + err.message;
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-camera"></i> Coba Lagi';
+                });
+        }
+
+        window.startApp = startApp;
+    </script>
+</body>
+
+</html>
