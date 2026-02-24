@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games Zone - XI PPLG UNIVERSE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./css/games.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="min-h-screen grid-bg">
+
+    <!-- Floating Decorations -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <svg class="star" style="top: 10%; left: 5%; animation-delay: 0s;" viewBox="0 0 24 24" fill="#FEE440" stroke="#2D2D2D" stroke-width="2"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>
+        <svg class="star" style="top: 20%; right: 10%; animation-delay: 0.5s;" viewBox="0 0 24 24" fill="#00F5D4" stroke="#2D2D2D" stroke-width="2"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>
+        <svg class="star" style="top: 60%; left: 8%; animation-delay: 1s;" viewBox="0 0 24 24" fill="#F15BB5" stroke="#2D2D2D" stroke-width="2"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>
+        <svg class="star" style="top: 75%; right: 5%; animation-delay: 1.5s;" viewBox="0 0 24 24" fill="#9B5DE5" stroke="#2D2D2D" stroke-width="2"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pb-24">
+
+        <!-- Header Section -->
+        <section class="min-h-[50vh] flex items-center justify-center p-4 md:p-8">
+            <div class="window-y2k w-full max-w-4xl animate-slideUp">
+                <div class="title-bar-y2k">
+                    <div class="flex items-center gap-3">
+                        <div class="w-6 h-6 border-2 border-white rounded-md bg-white/20 flex items-center justify-center">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4"/><path d="M8 10v4"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="12" r="1"/></svg>
+                        </div>
+                        <span class="font-pixel text-lg text-white drop-shadow-md">Games_Zone.exe</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="win-btn win-btn-min" aria-label="Minimize"><svg width="12" height="2" viewBox="0 0 12 2" fill="currentColor"><rect width="12" height="2"/></svg></button>
+                        <button class="win-btn win-btn-max" aria-label="Maximize"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="1" width="10" height="10"/></svg></button>
+                        <button class="win-btn win-btn-close" aria-label="Close"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M6 18L18 6"/></svg></button>
+                    </div>
+                </div>
+
+                <div class="p-6 md:p-10 bg-white/80 backdrop-blur-sm">
+                    <div class="text-center">
+                        <div class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-pixel px-4 py-2 rounded-full border-2 border-[var(--outline)] text-sm mb-6 shadow-lg">
+                            <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span> XI PPLG 
+                        </div>
+                        <h1 class="font-pixel text-4xl md:text-6xl text-[var(--text-dark)] mb-4">
+                            🎮 <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400">GAMES</span> ZONE
+                        </h1>
+                        <p class="text-lg text-gray-600 mb-8 max-w-xl mx-auto">
+                            Pilih game favoritmu dan mainkan sekarang! Klik pada game card untuk memulai petualangan.
+                        </p>
+                        
+                        <!-- Stats -->
+                        <div class="flex justify-center gap-4 mb-6">
+                            <div class="bg-purple-50 border-3 border-[var(--outline)] rounded-xl px-4 py-2">
+                                <div class="font-pixel text-2xl text-purple-500">2</div>
+                                <div class="text-xs text-gray-500">Games</div>
+                            </div>
+                            <div class="bg-pink-50 border-3 border-[var(--outline)] rounded-xl px-4 py-2">
+                                <div class="font-pixel text-2xl text-pink-500">∞</div>
+                                <div class="text-xs text-gray-500">Fun</div>
+                            </div>
+                            <div class="bg-teal-50 border-3 border-[var(--outline)] rounded-xl px-4 py-2">
+                                <div class="font-pixel text-2xl text-teal-500">24/7</div>
+                                <div class="text-xs text-gray-500">Online</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Games Grid -->
+        <section class="py-8 px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="font-pixel text-2xl md:text-3xl text-[var(--text-dark)] mb-2">Pilih Game</h2>
+                    <p class="text-gray-500">Klik untuk mulai bermain!</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    
+                    <!-- Game 1: Hockey Go -->
+                    <a href="./Games/Hockey_Go/index.html" target="_blank" class="game-card window-y2k animate-popIn" style="animation-delay: 0.3s;">
+                        <div class="title-bar-y2k" style="background: linear-gradient(90deg, #00BBF9, #00F5D4);">
+                            <span class="font-pixel text-lg text-white drop-shadow-md">Hockey_Go.exe</span>
+                            <div class="flex gap-2">
+                                <button class="win-btn win-btn-min"><svg width="12" height="2" viewBox="0 0 12 2" fill="currentColor"><rect width="12" height="2"/></svg></button>
+                                <button class="win-btn win-btn-close"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M6 18L18 6"/></svg></button>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-white/90">
+                            <div class="game-preview mb-4">
+                                <div class="pixel-art">🏒</div>
+                                <div class="play-overlay">
+                                    <div class="text-center">
+                                        <div class="font-pixel text-3xl text-white mb-2">▶ PLAY</div>
+                                        <div class="font-pixel text-sm text-white/80">Click to Start</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="font-pixel text-xl text-[var(--text-dark)] mb-2">Hockey Go</h3>
+                            <p class="text-sm text-gray-600 mb-4">
+                                Game Hockey Go (Finger Camera Game) menggunakan Python adalah permainan sederhana mirip air hockey, tetapi kontrol pemain menggunakan jari yang terdeteksi kamera (hand tracking).
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex gap-2">
+                                    <span class="bg-teal-100 text-teal-700 text-xs font-pixel px-2 py-1 rounded border-2 border-[var(--outline)]">ARCADE</span>
+                                    <span class="bg-purple-100 text-purple-700 text-xs font-pixel px-2 py-1 rounded border-2 border-[var(--outline)]">CLASSIC</span>
+                                </div>
+                                <div class="flex items-center gap-1 text-yellow-500">
+                                    <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Game 2: Draw  -->
+                    <a href="./Games/Draw/draw.html" target="_blank" class="game-card window-y2k animate-popIn" style="animation-delay: 0.5s;">
+                        <div class="title-bar-y2k" style="background: linear-gradient(90deg, #F15BB5, #FEE440);">
+                            <span class="font-pixel text-lg text-white drop-shadow-md">GestDraw.exe</span>
+                            <div class="flex gap-2">
+                                <button class="win-btn win-btn-min"><svg width="12" height="2" viewBox="0 0 12 2" fill="currentColor"><rect width="12" height="2"/></svg></button>
+                                <button class="win-btn win-btn-close"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M6 18L18 6"/></svg></button>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-white/90">
+                            <div class="game-preview mb-4">
+                                <div class="pixel-art">🖌️</div>
+                                <div class="play-overlay" style="background: rgba(241, 91, 181, 0.8);">
+                                    <div class="text-center">
+                                        <div class="font-pixel text-3xl text-white mb-2">▶ PLAY</div>
+                                        <div class="font-pixel text-sm text-white/80">Click to Start</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="font-pixel text-xl text-[var(--text-dark)] mb-2">GestDraw</h3>
+                            <p class="text-sm text-gray-600 mb-4">
+                               GestDraw adalah game yang memungkinkan pengguna menggambar di udara dengan mendeteksi ujung jari telunjuk sebagai pena virtual melalui kamera secara real-time.
+                            <div class="flex items-center justify-between">
+                                <div class="flex gap-2">
+                                    <span class="bg-pink-100 text-pink-700 text-xs font-pixel px-2 py-1 rounded border-2 border-[var(--outline)]">DRAWING</span>
+                                    <span class="bg-orange-100 text-orange-700 text-xs font-pixel px-2 py-1 rounded border-2 border-[var(--outline)]">INTERACTIVE</span>
+                                </div>
+                                <div class="flex items-center gap-1 text-yellow-500">
+                                    <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Info Section -->
+        <section class="py-8 px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="window-y2k animate-slideUp" style="animation-delay: 0.7s;">
+                    <div class="title-bar-y2k" style="background: linear-gradient(90deg, #9B5DE5, #F15BB5);">
+                        <span class="font-pixel text-lg text-white drop-shadow-md">Info.txt</span>
+                        <div class="flex gap-2">
+                            <button class="win-btn win-btn-min"><svg width="12" height="2" viewBox="0 0 12 2" fill="currentColor"><rect width="12" height="2"/></svg></button>
+                            <button class="win-btn win-btn-close"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M6 18L18 6"/></svg></button>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-white/90">
+                        <div class="flex flex-col md:flex-row items-center gap-6">
+                            <div class="w-20 h-20 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl border-4 border-[var(--outline)] flex items-center justify-center shadow-lg">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                            </div>
+                            <div class="flex-1 text-center md:text-left">
+                                <h3 class="font-pixel text-xl text-[var(--text-dark)] mb-2">Cara Bermain</h3>
+                                <p class="text-sm text-gray-600 mb-3">
+                                    Klik pada game card di atas untuk membuka halaman game. Game akan terbuka di tab baru dan kamu bisa langsung bermain!
+                                </p>
+                                <div class="flex flex-wrap justify-center md:justify-start gap-2">
+                                    <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full border-2 border-[var(--outline)]">🖱️ Klik untuk bermain</span>
+                                    <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full border-2 border-[var(--outline)]">📱 Mobile Friendly</span>
+                                    <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full border-2 border-[var(--outline)]">🎯 Gratis</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Taskbar Footer -->
+    <footer class="taskbar-y2k fixed bottom-0 left-0 right-0 z-50">
+        <div class="flex items-center justify-between px-4 py-2">
+            <div class="flex items-center gap-3">
+                <a href="./index.html" class="btn-y2k btn-primary py-2 px-4 flex items-center gap-2 text-sm no-underline">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                    <span class="font-pixel">Home</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="font-pixel text-sm text-[var(--text-dark)] bg-white/50 px-3 py-1 rounded-lg border-2 border-[var(--outline)]">
+                    🎮 Games Zone v1.0
+                </div>
+                <div id="clock" class="font-pixel text-lg text-[var(--text-dark)]">00:00</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Clock Update
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').textContent = 
+                `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // Add keyboard navigation
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.setAttribute('tabindex', '0');
+            card.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    card.click();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

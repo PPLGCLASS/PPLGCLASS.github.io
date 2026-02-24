@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XI PPLG · materi VOIP</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/materi.css">
+</head>
+<body>
+    <!-- grid latar -->
+    <div class="grid-bg"></div>
+
+    <div class="content-wrapper">
+        <!-- title bar seperti window explorer -->
+        <div class="window-y2k" style="margin-bottom: 24px;">
+            <div class="title-bar-y2k">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="font-weight:700; color: white; text-shadow: 2px 2px 0 #00000030;">📘 XI PPLG - materi.exe</span>
+                    <span class="font-pixel" style="background: var(--outline); color: var(--orange); padding: 4px 8px; border-radius: 30px; font-size: 14px;">Tahun Ajaran 2025-2026</span>
+                </div>
+                <div class="win-buttons">
+                    <div class="win-btn win-btn-min">─</div>
+                    <div class="win-btn win-btn-max">□</div>
+                    <div class="win-btn win-btn-close">✕</div>
+                </div>
+            </div>
+            <!-- isi title bar: stat singkat ala homepage -->
+            <div style="display: flex; flex-wrap: wrap; gap: 24px 32px; padding: 16px 24px; border-top: 2px solid var(--chrome-dark); background: var(--window-bg);">
+                <div><span class="font-pixel" style="font-size: 22px; font-weight: bold;">39</span> <span style="color: var(--text-dark);">Siswa Aktif</span></div>
+                <div><span class="font-pixel" style="font-size: 22px;">A</span> Akreditasi</div>
+            </div>
+        </div>
+
+        <!-- materi utama: VOIP -->
+        <div class="window-y2k animate-slideUp" style="margin-bottom: 30px;">
+            <div style="padding: 20px 28px;">
+                <!-- heading dengan icon desktop kecil -->
+                <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 20px;">
+                    <div class="desktop-icon" style="width: auto; padding: 6px 12px;">
+                        <div class="icon-container" style="width: 52px; height: 52px; font-size: 28px;">📞</div>
+                        <span class="font-pixel" style="margin-top: 4px;">VOIP</span>
+                    </div>
+                    <div>
+                        <h1 style="font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; display: flex; flex-wrap: wrap; gap: 8px;">
+                            Voice over <span style="color: var(--purple);">Internet Protocol</span>
+                            <span class="tag">VoIP</span>
+                        </h1>
+                        <div style="display: flex; gap: 12px; margin-top: 8px;">
+                            <span class="font-pixel" style="background: var(--pink); padding: 2px 12px; border: 2px solid black; border-radius: 20px; color: white;">#XI PPLG</span>
+                            <span class="font-pixel" style="background: var(--teal); padding: 2px 12px; border: 2px solid black; border-radius: 20px;">materi jaringan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- deskripsi singkat + progress pemahaman (gaya Y2K) -->
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 32px;">
+                    <div style="flex: 2; min-width: 260px;">
+                        <p style="font-size: 1.1rem; line-height: 1.6; background: rgba(255,255,240,0.7); padding: 16px; border-radius: 16px; border: 2px solid var(--outline);">
+                            <strong>VoIP (Voice over Internet Protocol)</strong> adalah teknologi yang memungkinkan pengiriman suara, video, dan data melalui jaringan internet (IP) — bukan melalui sirkuit telepon analog tradisional.  
+                            <span style="display: block; margin-top: 12px; font-family: 'VT323'; font-size: 1.3rem;">⚡ “Ngobrol jarak jauh pake internet, kayak telepon tapi digital.”</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- MATERI INTI: arsitektur VoIP dengan card Y2K -->
+                <h2 style="font-size: 1.8rem; margin: 32px 0 16px; border-left: 12px solid var(--purple); padding-left: 20px;">🖧 Arsitektur & komponen</h2>
+                <div class="voip-architecture">
+                    <div class="arch-block"><span style="font-size: 32px;">🎤</span><br><strong>Terminal</strong><br><span class="font-pixel">IP Phone/softphone</span></div>
+                    <div class="arch-block"><span style="font-size: 32px;">🌐</span><br><strong>Gateway</strong><br><span class="font-pixel">jembatan ke PSTN</span></div>
+                    <div class="arch-block"><span style="font-size: 32px;">📦</span><br><strong>Codec</strong><br><span class="font-pixel">G.711, G.729, Opus</span></div>
+                    <div class="arch-block"><span style="font-size: 32px;">🔄</span><br><strong>Server</strong><br><span class="font-pixel">sip server / pbx</span></div>
+                    <div class="arch-block"><span style="font-size: 32px;">📶</span><br><strong>Protokol</strong><br><span class="font-pixel">SIP, H.323, IAX</span></div>
+                </div>
+
+                <!-- penjelasan detail dalam card grid -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin: 40px 0;">
+                    <!-- card cara kerja -->
+                    <div class="materi-card">
+                        <div style="display: flex; gap: 10px; align-items: center;" class="font-pixel"><span>📡</span> <span style="font-size: 1.8rem;">cara kerja</span></div>
+                        <p style="margin: 16px 0;">Suara diubah jadi data digital (paket IP), dikirim via internet, lalu dirakit kembali di penerima. Menggunakan <strong>protokol SIP</strong> untuk setup panggilan dan <strong>RTP</strong> untuk pengiriman media.</p>
+                        <div style="background: #2d2d2d10; border-radius: 30px; padding: 12px; border: 2px dashed var(--purple);">
+                            <code class="font-pixel">analog → sampling → kompresi → paket → internet → dekompresi → suara</code>
+                        </div>
+                    </div>
+                    <!-- card kelebihan -->
+                    <div class="materi-card">
+                        <div style="display: flex; gap: 10px;" class="font-pixel"><span>✅</span> <span style="font-size: 1.8rem;">kelebihan</span></div>
+                        <ul style="margin: 16px 0 0 20px; list-style-type: '☎️ ';">
+                            <li>Biaya lebih murah (terutama SLJJ/internasional)</li>
+                            <li>Integrasi dengan layanan multimedia (video, chat)</li>
+                            <li>Skalabilitas & fitur canggih (IVR, recording)</li>
+                        </ul>
+                    </div>
+                    <!-- card tantangan -->
+                    <div class="materi-card">
+                        <div style="display: flex; gap: 10px;" class="font-pixel"><span>⚠️</span> <span style="font-size: 1.8rem;">tantangan</span></div>
+                        <ul style="margin: 16px 0 0 20px; list-style-type: '🔊 ';">
+                            <li>Kualitas tergantung koneksi internet (delay, jitter)</li>
+                            <li>Keamanan: eavesdropping, DoS</li>
+                            <li>Bergantung pada daya listrik & internet</li>
+                        </ul>
+                    </div>
+                    <!-- card contoh layanan -->
+                    <div class="materi-card">
+                        <div style="display: flex; gap: 10px;" class="font-pixel"><span>📱</span> <span style="font-size: 1.8rem;">contoh</span></div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 16px 0 0;">
+                            <span class="tag" style="background: var(--mint);">Skype</span>
+                            <span class="tag" style="background: var(--teal);">WhatsApp call</span>
+                            <span class="tag" style="background: var(--pink);">Zoom</span>
+                            <span class="tag" style="background: var(--orange);">Google Voice</span>
+                            <span class="tag" style="background: var(--purple);">Discord</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabel perbandingan ala windows 98 / y2k -->
+                <h2 class="font-pixel" style="font-size: 2rem; margin: 30px 0 10px;">🆚 VoIP vs Telepon tradisional</h2>
+                <div style="overflow-x: auto; border: 3px solid var(--outline); border-radius: 24px; background: white;">
+                    <table style="width: 100%; border-collapse: collapse; min-width: 480px;">
+                        <tr style="background: var(--purple); color: white; border-bottom: 3px solid black;">
+                            <th style="padding: 14px; font-family: VT323; font-size: 1.6rem;">Aspek</th>
+                            <th style="padding: 14px; font-family: VT323; font-size: 1.6rem;">VoIP</th>
+                            <th style="padding: 14px; font-family: VT323; font-size: 1.6rem;">PSTN (tradisional)</th>
+                        </tr>
+                        <tr style="border-bottom: 2px solid #ccc;">
+                            <td style="padding: 12px; font-weight: 600;">Infrastruktur</td>
+                            <td style="padding: 12px;">Jaringan IP / internet</td>
+                            <td style="padding: 12px;">Sirkuit fisik (kabel tembaga)</td>
+                        </tr>
+                        <tr style="border-bottom: 2px solid #ccc; background: #f8f0e5;">
+                            <td style="padding: 12px; font-weight: 600;">Biaya</td>
+                            <td style="padding: 12px;">murah / flat</td>
+                            <td style="padding: 12px;">mahal (apalagi interlokal)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; font-weight: 600;">Fitur tambahan</td>
+                            <td style="padding: 12px;">video, file sharing, konferensi</td>
+                            <td style="padding: 12px;">hanya suara (analog)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- codec populer & QoS -->
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 40px 0 20px;">
+                    <div style="flex: 1; min-width: 240px; background: #fcf2e0; border: 3px solid var(--outline); border-radius: 28px; padding: 20px;">
+                        <span class="font-pixel" style="font-size: 28px;">🎚️ Codec populer</span>
+                        <ul style="margin-top: 16px; font-size: 1.1rem;">
+                            <li><strong>G.711</strong> – tanpa kompresi (kualitas tinggi, bandwidth 64kbps)</li>
+                            <li><strong>G.729</strong> – kompresi tinggi (8kbps, cocok koneksi lambat)</li>
+                            <li><strong>Opus</strong> – open, adaptif (digunakan Discord/WebRTC)</li>
+                        </ul>
+                    </div>
+                    <div style="flex: 1; min-width: 240px; background: #e9def0; border: 3px solid var(--outline); border-radius: 28px; padding: 20px;">
+                        <span class="font-pixel" style="font-size: 28px;">📊 QoS penting</span>
+                        <p>Parameter kualitas: <span class="tag" style="background:var(--mint);">delay < 150ms</span> <span class="tag">jitter < 30ms</span> <span class="tag">packet loss < 1%</span></p>
+                        <div class="progress-y2k" style="margin: 16px 0;"><div class="progress-fill" style="width:92%"></div></div>
+                        <p class="font-pixel">Best effort ? terapkan <strong>DiffServ</strong> dan prioritaskan RTP.</p>
+                    </div>
+                </div>
+
+                <!-- tambahan: protokol signalling -->
+                <div class="materi-card" style="background: linear-gradient(145deg, #f0e7d8, #faf0e2); margin-top: 16px;">
+                    <div style="display: flex; gap: 16px; align-items: center;">
+                        <span style="font-size: 44px;">🤝</span>
+                        <div>
+                            <h3 class="font-pixel" style="font-size: 2rem;">protokol signalling</h3>
+                            <p><strong>SIP (Session Initiation Protocol)</strong> adalah protokol paling umum untuk membuat, mengubah, dan mengakhiri sesi multimedia. 
+                            Bekerja di port 5060 (TCP/UDP). Lawannya H.323 (lebih tua, lebih kompleks).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <!-- taskbar tipis bawah -->
+        <footer class="taskbar-y2k fixed bottom-0 left-0 right-0 z-50">
+        <div class="flex items-center justify-between px-4 py-2">
+            <div class="flex items-center gap-3">
+                <a href="./index.html" class="btn-y2k btn-primary py-2 px-4 flex items-center gap-2 text-sm no-underline">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                    <span class="font-pixel">Home</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-4">
+                <div id="clock" class="font-pixel text-lg text-[var(--text-dark)]">00:00</div>
+            </div>
+        </div>
+    </footer>
+   <script>
+       
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').textContent = 
+                `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.setAttribute('tabindex', '0');
+            card.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    card.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
