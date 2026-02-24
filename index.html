@@ -1,1 +1,675 @@
-<h1>SEDANG MT</h1>
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XI PPLG - UNIVERSE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body class="min-h-screen grid-bg">
+
+   
+    <div class="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <svg class="star" style="top: 10%; left: 5%; animation-delay: 0s;" viewBox="0 0 24 24" fill="#FEE440" stroke="#2D2D2D" stroke-width="2"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>
+        <svg class="star" style="top: 20%; right: 10%; animation-delay: 0.5s;" viewBox="0 0 24 24" fill="#00F5D4" stroke="#2D2D2D" stroke-width="2"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>
+        <svg class="star" style="top: 60%; left: 8%; animation-delay: 1s;" viewBox="0 0 24 24" fill="#F15BB5" stroke="#2D2D2D" stroke-width="2"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>
+        <svg class="star" style="top: 75%; right: 5%; animation-delay: 1.5s;" viewBox="0 0 24 24" fill="#9B5DE5" stroke="#2D2D2D" stroke-width="2"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>
+    </div>
+
+  
+    <div id="bootScreen" class="fixed inset-0 bg-black z-[9999] flex items-center justify-center">
+        <div class="text-center">
+            <div class="font-pixel text-4xl md:text-6xl text-white mb-8">PPLG UNIVERSE</div>
+            <div class="w-64 h-6 border-4 border-white rounded-full mx-auto overflow-hidden">
+                <div id="bootProgress" class="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 rounded-full" style="width: 0%; transition: width 0.1s linear;"></div>
+            </div>
+            <div id="bootText" class="font-pixel text-lg text-gray-400 mt-4">Loading system...</div>
+        </div>
+    </div>
+
+    
+    <main id="mainContent" class="opacity-0 transition-opacity duration-500">
+
+        
+        <section class="min-h-screen flex items-center justify-center p-4 md:p-8">
+            <div class="window-y2k w-full max-w-5xl animate-slideUp" style="animation-delay: 0.3s;">
+                <div class="title-bar-y2k">
+                    <div class="flex items-center gap-3">
+                        <div class="w-6 h-6 border-2 border-white rounded-md bg-white/20 flex items-center justify-center">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                        </div>
+                        <span class="font-pixel text-lg text-white drop-shadow-md">XI PPLG - Homepage.exe</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="win-btn win-btn-min" aria-label="Minimize"><svg width="12" height="2" viewBox="0 0 12 2" fill="currentColor"><rect width="12" height="2"/></svg></button>
+                        <button class="win-btn win-btn-max" aria-label="Maximize"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="1" width="10" height="10"/></svg></button>
+                        <button class="win-btn win-btn-close" aria-label="Close"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M6 18L18 6"/></svg></button>
+                    </div>
+                </div>
+
+                <div class="p-6 md:p-10 bg-white/80 backdrop-blur-sm">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <div class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-pixel px-4 py-2 rounded-full border-2 border-[var(--outline)] text-sm mb-6 shadow-lg">
+                                <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span> Tahun Ajaran 2025-2026
+                            </div>
+                            <h1 class="font-pixel text-4xl md:text-6xl text-[var(--text-dark)] mb-4 leading-tight">
+                                XI <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">PPLG</span>
+                            </h1>
+                            <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                                Pengembangan Perangkat Lunak dan Gim - Membekali siswa dengan keterampilan coding, pengembangan aplikasi, dan teknologi digital untuk masa depan.
+                            </p>
+                            <div class="flex flex-wrap gap-3">
+                                <button class="btn-y2k btn-primary" onclick="scrollToSection('struktur')">Explore Class</button>
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="role-card-y2k">
+                                    <div class="text-3xl font-bold text-purple-500 font-pixel">39</div>
+                                    <div class="text-sm text-gray-500 mt-1">Siswa Aktif</div>
+                                </div>
+                                <div class="role-card-y2k">
+                                    <div class="text-3xl font-bold text-pink-500 font-pixel">12</div>
+                                    <div class="text-sm text-gray-500 mt-1">Pengurus</div>
+                                </div>
+                                <div class="role-card-y2k">
+                                    <div class="text-3xl font-bold text-teal-500 font-pixel">5+</div>
+                                    <div class="text-sm text-gray-500 mt-1">Proyek</div>
+                                </div>
+                                <div class="role-card-y2k">
+                                    <div class="text-3xl font-bold text-orange-500 font-pixel">A</div>
+                                    <div class="text-sm text-gray-500 mt-1">Akreditasi</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-8 px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-wrap justify-center gap-4 md:gap-8">
+                    <div class="desktop-icon animate-popIn" style="animation-delay: 0.4s;" onclick="scrollToSection('struktur')">
+                        <div class="icon-container bg-gradient-to-br from-purple-300 to-purple-500"><svg width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v2"/></svg></div>
+                        <span class="font-pixel text-sm text-center">Struktur</span>
+                    </div>
+                    <div class="desktop-icon animate-popIn" style="animation-delay: 0.5s;" onclick="scrollToSection('piket')">
+                        <div class="icon-container bg-gradient-to-br from-teal-300 to-teal-500"><svg width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/><path d="M8 2v4"/><path d="M16 2v4"/></svg></div>
+                        <span class="font-pixel text-sm text-center">Piket</span>
+                    </div>
+                    
+                    <div class="desktop-icon animate-popIn" style="animation-delay: 0.6s;" onclick="scrollToSection('chat')">
+                        <div class="icon-container bg-gradient-to-br from-pink-300 to-pink-500 relative">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                            <span class="absolute top-1 right-1 w-3 h-3 bg-green-400 border-2 border-white rounded-full animate-pulse"></span>
+                        </div>
+                        <span class="font-pixel text-sm text-center">Chat</span>
+                    </div>
+                    <div class="desktop-icon animate-popIn" style="animation-delay: 0.7s;" onclick="window.location.href='./games.html'"> 
+                        <div class="icon-container bg-gradient-to-br from-orange-300 to-orange-500"><svg width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4"/><path d="M8 10v4"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="12" r="1"/></svg></div>
+                        <span class="font-pixel text-sm text-center">Games</span>
+                    </div>
+                 
+                    <div class="desktop-icon animate-popIn" style="animation-delay: 0.8s;" onclick="window.location.href='./materi.html'"> 
+                        <div class="icon-container bg-gradient-to-br from-purple-300 to-purple-500">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                                <path d="M8 7h8"/>
+                                <path d="M8 11h6"/>
+                                <path d="M8 15h4"/>
+                            </svg>
+                        </div>
+                        <span class="font-pixel text-sm text-center">Materi</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+      
+        <section id="struktur" class="py-16 px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="window-y2k">
+                    <div class="title-bar-y2k" style="background: linear-gradient(90deg, #9B5DE5, #F15BB5);">
+                        <span class="font-pixel text-lg text-white drop-shadow-md">Struktur_Kelas.exe</span>
+                        <div class="flex gap-2">
+                            <button class="win-btn win-btn-min"><svg width="12" height="2" viewBox="0 0 12 2" fill="currentColor"><rect width="12" height="2"/></svg></button>
+                            <button class="win-btn win-btn-close"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M6 18L18 6"/></svg></button>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-8 bg-white/90">
+                        <h2 class="font-pixel text-2xl md:text-3xl text-[var(--text-dark)] mb-8 text-center">Pengurus Kelas</h2>
+                        <div class="flex justify-center mb-8">
+                            <div class="role-card-y2k w-full max-w-xs border-l-4 border-purple-500">
+                                <div class="w-16 h-16 mx-auto rounded-full border-4 border-purple-500 bg-gradient-to-br from-purple-300 to-purple-500 flex items-center justify-center mb-3">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v2"/></svg>
+                                </div>
+                                <div class="font-pixel text-xs text-purple-500 uppercase tracking-wide">Wali Kelas</div>
+                                <div class="font-bold text-lg text-[var(--text-dark)] mt-1">Erlina Baharuddin, S.Kom</div>
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4 mb-8">
+                            <div class="role-card-y2k border-l-4 border-pink-500">
+                                <div class="font-pixel text-xs text-pink-500">Ketua Kelas</div>
+                                <div class="font-bold text-[var(--text-dark)] mt-1">Zidan Muhammad Sauki</div>
+                            </div>
+                            <div class="role-card-y2k border-l-4 border-teal-500">
+                                <div class="font-pixel text-xs text-teal-500">Wakil Ketua</div>
+                                <div class="font-bold text-[var(--text-dark)] mt-1">Zaim Raji Habibi</div>
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4 mb-8">
+                            <div class="bg-purple-50 border-3 border-[var(--outline)] rounded-xl p-4">
+                                <div class="font-pixel text-sm text-purple-500 mb-3">Sekretaris</div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center gap-2 text-sm"><span class="w-6 h-6 bg-purple-200 rounded-full flex items-center justify-center text-xs font-bold text-purple-600">1</span> Dzikra Humairo.S</div>
+                                    <div class="flex items-center gap-2 text-sm"><span class="w-6 h-6 bg-purple-200 rounded-full flex items-center justify-center text-xs font-bold text-purple-600">2</span> Rania Larasati Quinn</div>
+                                </div>
+                            </div>
+                            <div class="bg-orange-50 border-3 border-[var(--outline)] rounded-xl p-4">
+                                <div class="font-pixel text-sm text-orange-500 mb-3">Bendahara</div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center gap-2 text-sm"><span class="w-6 h-6 bg-orange-200 rounded-full flex items-center justify-center text-xs font-bold text-orange-600">1</span> Khayla Mazaya</div>
+                                    <div class="flex items-center gap-2 text-sm"><span class="w-6 h-6 bg-orange-200 rounded-full flex items-center justify-center text-xs font-bold text-orange-600">2</span> Naila Nurul Dzihni</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="role-card-y2k bg-red-50">
+                                <div class="font-pixel text-xs text-red-500 mb-2">Seksi Agama</div>
+                                <div class="text-sm text-[var(--text-dark)]">
+                                    <p>Rafiq Al Habib</p>
+                                    <p>M Fathul Al-Fath</p>
+                                </div>
+                            </div>
+                            <div class="role-card-y2k bg-yellow-50">
+                                <div class="font-pixel text-xs text-yellow-600 mb-2">Seksi Keamanan</div>
+                                <div class="text-sm text-[var(--text-dark)]">
+                                    <p>Abiyyu Athalian</p>
+                                    <p>Rafi Hibatullah</p>
+                                </div>
+                            </div>
+                            <div class="role-card-y2k bg-green-50">
+                                <div class="font-pixel text-xs text-green-500 mb-2">Seksi Kebersihan</div>
+                                <div class="text-sm text-[var(--text-dark)]">
+                                    <p>Fairuz Dzikri Harofi</p>
+                                    <p>Abdul Muhaimin</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="piket" class="py-16 px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="window-y2k">
+                    <div class="title-bar-y2k" style="background: linear-gradient(90deg, #00BBF9, #00F5D4);"><span class="font-pixel text-lg text-white drop-shadow-md">Jadwal_Piket.db</span></div>
+                    <div class="p-6 md:p-8 bg-white/90">
+                        <div class="flex border-b-3 border-[var(--outline)] mb-6 overflow-x-auto">
+                            <button class="tab-y2k active" data-day="senin">Senin</button>
+                            <button class="tab-y2k" data-day="selasa">Selasa</button>
+                            <button class="tab-y2k" data-day="rabu">Rabu</button>
+                            <button class="tab-y2k" data-day="kamis">Kamis</button>
+                            <button class="tab-y2k" data-day="jumat">Jumat</button>
+                        </div>
+                        <div id="piketContent"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="chat" class="py-16 px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="window-y2k">
+                    <div class="title-bar-y2k" style="background: linear-gradient(90deg, #F15BB5, #FEE440);">
+                        <div class="flex items-center gap-3">
+                            <span class="font-pixel text-lg text-white drop-shadow-md">Global Messenger</span>
+                            <span class="bg-white/30 px-2 py-1 rounded-full text-xs text-white font-pixel animate-pulse">LIVE</span>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-8 bg-gradient-to-b from-gray-100 to-white min-h-[400px] flex flex-col">
+
+                        
+                        <div id="chatBox" class="flex-1 space-y-4 overflow-y-auto mb-6 pr-2" style="max-height: 350px;">
+                            <div class="text-center text-gray-400 font-pixel text-xs py-8">Memuat data dari Cloud...</div>
+                        </div>
+
+                        
+                        <div class="border-t-3 border-[var(--outline)] pt-4 mt-auto space-y-3">
+                            <div class="flex gap-3">
+                                <input type="text" id="chatName" class="input-y2k w-1/3" placeholder="Nama..." maxlength="15">
+                                <input type="text" id="chatMessage" class="input-y2k flex-1" placeholder="Ketik pesan..." maxlength="200" onkeypress="if(event.key==='Enter')sendMessage()">
+                            </div>
+                            <div class="flex gap-3 justify-between">
+                                <button class="btn-y2k btn-pink" onclick="sendMessage()">KIRIM KE CLOUD</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="games" class="py-16 px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    
+                    <div class="window-y2k">
+                        <div class="title-bar-y2k" style="background: linear-gradient(90deg, #F15BB5, #9B5DE5);"><span class="font-pixel text-lg text-white drop-shadow-md">Tebak_Angka.exe</span></div>
+                        <div class="p-6 bg-white/90">
+                            <div class="text-center mb-6">
+                                <div class="font-pixel text-sm text-gray-500 mb-2">Level 1</div>
+                                <div class="font-pixel text-4xl text-[var(--text-dark)]">1 - 100</div>
+                            </div>
+                            <div id="gameOutput" class="bg-gradient-to-r from-purple-100 to-pink-100 border-3 border-[var(--outline)] rounded-xl p-4 text-center mb-6 min-h-[80px] flex items-center justify-center"><span class="font-pixel text-lg text-purple-600">Tebak angka rahasianya!</span></div>
+                            <div class="flex gap-3">
+                                <input type="number" id="guessInput" class="input-y2k flex-1 text-center font-pixel text-xl" min="1" max="100" placeholder="?">
+                                <button class="btn-y2k btn-pink" onclick="checkGuess()">TEBAK</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="tools" class="window-y2k">
+                        <div class="title-bar-y2k" style="background: linear-gradient(90deg, #00BBF9, #00F5D4);"><span class="font-pixel text-lg text-white drop-shadow-md">Calculator.app</span></div>
+                        <div class="p-6 bg-white/90">
+                            <div id="calcDisplay" class="bg-gray-100 border-3 border-[var(--outline)] rounded-xl p-4 text-right mb-4 font-pixel text-3xl text-[var(--text-dark)] min-h-[60px] overflow-hidden">0</div>
+                            <div class="grid grid-cols-4 gap-2">
+                                <button class="btn-y2k bg-gray-100 text-lg p-3" onclick="clearCalc()">C</button><button class="btn-y2k bg-gray-100 text-lg p-3" onclick="appendCalc('(')">(</button><button class="btn-y2k bg-gray-100 text-lg p-3" onclick="appendCalc(')')">)</button>
+                                <button class="btn-y2k btn-pink text-lg p-3" onclick="appendCalc('/')">/</button>
+                                <button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('7')">7</button><button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('8')">8</button><button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('9')">9</button>
+                                <button class="btn-y2k btn-secondary text-lg p-3" onclick="appendCalc('*')">x</button>
+                                <button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('4')">4</button><button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('5')">5</button><button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('6')">6</button>
+                                <button class="btn-y2k btn-secondary text-lg p-3" onclick="appendCalc('-')">-</button>
+                                <button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('1')">1</button><button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('2')">2</button><button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('3')">3</button>
+                                <button class="btn-y2k btn-secondary text-lg p-3" onclick="appendCalc('+')">+</button>
+                                <button class="btn-y2k bg-white text-lg p-3 col-span-2" onclick="appendCalc('0')">0</button><button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('.')">.</button><button class="btn-y2k btn-primary text-lg p-3"
+                                    onclick="calculateCalc()">=</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+   
+    <footer class="taskbar-y2k fixed bottom-0 left-0 right-0 z-50">
+        <div class="flex items-center justify-between px-4 py-2">
+            <div class="flex items-center gap-3">
+                <button id="startBtn" class="btn-y2k btn-primary py-2 px-4 flex items-center gap-2 text-sm" onclick="toggleStartMenu()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                    <span class="font-pixel">Start</span>
+                </button>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="progress-y2k w-32 hidden md:block">
+                    <div class="progress-fill" style="width: 75%;"></div>
+                </div>
+                <div id="clock" class="font-pixel text-lg text-[var(--text-dark)]">00:00</div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <div id="startMenu" class="fixed bottom-16 left-4 w-64 opacity-0 invisible transition-all duration-300 z-[100] transform translate-y-4">
+        <div class="window-y2k">
+            <div class="bg-gradient-to-b from-purple-500 to-pink-500 p-4 border-b-3 border-[var(--outline)]">
+                <div class="font-pixel text-xl text-white">PPLG UNIVERSE</div>
+                <div class="text-xs text-white/70">Version 1.0.2024</div>
+            </div>
+            <div class="bg-white/95 divide-y divide-gray-200">
+                <button class="w-full px-4 py-3 text-left hover:bg-purple-50 transition-colors flex items-center gap-3" onclick="scrollToSection('struktur'); toggleStartMenu();"><div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="#9B5DE5"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v2"/></svg></div><span class="font-medium">Struktur Kelas</span></button>
+                <button class="w-full px-4 py-3 text-left hover:bg-teal-50 transition-colors flex items-center gap-3" onclick="scrollToSection('piket'); toggleStartMenu();"><div class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="#00BBF9"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></svg></div><span class="font-medium">Jadwal Piket</span></button>
+                <button class="w-full px-4 py-3 text-left hover:bg-pink-50 transition-colors flex items-center gap-3" onclick="scrollToSection('chat'); toggleStartMenu();"><div class="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="#F15BB5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span class="font-medium">Chat Room</span></button>
+                <button class="w-full px-4 py-3 text-left hover:bg-orange-50 transition-colors flex items-center gap-3" onclick="scrollToSection('games'); toggleStartMenu();"><div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="#FEE440"><rect x="2" y="6" width="20" height="12" rx="2"/></svg></div><span class="font-medium">Games & Tools</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification-y2k">
+        <div class="flex items-start gap-3">
+            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="#9B5DE5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+            <div>
+                <div class="font-bold text-sm">System Notification</div>
+                <div class="text-sm text-gray-600 mt-1" id="notificationText">Welcome to PPLG OS!</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // =======================
+    // 1. KONFIGURASI & INISIALISASI FIREBASE
+    // =======================
+const _0x69bf3d=_0x48e8;function _0x5be6(){const _0x12a093=['ase.app','fba05006a4','112sbHxCV','G-NNJB8683','at-pplg-de','chat-pplg.','chat-pplg','PyAbYU8IDL','435812nahqGs','92mYLQyf','619968zpLJSn','firebaseap','.asia-sout','p.com','1:25569865','1254015JyDelA','2556986524','orage.app','185265jSLbPQ','ebasedatab','ba103944cf','firebasest','XJjvUYwPX3','2464:web:2','1512342jIkGrb','https://ch','87445jiKlHr','fault-rtdb','tkiqcmMMY','2945453gOusDT','heast1.fir','AIzaSyB7ox'];_0x5be6=function(){return _0x12a093;};return _0x5be6();}function _0x48e8(_0x30a7af,_0x5b9d61){_0x30a7af=_0x30a7af-(0x78*-0x40+0x1e7*-0xa+0x3232);const _0x1427ed=_0x5be6();let _0x125a4f=_0x1427ed[_0x30a7af];return _0x125a4f;}(function(_0x3aa301,_0x3bbcc4){const _0x2a0610=_0x48e8,_0x160fb3=_0x3aa301();while(!![]){try{const _0x2d10a6=parseInt(_0x2a0610(0x13d))/(0x13c7*0x1+-0x3f7*-0x1+-0x17bd)+parseInt(_0x2a0610(0x13f))/(0x127a+0x2449+-0x36c1)+-parseInt(_0x2a0610(0x144))/(0x3*0xfc+0x1c47*-0x1+0x1956)+parseInt(_0x2a0610(0x13e))/(0x491*-0x1+0x6*-0x232+0x11c1)*(parseInt(_0x2a0610(0x12f))/(-0x79*0x4d+0x2578+-0x10e))+parseInt(_0x2a0610(0x12d))/(-0x228e+0x6*-0x3a9+0x388a*0x1)+-parseInt(_0x2a0610(0x132))/(-0x12fe+0x1*-0x76d+0x5*0x54a)+parseInt(_0x2a0610(0x137))/(0x5*0x6c2+-0x473*-0x1+0x1*-0x2635)*(-parseInt(_0x2a0610(0x147))/(-0xc6b+0xc56*0x2+-0xc38));if(_0x2d10a6===_0x3bbcc4)break;else _0x160fb3['push'](_0x160fb3['shift']());}catch(_0x158190){_0x160fb3['push'](_0x160fb3['shift']());}}}(_0x5be6,-0x3a4*-0x9f+-0x401d6*-0x2+-0x61ba2));const firebaseConfig={'apiKey':_0x69bf3d(0x134)+_0x69bf3d(0x14b)+_0x69bf3d(0x13c)+_0x69bf3d(0x131),'authDomain':_0x69bf3d(0x13a)+_0x69bf3d(0x140)+_0x69bf3d(0x142),'databaseURL':_0x69bf3d(0x12e)+_0x69bf3d(0x139)+_0x69bf3d(0x130)+_0x69bf3d(0x141)+_0x69bf3d(0x133)+_0x69bf3d(0x148)+_0x69bf3d(0x135),'projectId':_0x69bf3d(0x13b),'storageBucket':_0x69bf3d(0x13a)+_0x69bf3d(0x14a)+_0x69bf3d(0x146),'messagingSenderId':_0x69bf3d(0x145)+'64','appId':_0x69bf3d(0x143)+_0x69bf3d(0x12c)+_0x69bf3d(0x136)+_0x69bf3d(0x149)+'5','measurementId':_0x69bf3d(0x138)+'BP'};
+
+    // Initialize Firebase
+    let db;
+    let isFirebaseReady = false;
+    let messagesRef;
+
+    try {
+        const app = firebase.initializeApp(firebaseConfig);
+        db = firebase.database();
+        messagesRef = db.ref('messages');
+        isFirebaseReady = true;
+        console.log("✅ Firebase berhasil diinisialisasi!");
+    } catch (e) {
+        console.error("❌ Firebase Error:", e.message);
+        showNotification("❌ Gagal terhubung ke database cloud!");
+    }
+
+    // =======================
+    // 2. FUNGSI CHAT SYSTEM (FIREBASE)
+    // =======================
+    function listenToChat() {
+        if (!isFirebaseReady) {
+            console.error("Firebase belum siap!");
+            return;
+        }
+
+        messagesRef.on('value', (snapshot) => {
+            const data = snapshot.val();
+            renderChat(data);
+        }, (error) => {
+            console.error("Error listening to chat:", error);
+            document.getElementById('chatBox').innerHTML =
+                '<div class="text-red-500 font-pixel text-center p-4">Error koneksi ke database!</div>';
+        });
+    }
+
+    function renderChat(data) {
+        const chatBox = document.getElementById('chatBox');
+
+        if (!data || Object.keys(data).length === 0) {
+            chatBox.innerHTML = `
+            <div class="text-center text-gray-400 font-pixel p-8">
+                <svg width="48" height="48" class="mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                </svg>
+                Belum ada pesan. Jadilah yang pertama mengirim!
+            </div>`;
+            return;
+        }
+
+        chatBox.innerHTML = '';
+
+        // Convert to array and sort by timestamp
+        const messages = Object.entries(data)
+            .map(([key, value]) => ({
+                id: key,
+                ...value
+            }))
+            .sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+
+        messages.forEach(msg => {
+            const isMe = localStorage.getItem('pplg_last_user') === msg.name;
+            const time = msg.time || new Date(msg.timestamp).toLocaleTimeString('id-ID', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            const bubble = document.createElement('div');
+            bubble.className = `chat-bubble ${isMe ? 'chat-bubble-me' : 'chat-bubble-other'} animate-popIn`;
+            bubble.innerHTML = `
+            <div class="flex items-center justify-between mb-1">
+                <div class="font-bold text-xs ${isMe ? 'text-white' : 'text-purple-600'}">
+                    ${msg.name}
+                </div>
+                <div class="text-xs opacity-70">${time}</div>
+            </div>
+            <div class="text-sm">${msg.text}</div>
+        `;
+            chatBox.appendChild(bubble);
+        });
+
+        // Auto scroll to bottom
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function sendMessage() {
+        const nameInput = document.getElementById('chatName');
+        const msgInput = document.getElementById('chatMessage');
+
+        const name = nameInput.value.trim() || "Anonim";
+        const text = msgInput.value.trim();
+
+        if (!text) {
+            showNotification("⚠️ Pesan tidak boleh kosong!");
+            msgInput.focus();
+            return;
+        }
+
+        if (!isFirebaseReady) {
+            alert("❌ Database tidak terhubung! Periksa koneksi internet.");
+            return;
+        }
+
+        // Simpan username untuk sesi ini
+        localStorage.setItem('pplg_last_user', name);
+
+        // Jika input nama kosong, isi dengan username yang disimpan
+        if (!nameInput.value.trim()) {
+            nameInput.value = name;
+        }
+
+        const now = new Date();
+        const time = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        // Kirim ke Firebase
+        messagesRef.push({
+                name: name,
+                text: text,
+                time: time,
+                timestamp: Date.now()
+            })
+            .then(() => {
+                // Sukses
+                msgInput.value = '';
+                msgInput.focus();
+                showNotification(`📤 Pesan terkirim sebagai "${name}"`);
+            })
+            .catch((error) => {
+                console.error("Error sending message:", error);
+                showNotification("❌ Gagal mengirim pesan!");
+            });
+    }
+
+    function exportChat() {
+        if (!isFirebaseReady) {
+            showNotification("❌ Database tidak terhubung!");
+            return;
+        }
+
+        messagesRef.once('value')
+            .then((snapshot) => {
+                const data = snapshot.val();
+                if (!data) {
+                    showNotification("📭 Tidak ada data chat untuk diexport.");
+                    return;
+                }
+
+                let textContent = "=== RIWAYAT CHAT XI PPLG ===\n";
+                textContent += `Di-export: ${new Date().toLocaleString('id-ID')}\n`;
+                textContent += "================================\n\n";
+
+                // Convert to array and sort
+                const messages = Object.entries(data)
+                    .map(([key, value]) => ({
+                        id: key,
+                        ...value
+                    }))
+                    .sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+
+                messages.forEach(msg => {
+                    textContent += `[${msg.time || '--:--'}] ${msg.name}: ${msg.text}\n`;
+                });
+
+                textContent += `\nTotal pesan: ${messages.length}`;
+
+                // Create and download file
+                const blob = new Blob([textContent], {
+                    type: 'text/plain;charset=utf-8'
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `chat_pplg_${new Date().toISOString().split('T')[0]}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                showNotification("📥 Chat berhasil di-export!");
+            })
+            .catch((error) => {
+                console.error("Error exporting chat:", error);
+                showNotification("❌ Gagal mengexport chat!");
+            });
+    }
+
+    // =======================
+    // 3. DATA LOKAL (PIKET, DLL)
+    // =======================
+    const piketData = {
+        senin: ["Rania Larasati Queen", "Zidan Muhammad Sauki", "Khayla Mazaya", "Ikmal Murial Devano", "Amru Naufal", "Abdul Muhaimin", "Muhammad Husein", "Alif Putra Perkasa"],
+        selasa: ["Zaim Raji Habibi", "Dzikra Humairo.S", "Daniella Zaina", "Rafiq Al Habib", "Yahya Fibert C", "Raja Fathur", "M Irfan Azzaky", "Atha Ramadhan"],
+        rabu: ["Fairuz Dzikri", "Naila Nurul", "Pricilla Putri Yemima", "M Rifki Fahrezi", "Tantra Hunafa", "Abiyyu Athalian", "Arya Rafka", "Beny Adrian Tobing"],
+        kamis: ["Izra Rakhi Muhammad", "Nasyafa Ivana", "Athifa Mahirah Putri", "Agung Dwi", "Dzaki Afkar", "Rafi Hibatullah", "Tafayat Raziq"],
+        jumat: ["M Fathul Al-fath", "Fairuz Naufal", "Awen Akiyan", "M Syahru Ramadhan", "Aisyah Calsih", "Rizky Ardiansyah", "Aisyah Azmi"]
+    };
+
+    let secretNumber = Math.floor(Math.random() * 100) + 1;
+    let calcValue = '0';
+
+    // =======================
+    // 4. FUNGSI UTILITY
+    // =======================
+    function renderPiket(day) {
+        const container = document.getElementById('piketContent');
+        const names = piketData[day];
+        container.innerHTML = `<div class="grid md:grid-cols-2 gap-3">${names.map((name, i) => `<div class="flex items-center gap-3 p-3 bg-white border-3 border-[var(--outline)] rounded-xl hover:shadow-lg transition-all cursor-pointer group"><div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white font-bold text-sm group-hover:scale-110 transition-transform">${i + 1}</div><span class="font-medium text-sm">${name}</span></div>`).join('')}</div>`;
+    }
+    
+    function appendCalc(val) { if (calcValue === '0' && !isNaN(val)) calcValue = val; else calcValue += val; document.getElementById('calcDisplay').textContent = calcValue; }
+    function clearCalc() { calcValue = '0'; document.getElementById('calcDisplay').textContent = '0'; }
+    function calculateCalc() { try { calcValue = String(eval(calcValue)); document.getElementById('calcDisplay').textContent = calcValue; } catch (e) { document.getElementById('calcDisplay').textContent = 'Error'; calcValue = '0'; } }
+
+    function checkGuess() {
+        const input = document.getElementById('guessInput');
+        const output = document.getElementById('gameOutput');
+        const guess = parseInt(input.value);
+        if (isNaN(guess) || guess < 1 || guess > 100) { output.innerHTML = '<span class="font-pixel text-lg text-red-500">Masukkan angka 1-100!</span>'; return; }
+        if (guess < secretNumber) output.innerHTML = '<span class="font-pixel text-lg text-orange-500">Terlalu rendah!</span>';
+        else if (guess > secretNumber) output.innerHTML = '<span class="font-pixel text-lg text-blue-500">Terlalu tinggi!</span>';
+        else { output.innerHTML = '<span class="font-pixel text-lg text-green-500">BENAR!</span>'; setTimeout(resetGame, 2000); }
+        input.value = '';
+    }
+    function resetGame() { secretNumber = Math.floor(Math.random() * 100) + 1; document.getElementById('gameOutput').innerHTML = '<span class="font-pixel text-lg text-purple-600">Game baru!</span>'; document.getElementById('guessInput').value = ''; }
+
+    function showLogin() { document.getElementById('loginDialog').classList.add('active'); }
+    function closeLogin() { document.getElementById('loginDialog').classList.remove('active'); }
+    function attemptLogin() { const u = document.getElementById('username').value; if(u) { showNotification(`Selamat datang, ${u}!`); closeLogin(); } else showNotification('Isi username!'); }
+
+    function toggleStartMenu() {
+        const menu = document.getElementById('startMenu');
+        const isVisible = menu.style.opacity === '1';
+        if (isVisible) { menu.style.opacity = '0'; menu.style.visibility = 'hidden'; menu.style.transform = 'translateY(16px)'; } 
+        else { menu.style.opacity = '1'; menu.style.visibility = 'visible'; menu.style.transform = 'translateY(0)'; }
+    }
+    
+    document.addEventListener('click', (e) => {
+        const menu = document.getElementById('startMenu'); const startBtn = document.getElementById('startBtn');
+        if (!menu.contains(e.target) && !startBtn.contains(e.target)) { menu.style.opacity = '0'; menu.style.visibility = 'hidden'; }
+    });
+
+    function showNotification(text) { const n = document.getElementById('notification'); document.getElementById('notificationText').textContent = text; n.classList.add('show'); setTimeout(() => n.classList.remove('show'), 4000); }
+    function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
+
+    // =======================
+    // 5. INISIALISASI SAAT HALAMAN DIMUAT
+    // =======================
+    document.addEventListener('DOMContentLoaded', () => {
+        // Piket Logic
+        document.querySelectorAll('.tab-y2k').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab-y2k').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                renderPiket(tab.dataset.day);
+            });
+        });
+        renderPiket('senin');
+
+        // Clock
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').textContent =
+                `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        }
+        updateClock();
+        setInterval(updateClock, 60000);
+
+        // Boot Animation
+        setTimeout(() => {
+            const bootScreen = document.getElementById('bootScreen');
+            const bootProgress = document.getElementById('bootProgress');
+            const bootText = document.getElementById('bootText');
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15 + 5;
+                if (progress > 100) progress = 100;
+                bootProgress.style.width = `${progress}%`;
+
+                if (progress < 30) bootText.textContent = "Loading system...";
+                else if (progress < 60) bootText.textContent = "Initializing database...";
+                else if (progress < 90) bootText.textContent = "Connecting to cloud...";
+                else bootText.textContent = "Ready to launch!";
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        bootScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            bootScreen.style.display = 'none';
+                            document.getElementById('mainContent').style.opacity = '1';
+
+                            // Mulai mendengarkan chat setelah boot selesai
+                            if (isFirebaseReady) {
+                                listenToChat();
+                                showNotification('✅ Terhubung ke Cloud Database!');
+
+                                // Auto-focus ke input nama jika ada di localStorage
+                                const lastUser = localStorage.getItem('pplg_last_user');
+                                if (lastUser) {
+                                    document.getElementById('chatName').value = lastUser;
+                                    document.getElementById('chatMessage').focus();
+                                }
+                            } else {
+                                document.getElementById('chatBox').innerHTML =
+                                    '<div class="text-red-500 font-pixel text-center p-4">❌ Gagal konek ke database!</div>';
+                                showNotification("⚠️ Error: Periksa koneksi internet!");
+                            }
+                        }, 300);
+                    }, 500);
+                }
+            }, 100);
+        }, 1000);
+    });
+</script>
+</body>
+
+</html>
