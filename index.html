@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="./css/index.css">
 </head>
 
+    <meta 
+    property="og:image"
+    content="./assets/pplgbanner.png"
+    />
+    
 <body class="min-h-screen grid-bg">
 
    
@@ -376,9 +381,6 @@
     </div>
 
     <script>
-    // =======================
-    // 1. KONFIGURASI & INISIALISASI FIREBASE
-    // =======================
     const firebaseConfig = {
         apiKey: "AIzaSyB7oxXJjvUYwPX3PyAbYU8IDLtkiqcmMMY",
         authDomain: "chat-pplg.firebaseapp.com",
@@ -390,7 +392,7 @@
         measurementId: "G-NNJB8683BP"
     };
 
-    // Initialize Firebase
+
     let db;
     let isFirebaseReady = false;
     let messagesRef;
@@ -406,9 +408,6 @@
         showNotification("❌ Gagal terhubung ke database cloud!");
     }
 
-    // =======================
-    // 2. FUNGSI CHAT SYSTEM (FIREBASE)
-    // =======================
     function listenToChat() {
         if (!isFirebaseReady) {
             console.error("Firebase belum siap!");
@@ -470,7 +469,7 @@
             chatBox.appendChild(bubble);
         });
 
-        // Auto scroll to bottom
+    
         chatBox.scrollTop = chatBox.scrollHeight;
     }
 
@@ -492,10 +491,7 @@
             return;
         }
 
-        // Simpan username untuk sesi ini
         localStorage.setItem('pplg_last_user', name);
-
-        // Jika input nama kosong, isi dengan username yang disimpan
         if (!nameInput.value.trim()) {
             nameInput.value = name;
         }
@@ -575,9 +571,7 @@
             });
     }
 
-    // =======================
-    // 3. DATA LOKAL (PIKET, DLL)
-    // =======================
+   
     const piketData = {
         senin: ["Rania Larasati Queen", "Zidan Muhammad Sauki", "Khayla Mazaya", "Ikmal Murial Devano", "Amru Naufal", "Abdul Muhaimin", "Muhammad Husein", "Alif Putra Perkasa"],
         selasa: ["Zaim Raji Habibi", "Dzikra Humairo.S", "Daniella Zaina", "Rafiq Al Habib", "Yahya Fibert C", "Raja Fathur", "M Irfan Azzaky", "Atha Ramadhan"],
@@ -589,9 +583,7 @@
     // Calculator variables (Tebak angka removed)
     let calcValue = '0';
 
-    // =======================
-    // 4. FUNGSI UTILITY
-    // =======================
+ 
     function renderPiket(day) {
         const container = document.getElementById('piketContent');
         const names = piketData[day];
@@ -621,9 +613,6 @@
     function showNotification(text) { const n = document.getElementById('notification'); document.getElementById('notificationText').textContent = text; n.classList.add('show'); setTimeout(() => n.classList.remove('show'), 4000); }
     function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
 
-    // =======================
-    // 5. INISIALISASI SAAT HALAMAN DIMUAT
-    // =======================
     document.addEventListener('DOMContentLoaded', () => {
         // Piket Logic
         document.querySelectorAll('.tab-y2k').forEach(tab => {
