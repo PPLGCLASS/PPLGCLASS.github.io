@@ -308,7 +308,7 @@
                         </div>
                     </div>
                     
-                    <!-- Calculator (unchanged) -->
+                   
                     <div id="tools" class="window-y2k">
                         <div class="title-bar-y2k" style="background: linear-gradient(90deg, #00BBF9, #00F5D4);"><span class="font-pixel text-lg text-white drop-shadow-md">Calculator.app</span></div>
                         <div class="p-6 bg-white/90">
@@ -434,7 +434,7 @@
 
         chatBox.innerHTML = '';
 
-        // Convert to array and sort by timestamp
+        
         const messages = Object.entries(data)
             .map(([key, value]) => ({
                 id: key,
@@ -493,7 +493,7 @@
         const now = new Date();
         const time = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
 
-        // Kirim ke Firebase
+        
         messagesRef.push({
                 name: name,
                 text: text,
@@ -530,7 +530,7 @@
                 textContent += `Di-export: ${new Date().toLocaleString('id-ID')}\n`;
                 textContent += "================================\n\n";
 
-                // Convert to array and sort
+               
                 const messages = Object.entries(data)
                     .map(([key, value]) => ({
                         id: key,
@@ -544,7 +544,7 @@
 
                 textContent += `\nTotal pesan: ${messages.length}`;
 
-                // Create and download file
+            
                 const blob = new Blob([textContent], {
                     type: 'text/plain;charset=utf-8'
                 });
@@ -573,11 +573,7 @@
         kamis: ["Izra Rakhi Muhammad", "Nasyafa Ivana", "Athifa Mahirah Putri", "Agung Dwi", "Dzaki Afkar", "Rafi Hibatullah", "Tafayat Raziq"],
         jumat: ["M Fathul Al-fath", "Fairuz Naufal", "Awen Akiyan", "M Syahru Ramadhan", "Aisyah Calsih", "Rizky Ardiansyah", "Aisyah Azmi"]
     };
-
-    // Calculator variables (Tebak angka removed)
-    let calcValue = '0';
-
- 
+        
     function renderPiket(day) {
         const container = document.getElementById('piketContent');
         const names = piketData[day];
@@ -608,7 +604,7 @@
     function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
 
     document.addEventListener('DOMContentLoaded', () => {
-        // Piket Logic
+        
         document.querySelectorAll('.tab-y2k').forEach(tab => {
             tab.addEventListener('click', () => {
                 document.querySelectorAll('.tab-y2k').forEach(t => t.classList.remove('active'));
@@ -618,7 +614,7 @@
         });
         renderPiket('senin');
 
-        // Clock
+     
         function updateClock() {
             const now = new Date();
             document.getElementById('clock').textContent =
@@ -627,7 +623,7 @@
         updateClock();
         setInterval(updateClock, 60000);
 
-        // Boot Animation
+      
         setTimeout(() => {
             const bootScreen = document.getElementById('bootScreen');
             const bootProgress = document.getElementById('bootProgress');
